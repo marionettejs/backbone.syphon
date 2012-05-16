@@ -60,6 +60,43 @@ Backbone.View.extend({
 });
 ```
 
+## Register Your Own Input Readers
+
+By default, there are two input readers that know how to
+handle form elements: the `default` reader and the `checkbox`
+reader.
+
+The default reader handles nearly every form of input using
+jQuery's `val()` method. The checkbox reader, however, looks
+for whether or not the checkbox is checked and returns a
+boolean value.
+
+But the method of reading data from a given input element was
+built in an extensible manner from the start, allowing you
+to change how the data is read. To do this, you can register
+a callback function to an input type.
+
+```js
+Backbone.Syphon.InputReaders.register('radio', function(el){
+  return el.val();
+});
+```
+
+The callback function receives one parameter: a jQuery selector
+object that is the form element. You must return a value
+from the callback function and this value is used as the
+value in the final JavaScript object returne from the call
+to serialize the form.
+
+### Limitation: Input "type" Attributes
+
+At this time, onlyt the input's `type` attribute is checked
+when determining the type of element. This means that input
+types with non-standard tag names, such as `<textarea>` and
+`<select>` are not configurable.
+
+This will be fixed in a future release.
+
 ## Set Key To The Element's Id
 
 The current convention for setting the key of the JSON
@@ -93,6 +130,7 @@ limitations.
 * An input of type `checkbox` will return a boolean value
 * Input types such as buttons may return a value in the result
 * The key of the returned object's key/values will always be set to the `id` of the input element
+* InputReader configuration is limited to `<input>` elements with a `type` attribute
 
 These limitations are by design in the initial release, but
 are intended to be solved / removed as the plugin moves
