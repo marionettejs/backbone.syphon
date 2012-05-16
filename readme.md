@@ -60,6 +60,30 @@ Backbone.View.extend({
 });
 ```
 
+### Set Key To The Element's Id
+
+The current convention for setting the key of the JSON
+object key/values, is the `id` attribute of the form's
+input element.
+
+For example, an HTML form that looks like this:
+
+```html
+<form>
+  <input id="foo" value="bar">
+  <input type="checkbox" id="chk" checked>
+</form>
+```
+
+will produce this result, when serialized:
+
+```js
+{
+  foo: "bar",
+  chk: true
+}
+```
+
 ## Register Your Own Input Readers
 
 By default, there are two input readers that know how to
@@ -88,7 +112,7 @@ from the callback function and this value is used as the
 value in the final JavaScript object returne from the call
 to serialize the form.
 
-### Limitation: Input "type" Attributes
+### Input "type" Attributes
 
 At this time, onlyt the input's `type` attribute is checked
 when determining the type of element. This means that input
@@ -96,30 +120,6 @@ types with non-standard tag names, such as `<textarea>` and
 `<select>` are not configurable.
 
 This will be fixed in a future release.
-
-## Set Key To The Element's Id
-
-The current convention for setting the key of the JSON
-object key/values, is the `id` attribute of the form's
-input element.
-
-For example, an HTML form that looks like this:
-
-```html
-<form>
-  <input id="foo" value="bar">
-  <input type="checkbox" id="chk" checked>
-</form>
-```
-
-will produce this result, when serialized:
-
-```js
-{
-  foo: "bar",
-  chk: true
-}
-```
 
 ## Current Limitation
 
