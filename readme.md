@@ -112,25 +112,34 @@ from the callback function and this value is used as the
 value in the final JavaScript object returne from the call
 to serialize the form.
 
-### Input "type" Attributes
+### Registering Reader For Non-Input Elements
 
-At this time, onlyt the input's `type` attribute is checked
-when determining the type of element. This means that input
-types with non-standard tag names, such as `<textarea>` and
-`<select>` are not configurable.
+You can register an Input Reader for a non-`<input>` element by
+specifying the element's tag name.
 
-This will be fixed in a future release.
+For example, if you want to handle a `<textarea>` input in some
+special way, you can register a reader like this:
+
+```js
+Backbone.Syphon.InputReaders.register("textarea", function(el){
+  var value;
+
+  // do something special to get the value you want, 
+  // from the text area input
+
+  return value;
+});
+```
 
 ## Current Limitation
 
-As of the v0.1.0 release, there are several known
-limitations.
+There are several known limitations in Backbone.Syphon, still. This list
+is basically my "todo" list for the features that need to be implemented.
 
 * You must have a `<form>` within your view's `$el`
 * An input of type `checkbox` will return a boolean value
 * Input types such as buttons may return a value in the result
 * The key of the returned object's key/values will always be set to the `id` of the input element
-* InputReader configuration is limited to `<input>` elements with a `type` attribute
 
 These limitations are by design in the initial release, but
 are intended to be solved / removed as the plugin moves
