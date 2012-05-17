@@ -17,7 +17,7 @@ describe("serializing a form", function(){
     });
 
     it("should return an object with a key from the text input id", function(){
-      expect(result.foo).not.toBeUndefined();
+      expect(result.hasOwnProperty("foo")).toBe(true)
     });
 
     it("should have the input's value", function(){
@@ -105,6 +105,48 @@ describe("serializing a form", function(){
       });
     });
 
+  });
+
+  describe("when serializing a button", function(){
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("<form><button id='btn' value='foo'>foo</button></form>");
+      }
+    });
+
+    var view, result;
+
+    beforeEach(function(){
+      view = new View();
+      view.render();
+
+      result = Backbone.Syphon.serialize(view);
+    });
+
+    it("should not have the button's value", function(){
+      expect(result.hasOwnProperty("btn")).toBe(false);
+    });
+  });
+
+  describe("when serializing an input with type of 'submit'", function(){
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("<form><input type='submit' id='btn' value='foo' text='Foo'></form>");
+      }
+    });
+
+    var view, result;
+
+    beforeEach(function(){
+      view = new View();
+      view.render();
+
+      result = Backbone.Syphon.serialize(view);
+    });
+
+    it("should not have the button's value", function(){
+      expect(result.hasOwnProperty("btn")).toBe(false);
+    });
   });
 
 });

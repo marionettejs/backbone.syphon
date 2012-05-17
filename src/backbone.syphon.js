@@ -13,7 +13,8 @@ Backbone.Syphon = (function(Backbone, $, _){
 
     _.each(elements, function(el){
       var $el = $(el);
-      var inputReader = Syphon.InputReaders.get($el);
+      var type = getElementType($el); 
+      var inputReader = Syphon.InputReaders.get(type);
       var value = inputReader($el);
 
       data[el.id] = value;
@@ -33,9 +34,8 @@ Backbone.Syphon = (function(Backbone, $, _){
     // in as the `$el` parameter. If no reader is
     // found for the specific input type, returns
     // a default input reader.
-    get: function($el){
-      var type = this.getElementType($el); 
-      var reader = this.readers[type];
+    get: function(type){
+      var reader = this.readers[type.toLowerCase()];
 
       if (!reader){
         reader = this.readers["default"];
@@ -50,7 +50,7 @@ Backbone.Syphon = (function(Backbone, $, _){
     // be a `type` attribute (`type="text"`) or the
     // elmement `tagName` (`<textarea>`).
     register: function(type, reader){
-      this.readers[type] = reader;
+      this.readers[type.toLowerCase()] = reader;
     },
 
     // Registers the default input reader that will
@@ -60,25 +60,10 @@ Backbone.Syphon = (function(Backbone, $, _){
       this.readers["default"] = reader;
     },
 
-    // Determine what type of element this is. It
-    // will either return the `type` attribute of
-    // an `<input>` element, or the `tagName` of
-    // the element when the element is not an `<input>`.
-    getElementType: function($el){
-      var typeAttr;
-      var tagName = $el[0].tagName;
-      var type = tagName;
-
-      if (tagName.toLowerCase() === "input"){
-        typeAttr = $el.attr("type");
-        if (typeAttr){
-          type = typeAttr;
-        } else {
-          type = "text";
-        }
-      }
-      
-      return type.toLowerCase();
+    // Remove the Input Reader associated with this
+    // input type.
+    unregister: function(type){
+      delete this.readers[type];
     }
   };
 
@@ -102,6 +87,33 @@ Backbone.Syphon = (function(Backbone, $, _){
   var getElements = function(view){
     var form = view.$("form")[0];
     return form.elements;
+  };
+
+  // Helpers
+  // -------
+
+  // Determine what type of element this is. It
+  // will either return the `type` attribute of
+  // an `<input>` element, or the `tagName` of
+  // the element when the element is not an `<input>`.
+  var getElementType = function($el){
+    var typeAttr;
+    var tagName = $el[0].tagName;
+    var type = tagName;
+
+    if (tagName.toLowerCase() === "input"){
+      typeAttr = $el.attr("type");
+      if (typeAttr){
+        type = typeAttr;
+      } else {
+        type = "text";
+      }
+    }
+    
+    // Always return the type as lowercase
+    // so it can be matched to lowercase
+    // type registrations.
+    return type.toLowerCase();
   };
 
   return Syphon;
