@@ -171,6 +171,11 @@ Backbone plugin, check out [WatchMeCode: Episode 7](http://watchmecode.net/backb
 
 ## Release Notes
 
+### v0.1.1
+
+* Ability to register Input Readers for elements other than `<input>`
+* An `<input>` element with no `type` attribute will be treated as a `text` input
+
 ### v0.1.0
 
 * Initial release
