@@ -84,20 +84,36 @@ will produce this result, when serialized:
 }
 ```
 
-## Register Your Own Input Readers
+### Ignored Input Types
+
+The following types of input are ignored, and not included in
+the resulting JavaScript object:
+
+* `<inputtype="submit">` buttons
+* `<input type="reset"`> buttons
+* standard `<button>` tags
+
+If you need to get a value from the specific button that was
+clicked, you should do that in your element click handler.
+
+## Input Readers
+
+Input Readers are used to serialize a specific form input
+element in to the value that is appended to the resulting
+JavaScript object. In other words, Input Readers are responsible
+for turning `<input value="foo">` in to the value "foo".
 
 By default, there are two input readers that know how to
 handle form elements: the `default` reader and the `checkbox`
-reader.
-
-The default reader handles nearly every form of input using
+reader. The default reader handles nearly every form of input using
 jQuery's `val()` method. The checkbox reader, however, looks
 for whether or not the checkbox is checked and returns a
 boolean value.
 
-But the method of reading data from a given input element was
-built in an extensible manner from the start, allowing you
-to change how the data is read. To do this, you can register
+### Register Your Own Input Reader
+
+You can register your own input readers, allowing you
+to change how the data is read. To do this register
 a callback function to an input type.
 
 ```js
@@ -105,6 +121,10 @@ Backbone.Syphon.InputReaders.register('radio', function(el){
   return el.val();
 });
 ```
+
+The input type that you specify is either the `type` attribute
+of an input element, or the tag name of a non-input element (see
+next section for more information).
 
 The callback function receives one parameter: a jQuery selector
 object that is the form element. You must return a value
@@ -130,18 +150,6 @@ Backbone.Syphon.InputReaders.register("textarea", function(el){
   return value;
 });
 ```
-
-### Ignored Input Types
-
-The following types of input are ignored, and not included in
-the resulting JavaScript object:
-
-* `<inputtype="submit">` buttons
-* `<input type="reset"`> buttons
-* standard `<button>` tags
-
-If you need to get a value from the specific button that was
-clicked, you should do that in your element click handler.
 
 ## Current Limitation
 
