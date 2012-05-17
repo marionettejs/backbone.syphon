@@ -1,6 +1,12 @@
 Backbone.Syphon = (function(Backbone, $, _){
   var Syphon = {};
 
+  // Ignore Element Types
+  // --------------------
+
+  // Tell Syphon to ignore all elements of these types
+  var ignoredTypes = ["button", "submit", "reset"];
+
   // Syphon
   // ------
 
@@ -9,7 +15,7 @@ Backbone.Syphon = (function(Backbone, $, _){
   Syphon.serialize = function(view){
     var data = {};
 
-    var elements = getElements(view);
+    var elements = getInputElements(view, ignoredTypes);
 
     _.each(elements, function(el){
       var $el = $(el);
@@ -82,22 +88,29 @@ Backbone.Syphon = (function(Backbone, $, _){
     return checked;
   });
 
-  // Retrieve all of the form inputs
-  // from the view
-  var getElements = function(view){
-    var form = view.$("form")[0];
-    return form.elements;
-  };
-
   // Helpers
   // -------
+
+  // Retrieve all of the form inputs
+  // from the view
+  var getInputElements = function(view, ignoreTypes){
+    var form = view.$("form")[0];
+    var elements = form.elements;
+    elements = _.reject(elements, function(el){
+      var type = getElementType(el);
+      var found = _.include(ignoreTypes, type);
+      return found;
+    });
+    return elements;
+  };
 
   // Determine what type of element this is. It
   // will either return the `type` attribute of
   // an `<input>` element, or the `tagName` of
   // the element when the element is not an `<input>`.
-  var getElementType = function($el){
+  var getElementType = function(el){
     var typeAttr;
+    var $el = $(el);
     var tagName = $el[0].tagName;
     var type = tagName;
 

@@ -149,4 +149,25 @@ describe("serializing a form", function(){
     });
   });
 
+  describe("when serializing an input with type of 'reset'", function(){
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("<form><input type='reset' id='btn' value='foo' text='Foo'></form>");
+      }
+    });
+
+    var view, result;
+
+    beforeEach(function(){
+      view = new View();
+      view.render();
+
+      result = Backbone.Syphon.serialize(view);
+    });
+
+    it("should not have the button's value", function(){
+      expect(result.hasOwnProperty("btn")).toBe(false);
+    });
+  });
+
 });

@@ -131,6 +131,18 @@ Backbone.Syphon.InputReaders.register("textarea", function(el){
 });
 ```
 
+### Ignored Input Types
+
+The following types of input are ignored, and not included in
+the resulting JavaScript object:
+
+* `<inputtype="submit">` buttons
+* `<input type="reset"`> buttons
+* standard `<button>` tags
+
+If you need to get a value from the specific button that was
+clicked, you should do that in your element click handler.
+
 ## Current Limitation
 
 There are several known limitations in Backbone.Syphon, still. This list
@@ -184,6 +196,7 @@ Backbone plugin, check out [WatchMeCode: Episode 7](http://watchmecode.net/backb
 
 * Ability to register Input Readers for elements other than `<input>`
 * An `<input>` element with no `type` attribute will be treated as a `text` input
+* Ignore elements of type "submit", "button" and "reset"
 
 ### v0.1.0
 
