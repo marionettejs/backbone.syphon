@@ -1,6 +1,6 @@
 describe("input readers", function(){
   
-  describe("when registering an input reader for an input type", function(){
+  describe("when registering an input reader for an input with a type attribute", function(){
     var el;
     var reader = function(){};
 
@@ -10,6 +10,21 @@ describe("input readers", function(){
     });
 
     it("should be able to retrieve the input reader for that type", function(){
+      var found = Backbone.Syphon.InputReaders.get(el);
+      expect(found).toBe(reader);
+    });
+  });
+
+  describe("when retrieving a reader for an input with no type attribute", function(){
+    var el;
+    var reader = function(){};
+
+    beforeEach(function(){
+      el = $("<input>");
+      Backbone.Syphon.InputReaders.register("text", reader);
+    });
+
+    it("should retrieve the registered 'text' reader", function(){
       var found = Backbone.Syphon.InputReaders.get(el);
       expect(found).toBe(reader);
     });
