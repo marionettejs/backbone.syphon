@@ -32,6 +32,12 @@ Development: [backbone.syphon.js](https://raw.github.com/derickbailey/backbone.s
 
 Production: [backbone.syphon.min.js](https://raw.github.com/derickbailey/backbone.syphon/master/lib/backbone.syphon.min.js)
 
+### AMD/RequireJS Builds
+
+Development: [backbone.syphon.js](https://raw.github.com/derickbailey/backbone.syphon/master/lib/amd/backbone.syphon.js)
+
+Production: [backbone.syphon.min.js](https://raw.github.com/derickbailey/backbone.syphon/master/lib/amd/backbone.syphon.min.js)
+
 ## Basic Usage
 
 When the data from a form is needed, you can call the

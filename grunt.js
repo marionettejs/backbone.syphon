@@ -1,6 +1,8 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
+  grunt.loadNpmTasks('grunt-rigger');
+
   // Project configuration.
   grunt.initConfig({
     meta: {
@@ -11,7 +13,7 @@ module.exports = function(grunt) {
         '// http://github.com/derickbailey/backbone.syphon'
     },
     lint: {
-      files: ['src/**/*.js']
+      files: ['src/backbone.syphon.js']
     },
     concat: {
       dist: {
@@ -19,10 +21,22 @@ module.exports = function(grunt) {
         dest: 'lib/backbone.syphon.js'
       }
     },
+
+    rig: {
+      amd: {
+        src: ['<banner:meta.banner>', 'src/amd.js'],
+        dest: 'lib/amd/backbone.syphon.js'
+      }
+    },
+
     min: {
-      dist: {
+      standard: {
         src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
         dest: 'lib/backbone.syphon.min.js'
+      },
+      amd: {
+        src: ['<banner:meta.banner>', '<config:rig.amd.dest>'],
+        dest: 'lib/amd/backbone.syphon.min.js'
       }
     },
     jshint: {
@@ -49,6 +63,6 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint concat min');
+  grunt.registerTask('default', 'lint concat rig min');
 
 };
