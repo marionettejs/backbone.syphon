@@ -38,6 +38,14 @@ Development: [backbone.syphon.js](https://raw.github.com/derickbailey/backbone.s
 
 Production: [backbone.syphon.min.js](https://raw.github.com/derickbailey/backbone.syphon/master/lib/amd/backbone.syphon.min.js)
 
+## Annotated Source Code
+
+Syphon has annotated source code using the Docco tool to turn
+comments in to documentation. This provides an in-depth look
+at what each section of is doing.
+
+[View The Annotated Source Code](http://derickbailey.github.com/backbone.syphon/docs/backbone.syphon.html)
+
 ## Basic Usage
 
 When the data from a form is needed, you can call the
