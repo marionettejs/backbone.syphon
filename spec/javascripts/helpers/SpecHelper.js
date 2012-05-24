@@ -1,9 +1,8 @@
 beforeEach(function() {
   this.addMatchers({
-    toBePlaying: function(expectedSong) {
-      var player = this.actual;
-      return player.currentlyPlayingSong === expectedSong && 
-             player.isPlaying;
+    toHaveOwnPropery: function(expectedProperty) {
+      var obj = this.actual;
+      return obj.hasOwnProperty(expectedProperty);
     }
   });
 });

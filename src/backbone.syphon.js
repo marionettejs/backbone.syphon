@@ -20,10 +20,14 @@ Backbone.Syphon = (function(Backbone, $, _){
     _.each(elements, function(el){
       var $el = $(el);
       var type = getElementType($el); 
+
       var inputReader = Syphon.InputReaders.get(type);
       var value = inputReader($el);
 
-      data[el.id] = value;
+      var keyExtractor = Syphon.KeyExtractors.get(type);
+      var key = keyExtractor($el);
+
+      data[key] = value;
     });
 
     return data;
@@ -70,6 +74,21 @@ Backbone.Syphon = (function(Backbone, $, _){
     // input type.
     unregister: function(type){
       delete this.readers[type];
+    }
+  };
+
+  // Key Extractors
+  // --------------
+  // Key extractors produce the "key" in `{key: "value"}`
+  // pairs, when serializing.
+  
+  Syphon.KeyExtractors = {
+    register: function(extractor){
+      this.extractor = extractor;
+    },
+
+    get: function(){
+      return this.extractor;
     }
   };
 
