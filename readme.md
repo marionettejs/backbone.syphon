@@ -206,7 +206,7 @@ and produce:
 }
 ```
 
-## Input Readers
+## Syphon.InputResetSet (Input Readers)
 
 Input Readers are used to serialize a specific form input
 element in to the value that is appended to the resulting
