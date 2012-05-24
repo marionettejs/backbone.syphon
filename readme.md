@@ -86,13 +86,35 @@ the resulting JavaScript object:
 If you need to get a value from the specific button that was
 clicked, you should do that in your element click handler.
 
-## Key Extractors
+## Syphon.KeyExtractorSet (Key Extractors)
 
 When a form is serialized, all of the input elements are 
 passed through a "Key Extractor" based on the type of input.
 Key extractors are used to generate the "key" in the
 `{key: "value"}` object that is returned from the call
 to `.serialize`.
+
+### Default Key Extractor Set
+
+Syphon comes with a default key extractor set in the
+`Backbone.Syhpon.KeyExtractors` object. This extractor set
+has one default extractor built in to it (see below).
+
+You can replace the entire extractor set by creating a new
+instance of `Backbone.Syphon.KeyExtractorSet` like this:
+
+```js
+MyExtractorSet = new Backbone.Syphon.KeyExtractorSet();
+MyExtractorSet.registerDefault(function($el){
+  return $el.prop("id");
+});
+
+Backbone.KeyExtractors = MyExtractorSet;
+```
+
+Under normal circumstances, you won't have to replace
+the key extractor set as a whole, though. You can simply
+register new extractors as needed (see below).
 
 ### Default Key Extractor: element "id"
 
@@ -198,6 +220,29 @@ jQuery's `val()` method. The checkbox reader, however, looks
 for whether or not the checkbox is checked and returns a
 boolean value.
 
+### Default Input Reset Set
+
+Syphon comes with a default input reader set in the
+`Backbone.Syhpon.InputReaders` object. This input reset set
+has a few default input readers built in (see below).
+
+You can replace the entire input reset set by creating a new
+instance of `Backbone.Syphon.InputReaderSet` like this:
+
+```js
+MyReaderSet = new Backbone.Syphon.InputReaderSet();
+MyReaderSet.registerDefault(function($el){
+  return $el.val();
+});
+
+Backbone.InputReaders = MyReaderSet;
+```
+
+Under normal circumstances, you won't have to create your
+own input reader set, though. You can register and remove
+input readers as needed (see below) using the default
+input reader set.
+
 ### Register Your Own Input Reader
 
 You can register your own input readers, allowing you
@@ -298,7 +343,8 @@ I've recorded several screencasts on how I built Syphon.
 
 ### v0.2.0
 
-* Added the notion of Key Extractors, allowing configuration of how the "key" in `{key: "value"}` serialized objects are generated
+* Added Key Extractors and Key Extractor Sets, allowing configuration of how the "key" in `{key: "value"}` serialized objects are generated
+* Input Readers are now a type that can be instantiated and replaced, wholesale, instead of just registered / removed
 
 ### v0.1.1
 
