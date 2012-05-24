@@ -74,11 +74,30 @@ Backbone.View.extend({
 });
 ```
 
-### Set Key To The Element's Id
+## Ignored Input Types
 
-The current convention for setting the key of the JSON
-object key/values, is the `id` attribute of the form's
-input element.
+The following types of input are ignored, and not included in
+the resulting JavaScript object:
+
+* `<inputtype="submit">` buttons
+* `<input type="reset"`> buttons
+* standard `<button>` tags
+
+If you need to get a value from the specific button that was
+clicked, you should do that in your element click handler.
+
+## Key Extractors
+
+When a form is serialized, all of the input elements are 
+passed through a "Key Extractor" based on the type of input.
+Key extractors are used to generate the "key" in the
+`{key: "value"}` object that is returned from the call
+to `.serialize`.
+
+### Default Key Extractor: element "id"
+
+The default key extractor uses the `id` attribute of the form's
+input element as the key.
 
 For example, an HTML form that looks like this:
 
@@ -98,17 +117,72 @@ will produce this result, when serialized:
 }
 ```
 
-### Ignored Input Types
+### Changing The Default Key Extractor
 
-The following types of input are ignored, and not included in
-the resulting JavaScript object:
+If you want to change the default key extractor, you can
+call `Syphon.KeyExtractors.registerDefault`. This method
+takes a single parameter of a function. The function
+receives a single parameter of a jQuery selector element -
+the input element that needs to have its key extracted.
 
-* `<inputtype="submit">` buttons
-* `<input type="reset"`> buttons
-* standard `<button>` tags
+To change the default behavior from using "id" to using
+"name" on input elements, use the following configuration:
 
-If you need to get a value from the specific button that was
-clicked, you should do that in your element click handler.
+```js
+Backbone.Syphon.KeyExtractors.registerDefault(function($el){
+  return $el.prop("name");
+});
+```
+
+Now an HTML form that looks like this:
+
+```html
+<form>
+  <input name="quux" value="bar">
+  <input type="checkbox" name="thingy" checked>
+</form>
+```
+
+will produce this result, when serialized:
+
+```js
+{
+  quux: "bar",
+  thingy: true
+}
+```
+
+### Key Extractors For Specific Input Types
+
+You can also register key extractors for specific input types.
+This allows you to override the behavior for a specific type
+while still using the default behavior for other types.
+
+To register a key extractor for a specific type, use the
+`Syphon.KeyExtractors.register` method. This method takes
+two parameters: the input type, and the extractor function.
+
+```js
+Backbone.Syphon.KeyExtractors.register("text", function($el){
+  return $el.data("foo");
+});
+```
+
+This configuration will take the following form:
+
+```html
+<form>
+  <input data-foo="thingy" value="that">
+</form>
+```
+
+and produce:
+
+```js
+{
+  thingy: "that"
+}
+```
 
 ## Input Readers
 
@@ -146,9 +220,9 @@ from the callback function and this value is used as the
 value in the final JavaScript object returne from the call
 to serialize the form.
 
-### Registering Reader For Non-Input Elements
+## Handling Non-"input" Elements
 
-You can register an Input Reader for a non-`<input>` element by
+You can register an Input Reader or a Key Extractor for a non-`<input>` element by
 specifying the element's tag name.
 
 For example, if you want to handle a `<textarea>` input in some
@@ -162,6 +236,14 @@ Backbone.Syphon.InputReaders.register("textarea", function(el){
   // from the text area input
 
   return value;
+});
+```
+
+This also works for key extractors:
+
+```js
+Backbone.Syphon.KeyExtractors.register("textarea", function(el){
+  return el.prop("name");
 });
 ```
 
