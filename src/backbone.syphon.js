@@ -16,27 +16,38 @@ Backbone.Syphon = (function(Backbone, $, _){
   Syphon.serialize = function(view, options){
     var data = {};
 
-    options = _.clone(options) || {};
-    options.ignoredTypes = _.clone(Syphon.ignoredTypes);
+    // Build the configuration
+    config = _.clone(options) || {};
+    config.ignoredTypes = _.clone(Syphon.ignoredTypes);
+    config.inputReaders = config.inputReaders || Syphon.InputReaders;
+    config.keyExtractors = config.keyExtractors || Syphon.KeyExtractors;
+    config.keyAssignmentValidators = config.keyAssignmentValidators || Syphon.KeyAssignmentValidators;
 
-    var elements = getInputElements(view, options);
+    // Get all of the elements to process
+    var elements = getInputElements(view, config);
 
+    // Process all of the elements
     _.each(elements, function(el){
       var $el = $(el);
       var type = getElementType($el); 
 
-      var inputReader = Syphon.InputReaders.get(type);
-      var value = inputReader($el);
-
-      var keyExtractor = Syphon.KeyExtractors.get(type);
+      // Get the key for the input
+      var keyExtractor = config.keyExtractors.get(type);
       var key = keyExtractor($el);
 
-      var validKeyAssignment = Syphon.KeyAssignmentValidators.get(type);
+      // Get the value for the input
+      var inputReader = config.inputReaders.get(type);
+      var value = inputReader($el);
+
+      // Get the key assignment validator and make sure
+      // it's valid before assigning the value to the key
+      var validKeyAssignment = config.keyAssignmentValidators.get(type);
       if (validKeyAssignment($el, key, value)){
         data[key] = value;
       }
     });
 
+    // Done; send back the results.
     return data;
   };
 
@@ -153,24 +164,24 @@ Backbone.Syphon = (function(Backbone, $, _){
 
   // Retrieve all of the form inputs
   // from the view
-  var getInputElements = function(view, options){
+  var getInputElements = function(view, config){
     var form = view.$("form")[0];
     var elements = form.elements;
 
     elements = _.reject(elements, function(el){
       var reject;
       var type = getElementType(el);
-      var extractor = Syphon.KeyExtractors.get(type);
+      var extractor = config.keyExtractors.get(type);
       var identifier = extractor($(el));
      
-      var foundInIgnored = _.include(options.ignoredTypes, type);
-      var foundInInclude = _.include(options.include, identifier);
-      var foundInExclude = _.include(options.exclude, identifier);
+      var foundInIgnored = _.include(config.ignoredTypes, type);
+      var foundInInclude = _.include(config.include, identifier);
+      var foundInExclude = _.include(config.exclude, identifier);
 
       if (foundInInclude){
         reject = false;
       } else {
-        if (options.include){
+        if (config.include){
           reject = true;
         } else {
           reject = (foundInExclude || foundInIgnored);

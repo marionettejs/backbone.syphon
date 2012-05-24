@@ -66,5 +66,31 @@ describe("input readers", function(){
     });
   });
 
+  describe("when specifying input readers in the options for serialize", function(){
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("<form><input name='foo' data-stuff='bar'></form>");
+      }
+    });
+
+    var result;
+    beforeEach(function(){
+      var readers = new Backbone.Syphon.InputReaderSet();
+      readers.registerDefault(function($el){
+        return $el.data("stuff");
+      });
+
+      var view = new View();
+      view.render();
+
+      result = Backbone.Syphon.serialize(view, {
+        inputReaders: readers
+      });
+    });
+
+    it("should use the specified input reader", function(){
+      expect(result.foo).toBe("bar");
+    });
+  });
 
 });

@@ -65,4 +65,31 @@ describe("key extractors", function(){
     });
   });
 
+  describe("when specifying key extractor in the options for serialize", function(){
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("<form><input data-stuff='bar'></form>");
+      }
+    });
+
+    var result;
+    beforeEach(function(){
+      var extractors = new Backbone.Syphon.KeyExtractorSet();
+      extractors.registerDefault(function($el){
+        return $el.data("stuff");
+      });
+
+      var view = new View();
+      view.render();
+
+      result = Backbone.Syphon.serialize(view, {
+        keyExtractors: extractors
+      });
+    });
+
+    it("should use the specified key extractors", function(){
+      expect(result).toHaveOwnProperty("bar");
+    });
+  });
+
 });
