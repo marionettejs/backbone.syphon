@@ -198,6 +198,34 @@ Extractors, Input Readers, and Key Assignment Validators. See the full
 [API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
 for more information on these.
 
+## Ignored Input Types
+
+The following types of input are ignored, and not included in
+the resulting JavaScript object:
+
+* `<inputtype="submit">` buttons
+* `<input type="reset"`> buttons
+* standard `<button>` tags
+
+If you need to get a value from the specific button that was
+clicked, you can either include it specifically (see below) or use
+a DOM event to listen for that element being manipulated (clicked, for
+example) and manually grab the data you need.
+
+### Ignoring Other Input Types
+
+Syphon exposes the list of ignored input types as a raw array. You can
+push, pop, and manipulate this array as any other array, to specify which
+types of input fields you want to ignore.
+
+This list is global to Syphon and there is no way to customize it for
+a specific call to `serialize`.
+
+```js
+// ignore all <textarea> input elements
+Backbone.Syphon.ignoredTypes.push("textarea");
+```
+
 ## Include / Exclude Specific Fields
 
 You can include or exclude specific fields as needed. Inclusion is given
@@ -324,32 +352,6 @@ Backbone.Syphon.serialize(view, {
 
 For more information on Key Extractors, see the full 
 [API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
-
-## Ignored Input Types
-
-The following types of input are ignored, and not included in
-the resulting JavaScript object:
-
-* `<inputtype="submit">` buttons
-* `<input type="reset"`> buttons
-* standard `<button>` tags
-
-If you need to get a value from the specific button that was
-clicked, you should do that in your element click handler.
-
-### Ignoring Other Input Types
-
-Syphon exposes the list of ignored input types as a raw array. You can
-push, pop, and manipulate this array as any other array, to specify which
-types of input fields you want to ignore.
-
-This list is global to Syphon and there is no way to customize it for
-a specific call to `serialize`.
-
-```js
-// ignore all <textarea> input elements
-Backbone.Syphon.ignoredTypes.push("textarea");
-```
 
 ## Current Limitations
 
