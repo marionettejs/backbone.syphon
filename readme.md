@@ -86,6 +86,62 @@ Backbone.View.extend({
 });
 ```
 
+### Fields Retrieved By "name" Attribute
+
+The default behavior for serializing fields is to use the field's "name"
+attribute as the key in the serialized object.
+
+```html
+<form>
+  <input name="a">
+  <select name="b"></select>
+  <textarea name="c"></textarea>
+</form>
+```
+
+```js
+Backbone.Syphon.serialize(view);
+
+// will produce => 
+
+{
+  a: "",
+  b: "",
+  c: ""
+}
+```
+
+For information on how to change this behavior, see the Key Extractors 
+section of the 
+[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+
+### Values Retrieved By jQuery `.val()` Call
+
+The default behavior for serializing fields is to use jQuery's `.val()`
+to get the value of the input element.
+
+```html
+<form>
+  <input name="a" value="a-value">
+  <textarea name="b">b-value</textarea>
+</form>
+```
+
+```js
+Backbone.Syphon.serialize(view);
+
+// will produce => 
+
+{
+  a: "a-value",
+  b: "b-value",
+}
+```
+
+For information on how to change this behavior, see the Input Readers
+section of the 
+[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+
 ### Checkboxes
 
 By default, a checkbox will return a boolean value signifying whether or 
