@@ -454,7 +454,7 @@ I've recorded several screencasts on how I built Syphon.
 
 ## Release Notes
 
-### v0.2.0-pre
+### v0.2.0
 
 * Specify fields to include or exclude, when calling `.serialize`
 * Defaults to input element "name" for the key in the serialized object
