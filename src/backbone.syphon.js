@@ -16,7 +16,7 @@ Backbone.Syphon = (function(Backbone, $, _){
   Syphon.serialize = function(view, options){
     var data = {};
 
-    options = _.clone(options) || {}
+    options = _.clone(options) || {};
     options.ignoredTypes = _.clone(Syphon.ignoredTypes);
 
     var elements = getInputElements(view, options);
@@ -164,8 +164,8 @@ Backbone.Syphon = (function(Backbone, $, _){
       var identifier = extractor($(el));
      
       var foundInIgnored = _.include(options.ignoredTypes, type);
-      var foundInInclude = _.include(options.include, identifier)
-      var foundInExclude = _.include(options.exclude, identifier)
+      var foundInInclude = _.include(options.include, identifier);
+      var foundInExclude = _.include(options.exclude, identifier);
 
       if (foundInInclude){
         reject = false;
