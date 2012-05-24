@@ -1,3 +1,5 @@
+# Backbone.Syphon API Documentation
+
 The document is the primary source for the API that Syphon
 exposes, and provides information on how to correctly override
 and configure the behaviors of Syphon.

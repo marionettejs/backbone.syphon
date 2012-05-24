@@ -48,7 +48,7 @@ If you need to modify the behaviors of Syphon, see the API document. It
 contains the documentation for the core APIs that Syphon exposes, with
 examples on how to change the behaviors of Syphon.
 
-##### [View The API Documentation](apidoc.md)
+##### [View The API Documentation](https://github.com/derickbailey/backbone.syphon/blob/dev/apidoc.md)
 
 ### Annotated Source Code
 
