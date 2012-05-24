@@ -13,10 +13,13 @@ Backbone.Syphon = (function(Backbone, $, _){
 
   // Get a JSON object that represents
   // all of the form inputs, in this view
-  Syphon.serialize = function(view){
+  Syphon.serialize = function(view, options){
     var data = {};
 
-    var elements = getInputElements(view, Syphon.ignoredTypes);
+    options = _.clone(options) || {}
+    options.ignoredTypes = _.clone(Syphon.ignoredTypes);
+
+    var elements = getInputElements(view, options);
 
     _.each(elements, function(el){
       var $el = $(el);
@@ -150,14 +153,33 @@ Backbone.Syphon = (function(Backbone, $, _){
 
   // Retrieve all of the form inputs
   // from the view
-  var getInputElements = function(view, ignoreTypes){
+  var getInputElements = function(view, options){
     var form = view.$("form")[0];
     var elements = form.elements;
+
     elements = _.reject(elements, function(el){
+      var reject;
       var type = getElementType(el);
-      var found = _.include(ignoreTypes, type);
-      return found;
+      var extractor = Syphon.KeyExtractors.get(type);
+      var identifier = extractor($(el));
+     
+      var foundInIgnored = _.include(options.ignoredTypes, type);
+      var foundInInclude = _.include(options.include, identifier)
+      var foundInExclude = _.include(options.exclude, identifier)
+
+      if (foundInInclude){
+        reject = false;
+      } else {
+        if (options.include){
+          reject = true;
+        } else {
+          reject = (foundInExclude || foundInIgnored);
+        }
+      }
+
+      return reject;
     });
+
     return elements;
   };
 
