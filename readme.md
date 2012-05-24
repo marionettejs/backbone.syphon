@@ -116,17 +116,17 @@ Under normal circumstances, you won't have to replace
 the key extractor set as a whole, though. You can simply
 register new extractors as needed (see below).
 
-### Default Key Extractor: element "id"
+### Default Key Extractor: element "name"
 
-The default key extractor uses the `id` attribute of the form's
+The default key extractor uses the `name` attribute of the form's
 input element as the key.
 
 For example, an HTML form that looks like this:
 
 ```html
 <form>
-  <input id="foo" value="bar">
-  <input type="checkbox" id="chk" checked>
+  <input name="foo" value="bar">
+  <input type="checkbox" name="chk" checked>
 </form>
 ```
 
@@ -152,7 +152,7 @@ To change the default behavior from using "id" to using
 
 ```js
 Backbone.Syphon.KeyExtractors.registerDefault(function($el){
-  return $el.prop("name");
+  return $el.prop("id");
 });
 ```
 
@@ -160,8 +160,8 @@ Now an HTML form that looks like this:
 
 ```html
 <form>
-  <input name="quux" value="bar">
-  <input type="checkbox" name="thingy" checked>
+  <input id="quux" value="bar">
+  <input type="checkbox" id="thingy" checked>
 </form>
 ```
 
@@ -292,7 +292,7 @@ Backbone.Syphon.KeyExtractors.register("textarea", function(el){
 });
 ```
 
-## Current Limitation
+## Current Limitations
 
 There are several known limitations in Backbone.Syphon, still. This list
 is basically my "todo" list for the features that need to be implemented.
@@ -343,6 +343,7 @@ I've recorded several screencasts on how I built Syphon.
 
 ### v0.2.0
 
+* Defaults to input element "name" for the key in the serialized object
 * Added Key Extractors and Key Extractor Sets, allowing configuration of how the "key" in `{key: "value"}` serialized objects are generated
 * Input Readers are now a type that can be instantiated and replaced, wholesale, instead of just registered / removed
 

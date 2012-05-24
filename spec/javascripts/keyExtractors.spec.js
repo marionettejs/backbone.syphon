@@ -1,4 +1,4 @@
-describe("override keys used in serialized object", function(){
+describe("key extractors", function(){
   var defaultExtractor;
 
   beforeEach(function(){
@@ -41,7 +41,7 @@ describe("override keys used in serialized object", function(){
 
     var View = Backbone.View.extend({
       render: function(){
-        this.$el.html("<form><input><input type='checkbox' id='chk'></form>");
+        this.$el.html("<form><input><input type='checkbox' name='chk'></form>");
       }
     });
 

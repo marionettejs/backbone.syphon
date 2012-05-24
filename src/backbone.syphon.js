@@ -127,7 +127,7 @@ Backbone.Syphon = (function(Backbone, $, _){
   // The default key extractor, which uses the
   // input element's "id" attribute
   Syphon.KeyExtractors.registerDefault(function($el){
-    return $el.prop("id");
+    return $el.prop("name");
   });
 
   // Built-in Input Readers

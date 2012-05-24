@@ -3,7 +3,7 @@ describe("serializing a form", function(){
   describe("when serializing a text input", function(){
     var View = Backbone.View.extend({
       render: function(){
-        this.$el.html("<form><input type='text' id='foo' value='bar'></form>");
+        this.$el.html("<form><input type='text' name='foo' value='bar'></form>");
       }
     });
 
@@ -16,7 +16,7 @@ describe("serializing a form", function(){
       result = Backbone.Syphon.serialize(view);
     });
 
-    it("should return an object with a key from the text input id", function(){
+    it("should return an object with a key from the text input name", function(){
       expect(result.hasOwnProperty("foo")).toBe(true)
     });
 
@@ -28,7 +28,7 @@ describe("serializing a form", function(){
   describe("when serializing a textarea", function(){
     var View = Backbone.View.extend({
       render: function(){
-        this.$el.html("<form><textarea id='foo'>bar</textarea></form>");
+        this.$el.html("<form><textarea name='foo'>bar</textarea></form>");
       }
     });
 
@@ -49,7 +49,7 @@ describe("serializing a form", function(){
   describe("when serializing a select box", function(){
     var View = Backbone.View.extend({
       render: function(){
-        this.$el.html("<form><select id='foo'><option value='bar'>bar</option></select></form>");
+        this.$el.html("<form><select name='foo'><option value='bar'>bar</option></select></form>");
       }
     });
 
@@ -70,7 +70,7 @@ describe("serializing a form", function(){
   describe("when serializing a checkbox", function(){
     var View = Backbone.View.extend({
       render: function(){
-        this.$el.html("<form><input type='checkbox' id='chk'></form>");
+        this.$el.html("<form><input type='checkbox' id='the-checkbox' name='chk'></form>");
       }
     });
 
@@ -80,7 +80,7 @@ describe("serializing a form", function(){
       beforeEach(function(){
         view = new View();
         view.render();
-        view.$("#chk").prop("checked", true);
+        view.$("#the-checkbox").prop("checked", true);
 
         result = Backbone.Syphon.serialize(view);
       });
@@ -110,7 +110,7 @@ describe("serializing a form", function(){
   describe("when serializing a button", function(){
     var View = Backbone.View.extend({
       render: function(){
-        this.$el.html("<form><button id='btn' value='foo'>foo</button></form>");
+        this.$el.html("<form><button name='btn' value='foo'>foo</button></form>");
       }
     });
 
@@ -131,7 +131,7 @@ describe("serializing a form", function(){
   describe("when serializing an input with type of 'submit'", function(){
     var View = Backbone.View.extend({
       render: function(){
-        this.$el.html("<form><input type='submit' id='btn' value='foo' text='Foo'></form>");
+        this.$el.html("<form><input type='submit' name='btn' value='foo' text='Foo'></form>");
       }
     });
 
@@ -152,7 +152,7 @@ describe("serializing a form", function(){
   describe("when serializing an input with type of 'reset'", function(){
     var View = Backbone.View.extend({
       render: function(){
-        this.$el.html("<form><input type='reset' id='btn' value='foo' text='Foo'></form>");
+        this.$el.html("<form><input type='reset' name='btn' value='foo' text='Foo'></form>");
       }
     });
 
@@ -167,6 +167,27 @@ describe("serializing a form", function(){
 
     it("should not have the button's value", function(){
       expect(result.hasOwnProperty("btn")).toBe(false);
+    });
+  });
+
+  describe("when serializing a radio button group", function(){
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("<form><input type='radio' name='foo' value='foo'><input type='radio' name='foo' value='bar' checked><input type='radio' name='foo' value='baz'>");
+      }
+    });
+
+    var view, result;
+
+    beforeEach(function(){
+      view = new View();
+      view.render();
+
+      result = Backbone.Syphon.serialize(view);
+    });
+
+    it("should only return the value of the selected radio button", function(){
+      expect(result.foo).toBe("bar");
     });
   });
 
