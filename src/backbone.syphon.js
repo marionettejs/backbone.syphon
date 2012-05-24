@@ -79,11 +79,14 @@ Backbone.Syphon = (function(Backbone, $, _){
 
   // Key Extractors
   // --------------
+  
   // Key extractors produce the "key" in `{key: "value"}`
   // pairs, when serializing.
-  
-  Syphon.KeyExtractors = {
-    extractors: {},
+  Syphon.KeyExtractorSet = function(){
+    this.extractors = {};
+  };
+
+  _.extend(Syphon.KeyExtractorSet.prototype, {
 
     // Register a default extractor to use when no extractor
     // for the specific input type is found.
@@ -91,6 +94,8 @@ Backbone.Syphon = (function(Backbone, $, _){
       this.extractors["default"] = extractor;
     },
 
+    // Register an extractor for a specific input type, allowing that
+    // input type to have it's key extracted in a specific way
     register: function(type, extractor){
       this.extractors[type] = extractor;
     },
@@ -106,18 +111,22 @@ Backbone.Syphon = (function(Backbone, $, _){
 
       return extractor;
     }
-  };
+  });
 
   // Built-in Key Extractors
   // -----------------------
 
-  // The default extractor
+  // The default extractor set
+  Syphon.KeyExtractors = new Syphon.KeyExtractorSet();
+
+  // The default key extractor, which uses the
+  // input element's "id" attribute
   Syphon.KeyExtractors.registerDefault(function($el){
     return $el.prop("id");
   });
 
   // Built-in Input Readers
-  // ---------------------
+  // ----------------------
   
   // The default reader
   Syphon.InputReaders.registerDefault(function($el){
