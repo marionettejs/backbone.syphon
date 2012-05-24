@@ -4,8 +4,9 @@ Backbone.Syphon = (function(Backbone, $, _){
   // Ignore Element Types
   // --------------------
 
-  // Tell Syphon to ignore all elements of these types
-  var ignoredTypes = ["button", "submit", "reset"];
+  // Tell Syphon to ignore all elements of these types. You can
+  // push new types to ignore directly in to this array.
+  Syphon.ignoredTypes = ["button", "submit", "reset"];
 
   // Syphon
   // ------
@@ -15,7 +16,7 @@ Backbone.Syphon = (function(Backbone, $, _){
   Syphon.serialize = function(view){
     var data = {};
 
-    var elements = getInputElements(view, ignoredTypes);
+    var elements = getInputElements(view, Syphon.ignoredTypes);
 
     _.each(elements, function(el){
       var $el = $(el);
