@@ -98,6 +98,20 @@ the resulting JavaScript object:
 If you need to get a value from the specific button that was
 clicked, you should do that in your element click handler.
 
+#### Ignoring Other Input Types
+
+Syphon exposes the list of ignored input types as a raw array. You can
+push, pop, and manipulate this array as any other array, to specify which
+types of input fields you want to ignore.
+
+This list is global to Syphon and there is no way to customize it for
+a specific call to `serialize`.
+
+```js
+// ignore all <textarea> input elements
+Backbone.Syphon.ignoredTypes.push("textarea");
+```
+
 ## Current Limitations
 
 There are several known limitations in Backbone.Syphon, still. This list
@@ -105,7 +119,6 @@ is basically my "todo" list for the features that need to be implemented.
 
 * You must have a `<form>` within your view's `$el`
 * An input of type `checkbox` will return a boolean value
-* Cannot add to, or remove from, the ignored input element types
 * Cannot specify specific fields to include
 * Cannot specify specific fields to ignore
 
@@ -129,7 +142,7 @@ Jasmine server
 3. Point your browser at `http://localhost:8888` and you will
 see all of the specs for Backbone.Syphon
 
-### To Build The Release Packages
+### To Build The Packages
 
 1. Be sure you have NodeJS and NPM installed on your system
 
@@ -153,6 +166,7 @@ I've recorded several screencasts on how I built Syphon.
 * Added Key Assignment Validators and Key Assignment Validator sets, allowing you to validate a key / value pair and prevent it from being attached to the serialization result
 * Input Readers are now a type that can be instantiated and replaced, wholesale, instead of just registered / removed
 * Created Syphon.TypeRegistry base type which is used by Key Extractors, Input Readders and Key Assignment Validators
+* Exposed the `Syphon.ignoredTypes` array, to allow manipulating which input types are ignored
 
 ### v0.1.1
 
