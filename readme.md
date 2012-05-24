@@ -328,7 +328,8 @@ There are two Key Assignment Validators built in to Syphon:
 
 ## Handling Non-"input" Elements
 
-You can register an Input Reader or a Key Extractor for a non-`<input>` element by
+You can register an Input Reader, Key Extractor, or Key
+Assignment Validator for a non-`<input>` element by
 specifying the element's tag name.
 
 For example, if you want to handle a `<textarea>` input in some
@@ -359,7 +360,6 @@ There are several known limitations in Backbone.Syphon, still. This list
 is basically my "todo" list for the features that need to be implemented.
 
 * You must have a `<form>` within your view's `$el`
-* Radio button groups (grouped by "name" attribute) don't work right
 * An input of type `checkbox` will return a boolean value
 * Cannot add to, or remove from, the ignored input element types
 * Cannot specify specific fields to include
@@ -402,12 +402,13 @@ I've recorded several screencasts on how I built Syphon.
 
 ## Release Notes
 
-### v0.2.0
+### v0.2.0-pre
 
 * Defaults to input element "name" for the key in the serialized object
 * Added Key Extractors and Key Extractor Sets, allowing configuration of how the "key" in `{key: "value"}` serialized objects are generated
 * Added Key Assignment Validators and Key Assignment Validator sets, allowing you to validate a key / value pair and prevent it from being attached to the serialization result
 * Input Readers are now a type that can be instantiated and replaced, wholesale, instead of just registered / removed
+* Created Syphon.TypeRegistry base type which is used by Key Extractors, Input Readders and Key Assignment Validators
 
 ### v0.1.1
 
