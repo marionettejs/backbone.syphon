@@ -48,7 +48,7 @@ If you need to modify the behaviors of Syphon, see the API document. It
 contains the documentation for the core APIs that Syphon exposes, with
 examples on how to change the behaviors of Syphon.
 
-##### [View The API Documentation](https://github.com/derickbailey/backbone.syphon/blob/dev/apidoc.md)
+##### [View The API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md)
 
 ### Annotated Source Code
 
@@ -56,7 +56,7 @@ Syphon has annotated source code using the Docco tool to turn
 comments in to documentation. This provides an in-depth look
 at what each section of is doing.
 
-[View The Annotated Source Code](http://derickbailey.github.com/backbone.syphon/docs/backbone.syphon.html)
+##### [View The Annotated Source Code](http://derickbailey.github.com/backbone.syphon/docs/backbone.syphon.html)
 
 ## Basic Usage
 
@@ -86,7 +86,133 @@ Backbone.View.extend({
 });
 ```
 
-### Ignored Input Types
+## Include / Exclude Specific Fields
+
+You can include or exclude specific fields as needed. Inclusion is given
+priority and specifying fields to include will force Syphon to exclude all
+other fields. Including a field that is ignore by it's type will also force
+the field to be included.
+
+### Basic Usage
+
+Given this HTML:
+
+```html
+<form>
+  <input name="a" value="a-value">
+  <input name="b" value="b-value">
+  <input name="c" value="c-value">
+  <button name="d" value="d-value">
+</form>
+```
+
+The following will occur:
+
+```js
+// include a, b only
+Backbone.Syphon.serialize(view, {
+  include: ["a", "b"]
+});
+
+// will produce =>
+
+{
+  a: "a-value",
+  b: "b-value"
+}
+```
+
+```js
+// include the normally excluded (button) "d"
+Backbone.Syphon.serialize(view, {
+  include: ["a", "d"]
+});
+
+// will produce =>
+
+{
+  a: "a-value",
+  d: "d-value"
+}
+```
+
+```js
+// exclude a
+Backbone.Syphon.serialize(view, {
+  exclude: ["a"]
+});
+
+// will produce =>
+
+{
+  b: "b-value",
+  c: "c-value"
+}
+```
+
+```js
+// include a and b, exclude b and c
+Backbone.Syphon.serialize(view, {
+  include: ["a", "b"],
+  exclude: ["b", "c"]
+});
+
+// will produce =>
+
+{
+  a: "a-value",
+  b: "b-value"
+}
+```
+
+### Include / Exclude Based On Key Extractors
+
+The include / exclude process uses the registered Key Extractors to determine
+which fields to include / exclude. 
+
+This means if you are only using the default Key Extractor which uses 
+the "name" attribute, all fields will be included or excluded based on 
+the name of the field.
+
+If you have registered other Key Extractors, they will be used when
+determining which fields to include / exclude.
+
+```html
+<form>
+  <input id="a">
+  <input type="radio" name="b">
+
+  <input id="c">
+  <input type="radio" name="d">
+</form>
+```
+
+```js
+// By default, use the "id"
+Backbone.Syphon.KeyExtractors.registerDefault(function($el){
+  return $el.prop("id");
+});
+
+// For radio buttons, use the "name"
+Backbone.Syphon.KeyExtractors.register("radio", function($el){
+  return $el.prop("name");
+});
+
+// Serialize the form
+Backbone.Syphon.serialize(view, {
+  exclude: ["a", "b"]
+});
+
+// This will produce =>
+{
+  c: "",
+  d: ""
+}
+```
+
+For more information on Key Extractors, see the full [API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+
+## Ignored Input Types
 
 The following types of input are ignored, and not included in
 the resulting JavaScript object:
@@ -98,7 +224,7 @@ the resulting JavaScript object:
 If you need to get a value from the specific button that was
 clicked, you should do that in your element click handler.
 
-#### Ignoring Other Input Types
+### Ignoring Other Input Types
 
 Syphon exposes the list of ignored input types as a raw array. You can
 push, pop, and manipulate this array as any other array, to specify which
@@ -114,16 +240,12 @@ Backbone.Syphon.ignoredTypes.push("textarea");
 
 ## Current Limitations
 
-There are several known limitations in Backbone.Syphon, still. This list
-is basically my "todo" list for the features that need to be implemented.
+There some known limitations in Backbone.Syphon, partially by design and
+partially implemented as default behaivors. 
 
 * You must have a `<form>` within your view's `$el`
-* An input of type `checkbox` will return a boolean value
-* Cannot specify specific fields to include
-* Cannot specify specific fields to ignore
-
-These limitations are by design in the current release, but
-are intended to be fixed as the plugin moves forward.
+* An input of type `checkbox` will return a boolean value. This can be
+overriden by replacing the Input Reader for checkboxes.
 
 ## Building Backbone.Syphon
 
@@ -161,6 +283,7 @@ I've recorded several screencasts on how I built Syphon.
 
 ### v0.2.0-pre
 
+* Specify fields to include or exclude, when calling `.serialize`
 * Defaults to input element "name" for the key in the serialized object
 * Added Key Extractors and Key Extractor Sets, allowing configuration of how the "key" in `{key: "value"}` serialized objects are generated
 * Added Key Assignment Validators and Key Assignment Validator sets, allowing you to validate a key / value pair and prevent it from being attached to the serialization result
