@@ -108,9 +108,6 @@ Backbone.Syphon = (function(Backbone, $, _){
   Syphon.InputReaderSet = Syphon.TypeRegistry.extend();
 
   // Built-in Input Readers
-  // ----------------------
-  
-  // The default reader set
   Syphon.InputReaders = new Syphon.InputReaderSet();
 
   // The default input reader, which uses an input
