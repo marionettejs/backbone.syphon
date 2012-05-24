@@ -86,7 +86,7 @@ Backbone.View.extend({
 });
 ```
 
-### Fields Retrieved By "name" Attribute
+### Keys Retrieved By "name" Attribute
 
 The default behavior for serializing fields is to use the field's "name"
 attribute as the key in the serialized object.
