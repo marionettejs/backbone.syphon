@@ -353,6 +353,64 @@ Backbone.Syphon.serialize(view, {
 For more information on Key Extractors, see the full 
 [API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
 
+## Other Options
+
+There are a few other options that can be specified when calling the
+`Syphon.serialize` method, which allow the behavior of Syphon to be
+altered for a single call instead of for all calls.
+
+### Key Extractors
+
+Key extractors are used to generate the "key" in the `{key: "value"}`
+result. You can specify a `KeyExtractorSet` as part of the options:
+
+```js
+extractors = new Backbone.Syphon.KeyExtractorSet();
+// configure it ...
+
+Backbone.Syphone.serialize({
+  keyExtractors: extractors
+});
+```
+
+For more information on Key Extractors, see the full 
+[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+
+### Input Readers
+
+Input Readers are used to generate the "value" in the `{key: "value"}`
+result. You can specify a `InputReadetSet` as part of the options:
+
+```js
+readers = new Backbone.Syphon.InputReaderSet();
+// configure it ...
+
+Backbone.Syphone.serialize({
+  inputReaders: readers
+});
+```
+
+For more information on Input Readers, see the full 
+[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+
+### Key Assignment Validators
+
+Input Readers are used to validate the assignment of a key to a value,
+in the context of an element. You can specify a `InputReadetSet` as part 
+of the options:
+
+```js
+validators = new Backbone.Syphon.KeyAssignmentValidators();
+// configure it ...
+
+Backbone.Syphone.serialize({
+  keyAssignmentValidators: validators
+});
+```
+
+For more information on Key Assignment Validators, see the full 
+[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+
 ## Current Limitations
 
 There some known limitations in Backbone.Syphon, partially by design and
@@ -405,6 +463,7 @@ I've recorded several screencasts on how I built Syphon.
 * Input Readers are now a type that can be instantiated and replaced, wholesale, instead of just registered / removed
 * Created Syphon.TypeRegistry base type which is used by Key Extractors, Input Readders and Key Assignment Validators
 * Exposed the `Syphon.ignoredTypes` array, to allow manipulating which input types are ignored
+* Allow `keyExtractors`, `inputReaders` and `keyAssignmentValidators` to be specified as part of the options for the call to `serialize`
 
 ### v0.1.1
 
