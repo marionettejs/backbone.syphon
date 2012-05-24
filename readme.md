@@ -86,6 +86,30 @@ Backbone.View.extend({
 });
 ```
 
+### Radio Button Groups
+
+Radio button groups (grouped by the input element "name" attribute) will
+produce a single value, from the selected radio button.
+
+```html
+<form>
+  <input type="radio" name="a" value="1">
+  <input type="radio" name="a" value="2" checked>
+  <input type="radio" name="a" value="3">
+  <input type="radio" name="a" value="4">
+</form>
+```
+
+```js
+Backbone.Syphon.serialize(view);
+
+// will produce => 
+
+{
+  a: "2"
+}
+```
+
 ## Include / Exclude Specific Fields
 
 You can include or exclude specific fields as needed. Inclusion is given
