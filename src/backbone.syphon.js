@@ -35,10 +35,14 @@ Backbone.Syphon = (function(Backbone, $, _){
 
   // Input Readers
   // -------------
+  
+  // Input Readers are used to extract the value from
+  // an input element, for the serialized object result
+  Syphon.InputReaderSet = function(){
+    this.readers = {};
+  };
 
-  Syphon.InputReaders = {
-    readers: {},
-
+  _.extend(Syphon.InputReaderSet.prototype, {
     // Retrieve the correct input reader based
     // on the type of the element that is passed
     // in as the `$el` parameter. If no reader is
@@ -75,7 +79,7 @@ Backbone.Syphon = (function(Backbone, $, _){
     unregister: function(type){
       delete this.readers[type];
     }
-  };
+  });
 
   // Key Extractors
   // --------------
@@ -128,7 +132,11 @@ Backbone.Syphon = (function(Backbone, $, _){
   // Built-in Input Readers
   // ----------------------
   
-  // The default reader
+  // The default reader set
+  Syphon.InputReaders = new Syphon.InputReaderSet();
+
+  // The default input reader, which uses an input
+  // element's "value"
   Syphon.InputReaders.registerDefault(function($el){
     return $el.val();
   });
