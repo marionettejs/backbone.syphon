@@ -1,6 +1,6 @@
 beforeEach(function() {
   this.addMatchers({
-    toHaveOwnPropery: function(expectedProperty) {
+    toHaveOwnProperty: function(expectedProperty) {
       var obj = this.actual;
       return obj.hasOwnProperty(expectedProperty);
     }
