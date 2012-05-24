@@ -254,7 +254,6 @@ is basically my "todo" list for the features that need to be implemented.
 
 * You must have a `<form>` within your view's `$el`
 * An input of type `checkbox` will return a boolean value
-* The key of the returned object's key/values will always be set to the `id` of the input element
 * Cannot add to, or remove from, the ignored input element types
 * Cannot specify specific fields to include
 * Cannot specify specific fields to ignore
@@ -287,15 +286,18 @@ see all of the specs for Backbone.Syphon
 
 3. From the project folder, run `grunt` to produce a build
 
-## WatchMeCode: Episode 7
+## Screencasts
 
-The initial build and release of Backbone.Syphon was recorded
-as a live screencast, and partially edited to cut out some
-of the long silences and rough spots. If you're interested
-in seeing how I move from nothing to a first release of a
-Backbone plugin, check out [WatchMeCode: Episode 7](http://watchmecode.net/backbone-plugin).
+I've recorded several screencasts on how I built Syphon.
+
+* [WatchMeCode: Episode 7](http://watchmecode.net/backbone-plugin): covers the initial project setup, build and release
+* [WatchMeCode: Episode 8](http://watchmecode.net/amd-builds-with-grunt): covers setting up an AMD build along side the standard build
 
 ## Release Notes
+
+### v0.2.0
+
+* Added the notion of Key Extractors, allowing configuration of how the "key" in `{key: "value"}` serialized objects are generated
 
 ### v0.1.1
 
