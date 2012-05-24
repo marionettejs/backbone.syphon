@@ -17,7 +17,7 @@ Backbone.Syphon = (function(Backbone, $, _){
     var data = {};
 
     // Build the configuration
-    config = _.clone(options) || {};
+    var config = _.clone(options) || {};
     config.ignoredTypes = _.clone(Syphon.ignoredTypes);
     config.inputReaders = config.inputReaders || Syphon.InputReaders;
     config.keyExtractors = config.keyExtractors || Syphon.KeyExtractors;
