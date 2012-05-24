@@ -86,6 +86,33 @@ Backbone.View.extend({
 });
 ```
 
+### Checkboxes
+
+By default, a checkbox will return a boolean value signifying whether or 
+not it is checked.
+
+```html
+<form>
+  <input type="checkbox" name="a">
+  <input type="checkbox" name="b" checked>
+</form>
+```
+
+```js
+Backbone.Syphon.serialize(view);
+
+// will produce => 
+
+{
+  a: false,
+  b: true
+}
+```
+
+For information on how to change this behavior, see the Input Readers
+section of the 
+[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+
 ### Radio Button Groups
 
 Radio button groups (grouped by the input element "name" attribute) will
@@ -109,6 +136,11 @@ Backbone.Syphon.serialize(view);
   a: "2"
 }
 ```
+
+This behavior can be changed by registering a different set of Key
+Extractors, Input Readers, and Key Assignment Validators. See the full
+[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+for more information on these.
 
 ## Include / Exclude Specific Fields
 
@@ -234,7 +266,8 @@ Backbone.Syphon.serialize(view, {
 }
 ```
 
-For more information on Key Extractors, see the full [API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+For more information on Key Extractors, see the full 
+[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
 
 ## Ignored Input Types
 
