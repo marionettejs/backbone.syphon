@@ -253,6 +253,7 @@ There are several known limitations in Backbone.Syphon, still. This list
 is basically my "todo" list for the features that need to be implemented.
 
 * You must have a `<form>` within your view's `$el`
+* Radio button groups (grouped by "name" attribute) don't work right
 * An input of type `checkbox` will return a boolean value
 * Cannot add to, or remove from, the ignored input element types
 * Cannot specify specific fields to include
