@@ -18,6 +18,7 @@ src_files:
     - src/backbone.syphon.typeregistry.js
     - src/backbone.syphon.keyextractors.js
     - src/backbone.syphon.inputreaders.js
+    - src/backbone.syphon.inputwriters.js
     - src/backbone.syphon.keyassignmentvalidators.js
 
 # stylesheets

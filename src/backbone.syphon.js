@@ -50,6 +50,33 @@ Backbone.Syphon = (function(Backbone, $, _){
     // Done; send back the results.
     return data;
   };
+  
+  // Use the given JSON object to populate
+  // all of the form inputs, in this view
+  Syphon.unserialize = function(view, data, options){
+    // Build the configuration
+    var config = _.clone(options) || {};
+    config.ignoredTypes = _.clone(Syphon.ignoredTypes);
+    config.inputWriters = config.inputWriters || Syphon.InputWriters;
+    config.keyExtractors = config.keyExtractors || Syphon.KeyExtractors;
+
+    // Get all of the elements to process
+    var elements = getInputElements(view, config);
+
+    // Process all of the elements
+    _.each(elements, function(el){
+      var $el = $(el);
+      var type = getElementType($el); 
+
+      // Get the key for the input
+      var keyExtractor = config.keyExtractors.get(type);
+      var key = keyExtractor($el);
+
+      // Write value to input
+      var inputWriter = config.inputWriters.get(type);
+      inputWriter($el, data[key]);
+    });
+  };
 
   // Helpers
   // -------
@@ -119,6 +146,8 @@ Backbone.Syphon = (function(Backbone, $, _){
 //= backbone.syphon.keyextractors.js
 
 //= backbone.syphon.inputreaders.js
+
+//= backbone.syphon.inputwriters.js
 
 //= backbone.syphon.keyassignmentvalidators.js
 
