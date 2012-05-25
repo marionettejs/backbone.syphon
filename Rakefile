@@ -10,7 +10,7 @@ end
 
 desc "Build the annotated source HTML"
 task :docco do
-  `docco lib/*.js`
+  `docco lib/backbone.syphon.js`
   `git add -A`
   `git stash`
   `git checkout gh-pages`
