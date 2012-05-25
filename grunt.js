@@ -12,17 +12,16 @@ module.exports = function(grunt) {
         '// Distributed under MIT license\n' + 
         '// http://github.com/derickbailey/backbone.syphon'
     },
+
     lint: {
       files: ['src/backbone.syphon.js']
     },
-    concat: {
-      dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:src/backbone.syphon.js>'],
-        dest: 'lib/backbone.syphon.js'
-      }
-    },
 
     rig: {
+      build: {
+        src: ['<banner:meta.banner>', 'src/backbone.syphon.js'],
+        dest: 'lib/backbone.syphon.js'
+      },
       amd: {
         src: ['<banner:meta.banner>', 'src/amd.js'],
         dest: 'lib/amd/backbone.syphon.js'
@@ -31,7 +30,7 @@ module.exports = function(grunt) {
 
     min: {
       standard: {
-        src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
+        src: ['<banner:meta.banner>', '<config:rig.standard.dest>'],
         dest: 'lib/backbone.syphon.min.js'
       },
       amd: {
@@ -39,6 +38,7 @@ module.exports = function(grunt) {
         dest: 'lib/amd/backbone.syphon.min.js'
       }
     },
+
     jshint: {
       options: {
         curly: true,
@@ -63,6 +63,6 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint concat rig min');
+  grunt.registerTask('default', 'lint rig min');
 
 };

@@ -51,114 +51,6 @@ Backbone.Syphon = (function(Backbone, $, _){
     return data;
   };
 
-  // Type Registry
-  // -------------
-
-  // Type Registries allow you to register something to
-  // an input type, and retrieve either the item registered
-  // for a specific type or the default registration
-  Syphon.TypeRegistry = function(){
-    this.registeredTypes = {};
-  };
-
-  // Borrow Backbone's `extend` keyword for our TypeRegistry
-  Syphon.TypeRegistry.extend = Backbone.Model.extend;
-
-  _.extend(Syphon.TypeRegistry.prototype, {
-
-    // Get the registered item by type. If nothing is
-    // found for the specified type, the default is
-    // returned.
-    get: function(type){
-      var item = this.registeredTypes[type];
-
-      if (!item){
-        item = this.registeredTypes["default"];
-      }
-
-      return item;
-    },
-
-    // Register a new item for a specified type
-    register: function(type, item){
-      this.registeredTypes[type] = item;
-    },
-
-    // Register a default item to be used when no
-    // item for a specified type is found
-    registerDefault: function(item){
-      this.registeredTypes["default"] = item;
-    },
-
-    // Remove an item from a given type registration
-    unregister: function(type){
-      if (this.registeredTypes[type]){
-        delete this.registeredTypes[type];
-      }
-    }
-  });
-
-  // Key Extractors
-  // --------------
-  
-  // Key extractors produce the "key" in `{key: "value"}`
-  // pairs, when serializing.
-  Syphon.KeyExtractorSet = Syphon.TypeRegistry.extend();
-  
-  // Built-in Key Extractors
-  Syphon.KeyExtractors = new Syphon.KeyExtractorSet();
-
-  // The default key extractor, which uses the
-  // input element's "id" attribute
-  Syphon.KeyExtractors.registerDefault(function($el){
-    return $el.prop("name");
-  });
-
-  // Input Readers
-  // -------------
-
-  // Input Readers are used to extract the value from
-  // an input element, for the serialized object result
-  Syphon.InputReaderSet = Syphon.TypeRegistry.extend();
-
-  // Built-in Input Readers
-  Syphon.InputReaders = new Syphon.InputReaderSet();
-
-  // The default input reader, which uses an input
-  // element's "value"
-  Syphon.InputReaders.registerDefault(function($el){
-    return $el.val();
-  });
-  
-  // Checkbox reader, returning a boolean value for
-  // whether or not the checkbox is checked.
-  Syphon.InputReaders.register("checkbox", function($el){
-    var checked = $el.prop("checked");
-    return checked;
-  });
-
-  // Key Assignment Validators
-  // -------------------------
-
-  // Key Assignment Validators are used to determine whether or not a
-  // key should be assigned to a value, after the key and value have been
-  // extracted from the element. This is the last opportunity to prevent
-  // bad data from getting serialized to your object.
-
-  Syphon.KeyAssignmentValidatorSet = Syphon.TypeRegistry.extend();
-
-  // Build-in Key Assignment Validators
-  Syphon.KeyAssignmentValidators = new Syphon.KeyAssignmentValidatorSet();
-
-  // Everything is valid by default
-  Syphon.KeyAssignmentValidators.registerDefault(function(){ return true; });
-
-  // But only the "checked" radio button for a given
-  // radio button group is valid
-  Syphon.KeyAssignmentValidators.register("radio", function($el, key, value){ 
-    return $el.prop("checked");
-  });
-
   // Helpers
   // -------
 
@@ -221,3 +113,12 @@ Backbone.Syphon = (function(Backbone, $, _){
 
   return Syphon;
 })(Backbone, jQuery, _);
+
+//= backbone.syphon.typeregistry.js
+
+//= backbone.syphon.keyextractors.js
+
+//= backbone.syphon.inputreaders.js
+
+//= backbone.syphon.keyassignmentvalidators.js
+

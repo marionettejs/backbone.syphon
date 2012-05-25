@@ -15,6 +15,10 @@ src_files:
     - public/javascripts/underscore.js
     - public/javascripts/backbone.js
     - src/backbone.syphon.js
+    - src/backbone.syphon.typeregistry.js
+    - src/backbone.syphon.keyextractors.js
+    - src/backbone.syphon.inputreaders.js
+    - src/backbone.syphon.keyassignmentvalidators.js
 
 # stylesheets
 #
