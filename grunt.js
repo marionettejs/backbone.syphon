@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 
     min: {
       standard: {
-        src: ['<banner:meta.banner>', '<config:rig.standard.dest>'],
+        src: ['<banner:meta.banner>', '<config:rig.build.dest>'],
         dest: 'lib/backbone.syphon.min.js'
       },
       amd: {
