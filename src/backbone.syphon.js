@@ -53,7 +53,7 @@ Backbone.Syphon = (function(Backbone, $, _){
   
   // Use the given JSON object to populate
   // all of the form inputs, in this view
-  Syphon.unserialize = function(view, data, options){
+  Syphon.deserialize = function(view, data, options){
     // Build the configuration
     var config = _.clone(options) || {};
     config.ignoredTypes = _.clone(Syphon.ignoredTypes);

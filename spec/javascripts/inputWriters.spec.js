@@ -84,7 +84,7 @@ describe("input writers", function(){
       view = new View();
       view.render();
 
-      Backbone.Syphon.unserialize(view, { foo: "bar" }, {
+      Backbone.Syphon.deserialize(view, { foo: "bar" }, {
         inputWriters: writers
       });
     });

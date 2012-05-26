@@ -13,7 +13,7 @@ describe("unserializing an object into a form", function(){
       view = new View();
       view.render();
       
-      Backbone.Syphon.unserialize(view, { foo: "bar" });
+      Backbone.Syphon.deserialize(view, { foo: "bar" });
     });
     
     it("should set the input's value to the corresponding value in the given object", function(){
@@ -35,7 +35,7 @@ describe("unserializing an object into a form", function(){
       view = new View();
       view.render();
 
-      Backbone.Syphon.unserialize(view, { foo: "bar" });
+      Backbone.Syphon.deserialize(view, { foo: "bar" });
     });
 
     it("should set the input's value to the corresponding value in the given object", function(){
@@ -57,7 +57,7 @@ describe("unserializing an object into a form", function(){
       view = new View();
       view.render();
 
-      Backbone.Syphon.unserialize(view, { foo: "bar" });
+      Backbone.Syphon.deserialize(view, { foo: "bar" });
     });
     
     it("should select the option corresponding to the value in the given object", function(){
@@ -80,7 +80,7 @@ describe("unserializing an object into a form", function(){
         view = new View();
         view.render();
 
-        Backbone.Syphon.unserialize(view, { chk: true });
+        Backbone.Syphon.deserialize(view, { chk: true });
       });
 
       it("should check the checkbox", function(){
@@ -97,7 +97,7 @@ describe("unserializing an object into a form", function(){
         view.render();
         view.$("#the-checkbox").prop("checked", true);
 
-        Backbone.Syphon.unserialize(view, { chk: false });
+        Backbone.Syphon.deserialize(view, { chk: false });
       });
 
       it("should uncheck the checkbox", function(){
@@ -122,7 +122,7 @@ describe("unserializing an object into a form", function(){
       view.render();
       value = view.$("button[name=btn]").val();
 
-      Backbone.Syphon.unserialize(view, { btn: "foo" });
+      Backbone.Syphon.deserialize(view, { btn: "foo" });
     });
 
     it("the button value should remain unchanged", function(){
@@ -145,7 +145,7 @@ describe("unserializing an object into a form", function(){
       view.render();
       value = view.$("input[name=btn]").val();
 
-      Backbone.Syphon.unserialize(view, { btn: "foo" });
+      Backbone.Syphon.deserialize(view, { btn: "foo" });
     });
 
     it("the input value should remain unchanged", function(){
@@ -168,7 +168,7 @@ describe("unserializing an object into a form", function(){
       view.render();
       value = view.$("input[name=btn]").val();
 
-      Backbone.Syphon.unserialize(view, { btn: "foo" });
+      Backbone.Syphon.deserialize(view, { btn: "foo" });
     });
 
     it("the input should not have a value", function(){
@@ -190,7 +190,7 @@ describe("unserializing an object into a form", function(){
       view = new View();
       view.render();
 
-      Backbone.Syphon.unserialize(view, { foo: "bar" });
+      Backbone.Syphon.deserialize(view, { foo: "bar" });
     });
 
     it("should select the corresponding radio button", function(){
