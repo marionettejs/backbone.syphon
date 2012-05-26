@@ -1,6 +1,6 @@
-describe("unserializing an object into a form", function(){
+describe("deserializing an object into a form", function(){
 
-  describe("when unserializing into a text input", function(){
+  describe("when deserializing into a text input", function(){
     var View = Backbone.View.extend({
       render: function(){
         this.$el.html("<form><input type='text' name='foo'></form>");
@@ -22,7 +22,7 @@ describe("unserializing an object into a form", function(){
     });
   });
 
-  describe("when unserializing into a textarea", function(){
+  describe("when deserializing into a textarea", function(){
     var View = Backbone.View.extend({
       render: function(){
         this.$el.html("<form><textarea name='foo'></textarea></form>");
@@ -44,7 +44,7 @@ describe("unserializing an object into a form", function(){
     });
   });
 
-  describe("when unserializing into a select box", function(){
+  describe("when deserializing into a select box", function(){
     var View = Backbone.View.extend({
       render: function(){
         this.$el.html("<form><select name='foo'><option value='baz'>baz</option><option value='bar'>bar</option></select></form>");
@@ -66,7 +66,7 @@ describe("unserializing an object into a form", function(){
     });
   });
 
-  describe("when unserializing into a checkbox", function(){
+  describe("when deserializing into a checkbox", function(){
     var View = Backbone.View.extend({
       render: function(){
         this.$el.html("<form><input type='checkbox' id='the-checkbox' name='chk'></form>");
@@ -108,7 +108,7 @@ describe("unserializing an object into a form", function(){
 
   });
 
-  describe("when unserializing into a button", function(){
+  describe("when deserializing into a button", function(){
     var View = Backbone.View.extend({
       render: function(){
         this.$el.html("<form><button name='btn'>foo</button></form>");
@@ -131,7 +131,7 @@ describe("unserializing an object into a form", function(){
     });
   });
 
-  describe("when unserializing into an input with type of 'submit'", function(){
+  describe("when deserializing into an input with type of 'submit'", function(){
     var View = Backbone.View.extend({
       render: function(){
         this.$el.html("<form><input type='submit' name='btn' text='Foo'></form>");
@@ -154,7 +154,7 @@ describe("unserializing an object into a form", function(){
     });
   });
   
-  describe("when unserializing into an input with type of 'reset'", function(){
+  describe("when deserializing into an input with type of 'reset'", function(){
     var View = Backbone.View.extend({
       render: function(){
         this.$el.html("<form><input type='reset' name='btn' text='Foo'></form>");
@@ -177,7 +177,7 @@ describe("unserializing an object into a form", function(){
     });
   });
 
-  describe("when unserializing into a radio button group", function(){
+  describe("when deserializing into a radio button group", function(){
     var View = Backbone.View.extend({
       render: function(){
         this.$el.html("<form><input type='radio' name='foo' value='foo'><input type='radio' name='foo' value='bar'><input type='radio' name='foo' value='baz'>");
