@@ -17,11 +17,7 @@ Backbone.Syphon = (function(Backbone, $, _){
     var data = {};
 
     // Build the configuration
-    var config = _.clone(options) || {};
-    config.ignoredTypes = _.clone(Syphon.ignoredTypes);
-    config.inputReaders = config.inputReaders || Syphon.InputReaders;
-    config.keyExtractors = config.keyExtractors || Syphon.KeyExtractors;
-    config.keyAssignmentValidators = config.keyAssignmentValidators || Syphon.KeyAssignmentValidators;
+    var config = buildConfig(options);
 
     // Get all of the elements to process
     var elements = getInputElements(view, config);
@@ -55,10 +51,7 @@ Backbone.Syphon = (function(Backbone, $, _){
   // all of the form inputs, in this view
   Syphon.deserialize = function(view, data, options){
     // Build the configuration
-    var config = _.clone(options) || {};
-    config.ignoredTypes = _.clone(Syphon.ignoredTypes);
-    config.inputWriters = config.inputWriters || Syphon.InputWriters;
-    config.keyExtractors = config.keyExtractors || Syphon.KeyExtractors;
+    var config = buildConfig(options);
 
     // Get all of the elements to process
     var elements = getInputElements(view, config);
@@ -136,6 +129,20 @@ Backbone.Syphon = (function(Backbone, $, _){
     // so it can be matched to lowercase
     // type registrations.
     return type.toLowerCase();
+  };
+  
+  // Build a configuration object and initialize
+  // default values.
+  var buildConfig = function(options){
+    var config = _.clone(options) || {};
+    
+    config.ignoredTypes = _.clone(Syphon.ignoredTypes);
+    config.inputReaders = config.inputReaders || Syphon.InputReaders;
+    config.inputWriters = config.inputWriters || Syphon.InputWriters;
+    config.keyExtractors = config.keyExtractors || Syphon.KeyExtractors;
+    config.keyAssignmentValidators = config.keyAssignmentValidators || Syphon.KeyAssignmentValidators;
+    
+    return config;
   };
 
   return Syphon;
