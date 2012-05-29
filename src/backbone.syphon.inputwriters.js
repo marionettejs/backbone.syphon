@@ -14,8 +14,15 @@ Backbone.Syphon.InputWriters.registerDefault(function($el, value){
   $el.val(value);
 });
 
-// Checkbox writer, returning a boolean value for
-// whether or not the checkbox is checked.
+// Checkbox writer, set whether or not the checkbox is checked
+// depending on the boolean value.
 Backbone.Syphon.InputWriters.register("checkbox", function($el, value){
   $el.prop("checked", value);
+});
+
+// Radio button writer, set whether or not the radio button is
+// checked.  The button should only be checked if it's value
+// equals the given value.
+Backbone.Syphon.InputWriters.register("radio", function($el, value){
+  $el.prop("checked", $el.val() === value);
 });

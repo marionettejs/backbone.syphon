@@ -192,16 +192,9 @@ describe("deserializing an object into a form", function(){
 
       Backbone.Syphon.deserialize(view, { foo: "bar" });
     });
-    
-    it("should set the input's value to the corresponding value in the given object", function(){
-      var result = view.$("input[name=foo]").val();
-      expect(result).toBe("bar");
-    });
 
     it("should select the corresponding radio button", function(){
-      var value = view.$("input[name=foo]").val();
-      var checked = view.$("input[name=foo][value=" + value + "]").prop("checked");
-      
+      var checked = view.$("input[name=foo][value=bar]").prop("checked");
       expect(checked).toBe(true);
     });
   });
