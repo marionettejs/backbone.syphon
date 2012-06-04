@@ -57,7 +57,7 @@ Backbone.Syphon = (function(Backbone, $, _){
   // Retrieve all of the form inputs
   // from the view
   var getInputElements = function(view, config){
-    var form = view.$("form")[0];
+    var form = view.$el.is("form") ? view.el : $("form")[0];
     var elements = form.elements;
 
     elements = _.reject(elements, function(el){
