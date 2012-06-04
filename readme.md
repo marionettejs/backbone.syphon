@@ -261,7 +261,7 @@ priority and specifying fields to include will force Syphon to exclude all
 other fields. Including a field that is ignore by it's type will also force
 the field to be included.
 
-### Basic Usage
+### Examples
 
 Given this HTML:
 
@@ -419,6 +419,16 @@ Backbone.Syphone.serialize({
 ```
 
 For more information on Input Readers, see the full 
+[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+
+### Input Writers
+
+Input Writers are used to set the value of form elements to the 
+"value" in the `{key: "value"}` data / object.  At this time, you cannot
+specify input writers in the `deserialize` method. That will come
+soon, hopefully.
+
+For more information on Input Writers, see the full 
 [API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
 
 ### Key Assignment Validators
