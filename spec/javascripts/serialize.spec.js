@@ -1,5 +1,5 @@
 describe("serializing a form", function(){
-
+  
   describe("when serializing a text input", function(){
     var View = Backbone.View.extend({
       render: function(){
@@ -187,6 +187,26 @@ describe("serializing a form", function(){
     });
 
     it("should only return the value of the selected radio button", function(){
+      expect(result.foo).toBe("bar");
+    });
+  });
+
+  describe("when the view is actually a form", function() {
+    var View = Backbone.View.extend({
+      tagName: "form",
+      render: function(){
+        this.$el.html("<input type='text' name='foo' value='bar'>");
+      }
+    });
+
+    beforeEach(function() {
+      view = new View();
+      view.render();
+
+      result = Backbone.Syphon.serialize(view);
+    });
+
+    it("retrieves the inputs' values", function() {
       expect(result.foo).toBe("bar");
     });
   });
