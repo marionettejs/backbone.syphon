@@ -58,7 +58,7 @@ at what each section of is doing.
 
 ##### [View The Annotated Source Code](http://derickbailey.github.com/backbone.syphon/docs/backbone.syphon.html)
 
-## Basic Usage
+## Basic Usage : Serialize
 
 When the data from a form is needed, you can call the
 `serialize` method of `Backbone.Syphon` to retrieve an
@@ -197,6 +197,34 @@ This behavior can be changed by registering a different set of Key
 Extractors, Input Readers, and Key Assignment Validators. See the full
 [API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
 for more information on these.
+
+## Basic Usage : Deserialize
+
+Syphon also allows you to deserialize an object's values back on to a
+form. It uses the same conventions and configuration as the serialization
+process, with the introduction of Input Writers to handle populating the
+form fields with the values. See the full 
+[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+for more information on Input Writers.
+
+```html
+<form>
+  <input type="text" name="a">
+  <input type="text" name="b">
+</form>
+```
+
+```js
+var data = {
+  a: "foo",
+  b: "bar"
+};
+
+Backbone.Syphon.deserialize(this, data);
+```
+
+This will populate the form input elements with the correct values from
+the `data` parameter.
 
 ## Ignored Input Types
 
@@ -453,6 +481,11 @@ I've recorded several screencasts on how I built Syphon.
 * [WatchMeCode: Episode 8](http://watchmecode.net/amd-builds-with-grunt): covers setting up an AMD build along side the standard build
 
 ## Release Notes
+
+### v0.3.0
+
+* Added Input Writers, to deserialize an object back in to a form
+* The view's `el` can be a `form` element directly
 
 ### v0.2.0
 

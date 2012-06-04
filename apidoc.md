@@ -124,7 +124,7 @@ and produce:
 }
 ```
 
-## Syphon.InputResetSet (Input Readers)
+## Syphon.InputReaderSet (Input Readers)
 
 Input Readers are used to serialize a specific form input
 element in to the value that is appended to the resulting
@@ -138,7 +138,7 @@ jQuery's `val()` method. The checkbox reader, however, looks
 for whether or not the checkbox is checked and returns a
 boolean value.
 
-### Default Input Reset Set
+### Default Input Reader Set
 
 Syphon comes with a default input reader set in the
 `Backbone.Syhpon.InputReaders` object. This input reset set
