@@ -211,4 +211,29 @@ describe("serializing a form", function(){
     });
   });
 
+  describe("when the view has nested naming", function() {
+    var View = Backbone.View.extend({
+      tagName: "form",
+      render: function(){
+        this.$el.html("<form><input type='text' name='foo.bar' value='qux'></form>");
+      }
+    });
+
+    beforeEach(function() {
+      view = new View();
+      view.render();
+
+      result = Backbone.Syphon.serialize(view);
+    });
+
+    it("has a nested property defined",function() {
+      expect(result.foo.bar).toBeDefined();
+    });
+
+    it("retrieves the value for the nested property",function() {
+      expect(result.foo.bar).toBe("qux");
+    });
+
+  });
+
 });
