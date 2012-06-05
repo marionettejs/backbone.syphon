@@ -141,10 +141,10 @@ boolean value.
 ### Default Input Reader Set
 
 Syphon comes with a default input reader set in the
-`Backbone.Syhpon.InputReaders` object. This input reset set
+`Backbone.Syhpon.InputReaders` object. This input reader set
 has a few default input readers built in (see below).
 
-You can replace the entire input reset set by creating a new
+You can replace the entire input reader set by creating a new
 instance of `Backbone.Syphon.InputReaderSet` like this:
 
 ```js
@@ -182,6 +182,79 @@ object that is the form element. You must return a value
 from the callback function and this value is used as the
 value in the final JavaScript object returne from the call
 to serialize the form.
+
+## Syphon.InputWriterSet (Input Writers)
+
+Input Writers are used to deserialize an object's values in to
+a form input elements. In other words, Input Writers are responsible
+for turning `{foo: "bar"}` in to the value "bar" for `<input value="foo">`.
+
+By default, there are three input writers that know how to
+handle form elements: 
+
+* the `default` writer
+* the `checkbox` writer
+* the `radio` writer 
+
+The default reader handles nearly 
+every form of input using jQuery's `val()` method. The checkbox reader, 
+sets whether or not the checkbox is checked, and the radio writer will
+select the correct radio button in a radio button group.
+
+### Default Input Writer Set
+
+Syphon comes with a default input writer set in the
+`Backbone.Syhpon.InputWriters` object. This input writer set
+has a few default input writers built in (see above).
+
+You can replace the entire input writer set by creating a new
+instance of `Backbone.Syphon.InputWriterSet` like this:
+
+```js
+MyWriterSet = new Backbone.Syphon.InputWriterSet();
+MyWriterSet.registerDefault(function($el, value){
+  $el.val(value);
+});
+
+Backbone.InputWriters = MyWriterSet;
+```
+
+Under normal circumstances, you won't have to create your
+own input writer set, though. You can register and remove
+input writers as needed using the default
+input writer set.
+
+### Register Your Own Input Writer
+
+You can register your own input writers, allowing you
+to change how the data is written to the form. To do this register
+a callback function to an input type.
+
+```js
+Backbone.Syphon.InputReaders.register('radio', function(el, value){
+  el.val(value);
+});
+```
+
+The input type that you specify is either the `type` attribute
+of an input element, or the tag name of a non-input element (see
+next section for more information).
+
+The callback function receives two parameter: 
+
+* a jQuery selector object that is the form element
+* the value to populate in to the element
+
+You should set the value on the element, based on the type of the
+element and based on whether or not the value should be set for that
+specific element. For example, in selecting a radio button from a group,
+you should only select the one that has the correct value:
+
+```js
+Backbone.Syphon.InputWriters.register("radio", function($el, value){
+  $el.prop("checked", $el.val() === value);
+});
+```
 
 ## Syphon.KeyAssignmentValidatorSet (Validating Key / Value Assignment)
 
