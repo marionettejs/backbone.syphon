@@ -226,7 +226,6 @@ describe("serializing a form", function(){
     });
 
     it("has a nested property defined",function() {
-      console.log(result);
       expect(result.foo.bar).toBeDefined();
     });
 
