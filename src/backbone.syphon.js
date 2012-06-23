@@ -6,7 +6,7 @@ Backbone.Syphon = (function(Backbone, $, _){
 
   // Tell Syphon to ignore all elements of these types. You can
   // push new types to ignore directly in to this array.
-  Syphon.ignoredTypes = ["button", "submit", "reset"];
+  Syphon.ignoredTypes = ["button", "submit", "reset", "fieldset"];
 
   // Syphon
   // ------
