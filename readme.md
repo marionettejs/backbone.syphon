@@ -492,6 +492,10 @@ I've recorded several screencasts on how I built Syphon.
 
 ## Release Notes
 
+### v0.3.1
+
+* Fixed the AMD require statements to match Backbone.Marionette
+
 ### v0.3.0
 
 * Added Input Writers, to deserialize an object back in to a form
