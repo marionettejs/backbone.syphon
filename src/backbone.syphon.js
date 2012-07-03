@@ -156,20 +156,20 @@ Backbone.Syphon = (function(Backbone, $, _){
       obj[key] = _.isArray(key) ? [] : {};
     }
 
+    // if it's the last key in the chain, assign the value directly
     if (keychain.length === 0){
-      
-      // if it's the last key in the chain, assign the value directly
       if (_.isArray(obj[key])){
         obj[key].push(value);
       } else {
         obj[key] = value;
       }
-
-    } else {
-      // recursive parsing of the array
-      assignKeyValue(obj[key], keychain, value);
     }
 
+    // recursive parsing of the array, depth-first
+    if (keychain.length > 0){
+      assignKeyValue(obj[key], keychain, value);
+    }
+    
     return obj;
   };
 
