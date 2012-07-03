@@ -1,13 +1,5 @@
 describe("key extractors", function(){
-  var defaultExtractor;
-
-  beforeEach(function(){
-    defaultExtractor = Backbone.Syphon.KeyExtractors.get();
-  });
-
-  afterEach(function(){
-    Backbone.Syphon.KeyExtractors.registerDefault(defaultExtractor);
-  });
+  var defaultExtractor = Backbone.Syphon.KeyExtractors.get();
 
   describe("when registering a global key extractor", function(){
     var result;
@@ -29,6 +21,9 @@ describe("key extractors", function(){
       result = Backbone.Syphon.serialize(view);
     });
 
+    afterEach(function(){
+      Backbone.Syphon.KeyExtractors.registerDefault(defaultExtractor);
+    });
 
     it("should return an object that has a key produced by the key extractor", function(){
       expect(result).toHaveOwnProperty("foo");
@@ -54,6 +49,10 @@ describe("key extractors", function(){
       view.render();
 
       result = Backbone.Syphon.serialize(view);
+    });
+
+    afterEach(function(){
+      Backbone.Syphon.KeyExtractors.unregister("text");
     });
 
     it("should use the specific extractor for inputs of that type", function(){

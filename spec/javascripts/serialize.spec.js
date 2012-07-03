@@ -213,7 +213,6 @@ describe("serializing a form", function(){
 
   describe("when the view has nested naming", function() {
     var View = Backbone.View.extend({
-      tagName: "form",
       render: function(){
         this.$el.html("<form><input type='text' name='foo.bar' value='qux'></form>");
       }
@@ -234,6 +233,43 @@ describe("serializing a form", function(){
       expect(result.foo.bar).toBe("qux");
     });
 
+  });
+
+  describe("Value assignment", function() {
+    it ("assigns a value to a direct level key", function() {
+      var data = {}
+        , key = "foo"
+        , keychain = key.split(".")
+        , value = "bar";
+
+      expect(Backbone.Syphon._assign(data,keychain,value).foo).toBe("bar");
+
+    });
+
+    it ("assigns a value to a indirect level key", function() {
+      var data = {}
+        , key = "foo.bar"
+        , keychain = key.split(".")
+        , value = "qux";
+
+      expect(Backbone.Syphon._assign(data,keychain,value).foo.bar).toBe("qux");
+
+    });
+
+    it ("assigns a value to a indirect level key next to a sibling", function() {
+      var data = { 
+        foo: {
+          baz: "quxx"
+        }
+      }
+        , key = "foo.bar"
+        , keychain = key.split(".")
+        , value = "qux";
+
+      expect(Backbone.Syphon._assign(data,keychain,value).foo.bar).toBe("qux");
+      expect(Backbone.Syphon._assign(data,keychain,value).foo.baz).toBe("quxx");
+
+    });
   });
 
 });
