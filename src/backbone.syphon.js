@@ -151,28 +151,25 @@ Backbone.Syphon = (function(Backbone, $, _){
   var assignKeyValue = function(obj, keychain, value) {
     var currentObj = obj;
     var keyLength = keychain.length-1;
+    var key = keychain.shift();
 
-    // Loop through each part of the key chain
-    for(var i=0; i<=keyLength; i++){
-      // get the current key
-      var key = keychain[i];
+    // build the current object we need to store data
+    if (!currentObj[key]){
+      currentObj[key] = _.isArray(key) ? [] : {};
+    }
 
-      if (!currentObj[key]){
-        currentObj[key] = _.isArray(key) ? [] : {};
+    if (keychain.length === 0){
+      
+      // if it's the last key in the chain, assign the value directly
+      if (_.isArray(currentObj[key])){
+        currentObj[key].push(value);
+      } else {
+        currentObj[key] = value;
       }
 
-      if (i === keyLength){
-        
-        // if it's the last key in the chain, assign the value directly
-        if (_.isArray(currentObj[key])){
-          currentObj[key].push(value);
-        } else {
-          currentObj[key] = value;
-        }
-
-      }
-
-      currentObj = currentObj[key];
+    } else {
+      // recursive parsing of the array
+      assignKeyValue(currentObj[key], keychain, value);
     }
 
     return obj;
