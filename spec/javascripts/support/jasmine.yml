@@ -20,6 +20,7 @@ src_files:
     - src/backbone.syphon.inputreaders.js
     - src/backbone.syphon.inputwriters.js
     - src/backbone.syphon.keyassignmentvalidators.js
+    - src/backbone.syphon.keysplitter.js
 
 # stylesheets
 #

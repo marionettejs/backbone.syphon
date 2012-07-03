@@ -39,7 +39,8 @@ Backbone.Syphon = (function(Backbone, $, _){
       // it's valid before assigning the value to the key
       var validKeyAssignment = config.keyAssignmentValidators.get(type);
       if (validKeyAssignment($el, key, value)){
-        data = assignKeyValue(data, key, value);
+        var keychain = config.keySplitter(key);
+        data = assignKeyValue(data, keychain, value);
       }
     });
 
@@ -140,14 +141,14 @@ Backbone.Syphon = (function(Backbone, $, _){
     config.inputReaders = config.inputReaders || Syphon.InputReaders;
     config.inputWriters = config.inputWriters || Syphon.InputWriters;
     config.keyExtractors = config.keyExtractors || Syphon.KeyExtractors;
+    config.keySplitter = config.keySplitter || Syphon.KeySplitter;
     config.keyAssignmentValidators = config.keyAssignmentValidators || Syphon.KeyAssignmentValidators;
     
     return config;
   };
 
   // Assigns `value` to a parsed JSON key.
-  var assignKeyValue = function(obj, fieldKey, value) {
-    var keychain = fieldKey.split(".");
+  var assignKeyValue = function(obj, keychain, value) {
     var currentObj = obj;
     var keyLength = keychain.length-1;
 
@@ -185,3 +186,4 @@ Backbone.Syphon = (function(Backbone, $, _){
 
 //= backbone.syphon.keyassignmentvalidators.js
 
+//= backbone.syphon.keysplitter.js
