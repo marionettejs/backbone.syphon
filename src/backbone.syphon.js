@@ -164,11 +164,11 @@ Backbone.Syphon = (function(Backbone, $, _){
       } else {
 
         // otherwise, get or create the next level in the hierarchy
-        currentObj[key] || (currentObj[key] = {});
+        if (!currentObj[key]) { currentObj[key] = {}; }
         currentObj = currentObj[key];
 
       }
-    };
+    }
 
     return obj;
   };
