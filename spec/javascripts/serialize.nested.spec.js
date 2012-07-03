@@ -75,7 +75,6 @@ describe("serializing nested key names", function(){
     });
 
     it("has a nested property defined",function() {
-      console.log(result.foo.bar);
       expect(result.foo.bar).toBeDefined();
     });
 
