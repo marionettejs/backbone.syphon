@@ -39,8 +39,7 @@ Backbone.Syphon = (function(Backbone, $, _){
       // it's valid before assigning the value to the key
       var validKeyAssignment = config.keyAssignmentValidators.get(type);
       if (validKeyAssignment($el, key, value)){
-        var keychain = key.split(".");
-        data = Syphon._assign(data,keychain,value);
+        data = assignKeyValue(data, key, value);
       }
     });
 
@@ -147,24 +146,30 @@ Backbone.Syphon = (function(Backbone, $, _){
   };
 
   // Assigns `value` to a parsed JSON key.
-  Syphon._assign = function(obj, keychain, value) {
-    // Pop the key to process.
-    var key = keychain.shift();
+  var assignKeyValue = function(obj, fieldKey, value) {
+    var keychain = fieldKey.split(".");
+    var currentObj = obj;
+    var keyLength = keychain.length-1;
 
-    // Recursive endpoint: No more nesting.
-    if (keychain.length === 0) {
-      obj[key] = value;
-      return obj;
-    }
+    // Loop through each part of the key chain
+    for(var i=0; i<=keyLength; i++){
+      // get the current key
+      var key = keychain[i];
+      if (i === keyLength){
+        
+        // if it's the last key in the chain, assign the value directly
+        currentObj[key] = value;
 
-    // If the object isn't defined, create a new object with that key.
-    obj[key] || (obj[key] = {});
+      } else {
 
-    // Recursive startpoint: extend object with nested method call.
-    _.extend(obj[key], Syphon._assign(obj[key], keychain, value));
+        // otherwise, get or create the next level in the hierarchy
+        currentObj[key] || (currentObj[key] = {});
+        currentObj = currentObj[key];
+
+      }
+    };
 
     return obj;
-
   };
 
   return Syphon;
