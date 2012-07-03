@@ -46,6 +46,48 @@ describe("serializing nested key names", function(){
 
   });
 
+  describe("when the view has nested naming with [] and ends with [] for an array", function() {
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("\
+          <form>\
+          <input type='checkbox' name='foo[bar][]' value='baz' checked='checked'>\
+          <input type='checkbox' name='foo[bar][]' value='qux' checked='checked'>\
+          </form>\
+        ");
+      }
+    });
+
+    var view, result, inputReaders;
+
+    beforeEach(function() {
+      view = new View();
+      view.render();
+
+      var inputReaders = new Backbone.Syphon.InputReaderSet();
+      inputReaders.register("checkbox", function($el){
+        return $el.val();
+      });
+
+      result = Backbone.Syphon.serialize(view, {
+        inputReaders: inputReaders
+      });
+    });
+
+    it("has a nested property defined",function() {
+      console.log(result.foo.bar);
+      expect(result.foo.bar).toBeDefined();
+    });
+
+    it("should have the first value",function() {
+      expect(result.foo.bar[0]).toBe("baz");
+    });
+
+    it("should have the second value",function() {
+      expect(result.foo.bar[1]).toBe("qux");
+    });
+  });
+
   describe("when the view has nested naming with a .", function() {
     var View = Backbone.View.extend({
       render: function(){
@@ -58,6 +100,8 @@ describe("serializing nested key names", function(){
         ");
       }
     });
+
+    var view, result;
 
     beforeEach(function() {
       this.keySplitter = Backbone.Syphon.KeySplitter;
@@ -114,6 +158,8 @@ describe("serializing nested key names", function(){
         ");
       }
     });
+
+    var view, result;
 
     beforeEach(function() {
       view = new View();

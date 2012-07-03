@@ -9,5 +9,11 @@
 // `<input name="foo.bar.baz">`, `return key.split(".")`
 Backbone.Syphon.KeySplitter = function(key){
   var matches = key.match(/[^\[\]]+/g);
+
+  if (key.indexOf("[]") === key.length - 2){
+    lastKey = matches.pop();
+    matches.push([lastKey]);
+  }
+
   return matches;
 }

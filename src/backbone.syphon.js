@@ -156,15 +156,25 @@ Backbone.Syphon = (function(Backbone, $, _){
     for(var i=0; i<=keyLength; i++){
       // get the current key
       var key = keychain[i];
+
       if (i === keyLength){
         
         // if it's the last key in the chain, assign the value directly
-        currentObj[key] = value;
+        if (_.isArray(key)){
+          if (!currentObj[key]){
+            currentObj[key] = [];
+          }
+          currentObj[key].push(value);
+        } else {
+          currentObj[key] = value;
+        }
 
       } else {
 
         // otherwise, get or create the next level in the hierarchy
-        if (!currentObj[key]) { currentObj[key] = {}; }
+        if (!currentObj[key]) { 
+          currentObj[key] = {}; 
+        }
         currentObj = currentObj[key];
 
       }
