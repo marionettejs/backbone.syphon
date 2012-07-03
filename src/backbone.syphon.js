@@ -147,7 +147,27 @@ Backbone.Syphon = (function(Backbone, $, _){
     return config;
   };
 
-  // Assigns `value` to a parsed JSON key.
+  // Assigns `value` to a parsed JSON key. 
+  //
+  // The first parameter is the object which will be
+  // modified to store the key/value pair.
+  //
+  // The second parameter accepts an array of keys as a 
+  // string with an option array containing a 
+  // single string as the last option.
+  //
+  // The third parameter is the value to be assigned.
+  //
+  // Examples:
+  //
+  // `["foo", "bar", "baz"] => {foo: {bar: {baz: "value"}}}`
+  // 
+  // `["foo", "bar", ["baz"]] => {foo: {bar: {baz: ["value"]}}}`
+  // 
+  // When the final value is an array with a string, the key
+  // becomes an array, and values are pushed in to the array,
+  // allowing multiple fields with the same name to be 
+  // assigned to the array.
   var assignKeyValue = function(obj, keychain, value) {
     var key = keychain.shift();
 
