@@ -495,6 +495,7 @@ I've recorded several screencasts on how I built Syphon.
 ### v0.3.1
 
 * Fixed the AMD require statements to match Backbone.Marionette
+* Ignore `fieldset`
 
 ### v0.3.0
 
