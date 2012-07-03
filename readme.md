@@ -234,6 +234,7 @@ the resulting JavaScript object:
 * `<inputtype="submit">` buttons
 * `<input type="reset"`> buttons
 * standard `<button>` tags
+* `<fieldset>` tags
 
 If you need to get a value from the specific button that was
 clicked, you can either include it specifically (see below) or use
@@ -252,6 +253,31 @@ a specific call to `serialize`.
 ```js
 // ignore all <textarea> input elements
 Backbone.Syphon.ignoredTypes.push("textarea");
+```
+
+## Serializing Nested Attributes And Field Names
+
+Syphon will parse nested attribute names and create a nested result object,
+using the Rails standard of `name="foo[bar][baz]"` by default.
+
+```html
+<form>
+  <input type="text" name="foo[bar]" value="a value">
+  <input type="text" name="foo[baz][quux]" value="another value">
+</form>
+```
+
+will produce
+
+```js
+{
+  foo: {
+    bar: "a value",
+    baz: {
+      quux: "another value"
+    }
+  }
+}
 ```
 
 ## Include / Exclude Specific Fields
@@ -492,8 +518,10 @@ I've recorded several screencasts on how I built Syphon.
 
 ## Release Notes
 
-### v0.3.1
+### v0.4.0
 
+* Added support for nested field names, defaulting to Rails' standard of `foo[bar][baz]`
+* Added notion of `KeySplitter` to define how fields are split apart for nesting
 * Fixed the AMD require statements to match Backbone.Marionette
 * Ignore `fieldset`
 
