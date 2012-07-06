@@ -85,9 +85,14 @@ describe("deserializing nested key names", function(){
       expect(chk).toBeChecked(); 
     });
 
+    it("should select the second checkbox", function(){
+      var chk = view.$("[name='foo[bar][]'][value='qux']");
+      expect(chk).toBeChecked(); 
+    });
+
   });
 
-  xdescribe("when the view has nested naming with a .", function() {
+  describe("when the view has nested naming with a . and using a custom keyJoiner", function() {
     var View = Backbone.View.extend({
       render: function(){
         this.$el.html("\
@@ -103,96 +108,40 @@ describe("deserializing nested key names", function(){
     var view, result;
 
     beforeEach(function() {
-      this.keySplitter = Backbone.Syphon.KeySplitter;
+      this.keyJoiner = Backbone.Syphon.KeyJoiner;
 
-      Backbone.Syphon.KeySplitter = function(key){
-        return key.split(".");
+      Backbone.Syphon.KeyJoiner = function(parentKey, childKey){
+        return [parentKey, childKey].join(".");
       }
       
       view = new View();
       view.render();
 
-      result = Backbone.Syphon.serialize(view);
-    });
-
-    afterEach(function(){
-      Backbone.Syphon.KeySplitter = this.keySplitter;
-    });
-
-    it("has a property defined",function() {
-      expect(result.widget).toBeDefined();
-    });
-
-    it("retrieves the value for the property",function() {
-      expect(result.widget).toBe("wombat");
-    });
-
-    it("has a nested property defined",function() {
-      expect(result.foo.bar).toBeDefined();
-    });
-
-    it("retrieves the value for the nested property",function() {
-      expect(result.foo.bar).toBe("baz");
-    });
-
-    it("has a nested, sibling property defined",function() {
-      expect(result.foo.baz.quux).toBeDefined();
-    });
-
-    it("retrieves the value for the nested, sibling property",function() {
-      expect(result.foo.baz.quux).toBe("qux");
-    });
-
-  });
-
-  xdescribe("when the keys are split by a custom splitter in the serialize call", function() {
-    var View = Backbone.View.extend({
-      render: function(){
-        this.$el.html("\
-          <form>\
-          <input type='text' name='widget' value='wombat'>\
-          <input type='text' name='foo-bar' value='baz'>\
-          <input type='text' name='foo-baz-quux' value='qux'>\
-          </form>\
-        ");
-      }
-    });
-
-    var view, result;
-
-    beforeEach(function() {
-      view = new View();
-      view.render();
-
-      result = Backbone.Syphon.serialize(view, {
-        keySplitter: function(key){
-          return key.split("-");
+      result = Backbone.Syphon.deserialize(view,{
+        widget: "wombat",
+        foo: {
+          bar: "baz",
+          baz: {
+            quux: "qux"
+          }
         }
       });
     });
 
-    it("has a property defined",function() {
-      expect(result.widget).toBeDefined();
+    afterEach(function(){
+      Backbone.Syphon.KeyJoiner = this.keyJoiner;
     });
 
-    it("retrieves the value for the property",function() {
-      expect(result.widget).toBe("wombat");
+    it("should set root values",function() {
+      expect(view.$("[name='widget']")).toHaveValue("wombat");
     });
 
-    it("has a nested property defined",function() {
-      expect(result.foo.bar).toBeDefined();
+    it("should set first nested value",function() {
+      expect(view.$("[name='foo.bar']")).toHaveValue("baz");
     });
 
-    it("retrieves the value for the nested property",function() {
-      expect(result.foo.bar).toBe("baz");
-    });
-
-    it("has a nested, sibling property defined",function() {
-      expect(result.foo.baz.quux).toBeDefined();
-    });
-
-    it("retrieves the value for the nested, sibling property",function() {
-      expect(result.foo.baz.quux).toBe("qux");
+    it("should set sibling nested value",function() {
+      expect(view.$("[name='foo.baz.quux']")).toHaveValue("qux");
     });
 
   });
