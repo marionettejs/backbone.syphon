@@ -59,8 +59,6 @@ Backbone.Syphon = (function(Backbone, $, _){
 
     // Flatten the data structure that we are deserializing
     var flattenedData = flattenData(config, data);
-    console.log("Initial input: ", data);
-    console.log("Final output: ", flattenedData);
 
     // Process all of the elements
     _.each(elements, function(el){
