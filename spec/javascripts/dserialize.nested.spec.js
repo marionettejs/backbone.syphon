@@ -7,7 +7,7 @@ describe("deserializing nested key names", function(){
           <form>\
           <input type='text' name='widget'>\
           <input type='text' name='foo[bar]'>\
-          <input type='text' name='foo[baz][quux]'>\
+          <input type='text' name='foo[baz][qu_ux]'>\
           </form>\
         ");
       }
@@ -24,7 +24,7 @@ describe("deserializing nested key names", function(){
         foo: {
           bar: "baz",
           baz: {
-            quux: "qux"
+            qu_ux: "qux"
           }
         }
       });
@@ -39,7 +39,7 @@ describe("deserializing nested key names", function(){
     });
 
     it("should set sibling nested value",function() {
-      expect(view.$("[name='foo[baz][quux]']")).toHaveValue("qux");
+      expect(view.$("[name='foo[baz][qu_ux]']")).toHaveValue("qux");
     });
 
   });
