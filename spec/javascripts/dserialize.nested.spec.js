@@ -23,7 +23,9 @@ describe("deserializing nested key names", function(){
         widget: "wombat",
         foo: {
           bar: "baz",
-          quux: "qux"
+          baz: {
+            quux: "qux"
+          }
         }
       });
     });
@@ -37,7 +39,7 @@ describe("deserializing nested key names", function(){
     });
 
     it("should set sibling nested value",function() {
-      expect(view.$("[name='foo[quux]']")).toHaveValue("qux");
+      expect(view.$("[name='foo[baz][quux]']")).toHaveValue("qux");
     });
 
   });

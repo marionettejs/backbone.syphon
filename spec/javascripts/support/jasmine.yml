@@ -21,6 +21,7 @@ src_files:
     - src/backbone.syphon.inputwriters.js
     - src/backbone.syphon.keyassignmentvalidators.js
     - src/backbone.syphon.keysplitter.js
+    - src/backbone.syphon.keyjoiner.js
 
 # stylesheets
 #

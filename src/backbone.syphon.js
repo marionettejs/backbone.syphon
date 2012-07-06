@@ -57,6 +57,11 @@ Backbone.Syphon = (function(Backbone, $, _){
     // Get all of the elements to process
     var elements = getInputElements(view, config);
 
+    // Flatten the data structure that we are deserializing
+    var flattenedData = flattenData(config, data);
+    console.log("Initial input: ", data);
+    console.log("Final output: ", flattenedData);
+
     // Process all of the elements
     _.each(elements, function(el){
       var $el = $(el);
@@ -68,7 +73,7 @@ Backbone.Syphon = (function(Backbone, $, _){
 
       // Write value to input
       var inputWriter = config.inputWriters.get(type);
-      inputWriter($el, data[key]);
+      inputWriter($el, flattenedData[key]);
     });
   };
 
@@ -142,6 +147,7 @@ Backbone.Syphon = (function(Backbone, $, _){
     config.inputWriters = config.inputWriters || Syphon.InputWriters;
     config.keyExtractors = config.keyExtractors || Syphon.KeyExtractors;
     config.keySplitter = config.keySplitter || Syphon.KeySplitter;
+    config.keyJoiner = config.keyJoiner || Syphon.KeyJoiner;
     config.keyAssignmentValidators = config.keyAssignmentValidators || Syphon.KeyAssignmentValidators;
     
     return config;
@@ -193,6 +199,63 @@ Backbone.Syphon = (function(Backbone, $, _){
     return obj;
   };
 
+  // Flatten the data structure in to nested strings, using the
+  // provided `KeyJoiner` function.
+  //
+  // Example:
+  //
+  // This input:
+  //
+  // ```js
+  // {
+  //   widget: "wombat",
+  //   foo: {
+  //     bar: "baz",
+  //     baz: {
+  //       quux: "qux"
+  //     }
+  //   }
+  // }
+  // ```
+  //
+  // With a KeyJoiner that uses [ ] square brackets, 
+  // should produce this output:
+  //
+  // ```js
+  // {
+  //  "widget": "wombat",
+  //  "foo[bar]": "baz",
+  //  "foo[baz][quux]": "qux"
+  // }
+  // ```
+  var flattenData = function(config, data, parentKey){
+    var flatData = {};
+
+    _.each(data, function(value, keyName){
+      var hash = {};
+
+      // If there is a parent key, join it with
+      // the current, child key.
+      if (parentKey){
+        keyName = config.keyJoiner(parentKey, keyName);
+      }
+
+      // If the value is an object, recurse in to it
+      // otherwise, set the key/value pair
+      if (_.isObject(value)){
+        hash = flattenData(config, value, keyName);
+      } else {
+        hash[keyName] = value;
+      }
+
+      // Store the resulting key/value pairs in the
+      // final flattened data object
+      _.extend(flatData, hash);
+    });
+
+    return flatData;
+  };
+
   return Syphon;
 })(Backbone, jQuery, _);
 
@@ -207,3 +270,5 @@ Backbone.Syphon = (function(Backbone, $, _){
 //= backbone.syphon.keyassignmentvalidators.js
 
 //= backbone.syphon.keysplitter.js
+
+//= backbone.syphon.keyjoiner.js
