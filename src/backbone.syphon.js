@@ -69,9 +69,12 @@ Backbone.Syphon = (function(Backbone, $, _){
       var keyExtractor = config.keyExtractors.get(type);
       var key = keyExtractor($el);
 
-      // Write value to input
+      // Get the input writer and the value to write
       var inputWriter = config.inputWriters.get(type);
-      inputWriter($el, flattenedData[key]);
+      var value = flattenedData[key];
+
+      // Write the value to the input
+      inputWriter($el, value);
     });
   };
 
@@ -211,7 +214,8 @@ Backbone.Syphon = (function(Backbone, $, _){
   //     bar: "baz",
   //     baz: {
   //       quux: "qux"
-  //     }
+  //     },
+  //     quux: ["foo", "bar"]
   //   }
   // }
   // ```
@@ -223,7 +227,8 @@ Backbone.Syphon = (function(Backbone, $, _){
   // {
   //  "widget": "wombat",
   //  "foo[bar]": "baz",
-  //  "foo[baz][quux]": "qux"
+  //  "foo[baz][quux]": "qux",
+  //  "foo[quux]": ["foo", "bar"]
   // }
   // ```
   var flattenData = function(config, data, parentKey){
@@ -238,9 +243,10 @@ Backbone.Syphon = (function(Backbone, $, _){
         keyName = config.keyJoiner(parentKey, keyName);
       }
 
-      // If the value is an object, recurse in to it
-      // otherwise, set the key/value pair
-      if (_.isObject(value)){
+      if (_.isArray(value)){
+        keyName += "[]";
+        hash[keyName] = value;
+      } else if (_.isObject(value)){
         hash = flattenData(config, value, keyName);
       } else {
         hash[keyName] = value;

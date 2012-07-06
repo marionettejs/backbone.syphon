@@ -44,13 +44,13 @@ describe("deserializing nested key names", function(){
 
   });
 
-  xdescribe("when the view has nested naming with [] and ends with [] for an array", function() {
+  describe("when the view has nested naming with [] and ends with [] for an array, on checkboxes", function() {
     var View = Backbone.View.extend({
       render: function(){
         this.$el.html("\
           <form>\
-          <input type='checkbox' name='foo[bar][]' value='baz' checked='checked'>\
-          <input type='checkbox' name='foo[bar][]' value='qux' checked='checked'>\
+          <input type='checkbox' name='foo[bar][]' value='baz'>\
+          <input type='checkbox' name='foo[bar][]' value='qux'>\
           </form>\
         ");
       }
@@ -62,27 +62,29 @@ describe("deserializing nested key names", function(){
       view = new View();
       view.render();
 
-      var inputReaders = new Backbone.Syphon.InputReaderSet();
-      inputReaders.register("checkbox", function($el){
-        return $el.val();
+      var writers = new Backbone.Syphon.InputWriterSet();
+      writers.register("checkbox", function($el, value){
+        if (_.include(value, $el.val())){
+          $el.prop("checked", true);
+        }
       });
 
-      result = Backbone.Syphon.serialize(view, {
-        inputReaders: inputReaders
+      var data = {
+        foo: {
+          bar: ['baz', 'qux']
+        }
+      };
+
+      result = Backbone.Syphon.deserialize(view, data, {
+        inputWriters: writers
       });
     });
 
-    it("has a nested property defined",function() {
-      expect(result.foo.bar).toBeDefined();
+    it("should select the first checkbox", function(){
+      var chk = view.$("[name='foo[bar][]'][value='baz']");
+      expect(chk).toBeChecked(); 
     });
 
-    it("should have the first value",function() {
-      expect(result.foo.bar[0]).toBe("baz");
-    });
-
-    it("should have the second value",function() {
-      expect(result.foo.bar[1]).toBe("qux");
-    });
   });
 
   xdescribe("when the view has nested naming with a .", function() {
