@@ -199,4 +199,19 @@ describe("deserializing an object into a form", function(){
     });
   });
 
+  describe("when given a form element instead of a view", function() {
+    var form;
+
+    beforeEach(function(){
+      form = $("<form><input type='text' name='foo' value='bar'></form>")[0];
+
+      Backbone.Syphon.deserialize(form, { foo: "bar" });
+    });
+
+    it("should set the input's value to the corresponding value in the given object", function(){
+      var result = $(form).find('input[name=foo]').val();
+      expect(result).toBe("bar");
+    });
+  });
+
 });

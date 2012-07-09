@@ -12,7 +12,9 @@ Backbone.Syphon = (function(Backbone, $, _){
   // ------
 
   // Get a JSON object that represents
-  // all of the form inputs, in this view
+  // all of the form inputs, in this view.
+  // Alternately, pass a form element directly
+  // in place of the view.
   Syphon.serialize = function(view, options){
     var data = {};
 
@@ -48,7 +50,9 @@ Backbone.Syphon = (function(Backbone, $, _){
   };
   
   // Use the given JSON object to populate
-  // all of the form inputs, in this view
+  // all of the form inputs, in this view.
+  // Alternately, pass a form element directly
+  // in place of the view.
   Syphon.deserialize = function(view, data, options){
     // Build the configuration
     var config = buildConfig(options);
@@ -75,9 +79,9 @@ Backbone.Syphon = (function(Backbone, $, _){
   // -------
 
   // Retrieve all of the form inputs
-  // from the view
+  // from the form
   var getInputElements = function(view, config){
-    var form = view.$el.is("form") ? view.el : view.$("form")[0];
+    var form = getForm(view);
     var elements = form.elements;
 
     elements = _.reject(elements, function(el){
@@ -131,6 +135,16 @@ Backbone.Syphon = (function(Backbone, $, _){
     return type.toLowerCase();
   };
   
+  // If a form element is given, just return it. 
+  // Otherwise, get the form element from the view.
+  var getForm = function(viewOrForm){
+    if (_.isUndefined(viewOrForm.$el) && viewOrForm.tagName.toLowerCase() === 'form'){
+      return viewOrForm;
+    } else {
+      return viewOrForm.$el.is("form") ? viewOrForm.el : viewOrForm.$("form")[0];
+    }
+  }
+
   // Build a configuration object and initialize
   // default values.
   var buildConfig = function(options){
