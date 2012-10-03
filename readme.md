@@ -231,7 +231,7 @@ the `data` parameter.
 The following types of input are ignored, and not included in
 the resulting JavaScript object:
 
-* `<inputtype="submit">` buttons
+* `<input type="submit">` buttons
 * `<input type="reset"`> buttons
 * standard `<button>` tags
 
