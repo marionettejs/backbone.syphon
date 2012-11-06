@@ -211,4 +211,19 @@ describe("serializing a form", function(){
     });
   });
 
+  describe("when given a form element instead of a view", function() {
+
+    var result;
+
+    beforeEach(function() {
+      form = $("<form><input type='text' name='foo' value='bar'></form>")[0];
+
+      result = Backbone.Syphon.serialize(form);
+    });
+
+    it("retrieves the inputs' values", function() {
+      expect(result.foo).toBe("bar");
+    });
+  });
+
 });
