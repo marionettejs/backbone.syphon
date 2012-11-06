@@ -25,6 +25,28 @@ describe("serializing a form", function(){
     });
   });
 
+  describe("when serializing a input with no name", function(){
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("<form><input type='text' value='bar'></form>");
+      }
+    });
+
+    var view, result;
+
+    beforeEach(function(){
+      view = new View();
+      view.render();
+
+      result = Backbone.Syphon.serialize(view);
+    });
+
+    it("should not serialize the value to the target object", function(){
+      expect(result).toBeUndefined();
+    });
+
+  });
+
   describe("when serializing a textarea", function(){
     var View = Backbone.View.extend({
       render: function(){
