@@ -150,7 +150,7 @@ Backbone.Syphon = (function(Backbone, $, _){
     } else {
       return viewOrForm.$el.is("form") ? viewOrForm.el : viewOrForm.$("form")[0];
     }
-  }
+  };
 
   // Build a configuration object and initialize
   // default values.
