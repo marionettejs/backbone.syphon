@@ -190,7 +190,7 @@ Backbone.Syphon = (function(Backbone, $, _){
   // allowing multiple fields with the same name to be 
   // assigned to the array.
   var assignKeyValue = function(obj, keychain, value) {
-    if (!keychain){ return; }
+    if (!keychain){ return obj; }
 
     var key = keychain.shift();
 

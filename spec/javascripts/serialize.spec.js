@@ -42,7 +42,7 @@ describe("serializing a form", function(){
     });
 
     it("should not serialize the value to the target object", function(){
-      expect(result).toBeUndefined();
+      expect(result).toBeTruthy({});
     });
 
   });
