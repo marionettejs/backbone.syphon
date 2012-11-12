@@ -1,3 +1,7 @@
+## v0.4.1
+
+* Fixed issue w/ field that has no name (or other specified identifier)
+
 ## v0.4.0
 
 * Added support for nested field names, defaulting to Rails' standard of `foo[bar][baz]`
