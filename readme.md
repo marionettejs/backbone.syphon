@@ -422,7 +422,7 @@ result. You can specify a `KeyExtractorSet` as part of the options:
 extractors = new Backbone.Syphon.KeyExtractorSet();
 // configure it ...
 
-Backbone.Syphone.serialize({
+Backbone.Syphon.serialize({
   keyExtractors: extractors
 });
 ```
@@ -439,7 +439,7 @@ result. You can specify a `InputReadetSet` as part of the options:
 readers = new Backbone.Syphon.InputReaderSet();
 // configure it ...
 
-Backbone.Syphone.serialize({
+Backbone.Syphon.serialize({
   inputReaders: readers
 });
 ```
@@ -467,7 +467,7 @@ of the options:
 validators = new Backbone.Syphon.KeyAssignmentValidators();
 // configure it ...
 
-Backbone.Syphone.serialize({
+Backbone.Syphon.serialize({
   keyAssignmentValidators: validators
 });
 ```
