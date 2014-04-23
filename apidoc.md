@@ -65,8 +65,8 @@ takes a single parameter of a function. The function
 receives a single parameter of a jQuery selector element -
 the input element that needs to have its key extracted.
 
-To change the default behavior from using "id" to using
-"name" on input elements, use the following configuration:
+To change the default behavior from using "name" to using
+"id" on input elements, use the following configuration:
 
 ```js
 Backbone.Syphon.KeyExtractors.registerDefault(function($el){
