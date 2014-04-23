@@ -24,5 +24,5 @@ Backbone.Syphon.InputWriters.register("checkbox", function($el, value){
 // checked.  The button should only be checked if it's value
 // equals the given value.
 Backbone.Syphon.InputWriters.register("radio", function($el, value){
-  $el.prop("checked", $el.val() === value);
+  $el.prop("checked", $el.val() === value.toString());
 });
