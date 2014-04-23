@@ -199,6 +199,29 @@ describe("deserializing an object into a form", function(){
     });
   });
 
+  describe("when deserializing into a radio button group (when value is a number)", function(){
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("<form><input type='radio' name='foo' value='1'><input type='radio' name='foo' value='2'><input type='radio' name='foo' value='3'>");
+      }
+    });
+
+    var view;
+
+    beforeEach(function(){
+      view = new View();
+      view.render();
+
+      Backbone.Syphon.deserialize(view, { foo: 2 });
+    });
+
+    it("should select the corresponding radio button", function(){
+      var checked = view.$("input[name=foo][value=2]").prop("checked");
+      expect(checked).toBe(true);
+    });
+  });
+
+
   describe("when given a form element instead of a view", function() {
     var form;
 
