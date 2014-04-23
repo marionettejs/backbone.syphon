@@ -17,4 +17,4 @@ Backbone.Syphon.KeySplitter = function(key){
   }
 
   return matches;
-}
+};

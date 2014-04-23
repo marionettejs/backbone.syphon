@@ -17,4 +17,4 @@
 
 Backbone.Syphon.KeyJoiner = function(parentKey, childKey){
   return parentKey + "[" + childKey + "]";
-}
+};
