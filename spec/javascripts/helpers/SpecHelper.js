@@ -1,8 +1,13 @@
 beforeEach(function() {
-  this.addMatchers({
-    toHaveOwnProperty: function(expectedProperty) {
-      var obj = this.actual;
-      return obj.hasOwnProperty(expectedProperty);
+  jasmine.addMatchers({
+    toHaveOwnProperty: function() {
+      return {
+        compare: function (actual, expected) {
+          return {
+            pass: _.has(actual, expected)
+          };
+        }
+      };
     }
   });
 });

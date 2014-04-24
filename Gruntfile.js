@@ -57,6 +57,31 @@ module.exports = function(grunt) {
         src: '<%= concat.amd.dest %>',
         dest: 'lib/amd/backbone.syphon.min.js'
       }
+    },
+
+    jasmine: {
+      tests: {
+        src: [
+          'src/backbone.syphon.js',
+          'src/backbone.syphon.typeregistry.js',
+          'src/backbone.syphon.keyextractors.js',
+          'src/backbone.syphon.inputreaders.js',
+          'src/backbone.syphon.inputwriters.js',
+          'src/backbone.syphon.keyassignmentvalidators.js',
+          'src/backbone.syphon.keysplitter.js',
+          'src/backbone.syphon.keyjoiner.js'
+        ],
+        options: {
+          specs: 'spec/javascripts/*.spec.js',
+          vendor: [
+            'public/javascripts/jquery.js',
+            'public/javascripts/underscore.js',
+            'public/javascripts/backbone.js',
+            'spec/javascripts/helpers/jasmine-jquery.js',
+            'spec/javascripts/helpers/SpecHelper.js'
+          ]
+        }
+      }
     }
   });
 
@@ -67,7 +92,12 @@ module.exports = function(grunt) {
     'uglify'
   ]);
 
+  grunt.registerTask('test', [
+    'jasmine'
+  ]);
+
   grunt.registerTask('default', [
+    'test',
     'build'
   ]);
 
