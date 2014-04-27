@@ -1,15 +1,29 @@
-// @include ../backbone.syphon.js
+(function(root, factory) {
 
-// @include ../backbone.syphon.typeregistry.js
+  if (typeof define === 'function' && define.amd) {
+    define(['underscore', 'backbone', 'jquery'], function(_, Backbone, $) {
+      return factory(_, Backbone, $);
+    });
+  } else if (typeof exports !== 'undefined') {
+    var _ = require('underscore');
+    var Backbone = require('backbone');
+    var $ = require('jquery');
+    module.exports = factory(_, Backbone, $);
+  } else {
+    factory(root._, root.Backbone, root.jQuery);
+  }
 
-// @include ../backbone.syphon.keyextractors.js
+}(this, function(_, Backbone, jQuery) {
+  "use strict";
 
-// @include ../backbone.syphon.inputreaders.js
+  // @include ../backbone.syphon.js
+  // @include ../backbone.syphon.typeregistry.js
+  // @include ../backbone.syphon.keyextractors.js
+  // @include ../backbone.syphon.inputreaders.js
+  // @include ../backbone.syphon.inputwriters.js
+  // @include ../backbone.syphon.keyassignmentvalidators.js
+  // @include ../backbone.syphon.keysplitter.js
+  // @include ../backbone.syphon.keyjoiner.js
 
-// @include ../backbone.syphon.inputwriters.js
-
-// @include ../backbone.syphon.keyassignmentvalidators.js
-
-// @include ../backbone.syphon.keysplitter.js
-
-// @include ../backbone.syphon.keyjoiner.js
+  return Backbone.Syphon;
+}));

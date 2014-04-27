@@ -23,10 +23,6 @@ module.exports = function(grunt) {
       build: {
         src: 'src/build/backbone.syphon.js',
         dest: 'lib/backbone.syphon.js'
-      },
-      amd: {
-        src: 'src/build/backbone.syphon.amd.js',
-        dest: 'lib/amd/backbone.syphon.js'
       }
     },
 
@@ -37,10 +33,6 @@ module.exports = function(grunt) {
       build: {
         src: '<%= preprocess.build.dest %>',
         dest: 'lib/backbone.syphon.js'
-      },
-      amd: {
-        src: '<%= preprocess.amd.dest %>',
-        dest: 'lib/amd/backbone.syphon.js'
       }
     },
 
@@ -52,10 +44,6 @@ module.exports = function(grunt) {
       build: {
         src: '<%= concat.build.dest %>',
         dest: 'lib/backbone.syphon.min.js'
-      },
-      amd: {
-        src: '<%= concat.amd.dest %>',
-        dest: 'lib/amd/backbone.syphon.min.js'
       }
     },
 
