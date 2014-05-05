@@ -1,0 +1,20 @@
+{
+  "name": "backbone.syphon",
+  "description": "Serialize a Backbone.View in to a JavaScript object !",
+  "repo": "marionettejs/backbone.syphon",
+  "main": "lib/backbone.syphon.js",
+  "scripts": ["lib/backbone.syphon.js"],
+  "version": "0.5.0",
+
+  "keywords": [
+    "backbone",
+    "serialize",
+    "client",
+    "browser"
+  ],
+  "dependencies": {
+    "components/jquery": "^2.0.0",
+    "jashkenas/backbone" : "^1.1.0",
+    "jashkenas/underscore": "^1.6.0"
+  }
+}

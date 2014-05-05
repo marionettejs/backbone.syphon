@@ -62,9 +62,9 @@ module.exports = function(grunt) {
         options: {
           specs: 'spec/javascripts/*.spec.js',
           vendor: [
-            'public/javascripts/jquery.js',
-            'public/javascripts/underscore.js',
-            'public/javascripts/backbone.js',
+            'bower_components/jquery/dist/jquery.js',
+            'bower_components/underscore/underscore.js',
+            'bower_components/backbone/backbone.js',
             'spec/javascripts/helpers/jasmine-jquery.js',
             'spec/javascripts/helpers/SpecHelper.js'
           ]
