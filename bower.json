@@ -16,7 +16,7 @@
     "email" : "derickbailey@gmail.com"
   },
   "dependencies": {
-    "jquery": "^2.0.0",
+    "jquery": "^1.8.0 || ^2.1.0",
     "backbone" : "^1.1.0",
     "underscore": "^1.6.0"
   },
