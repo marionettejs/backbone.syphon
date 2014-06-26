@@ -16,23 +16,19 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      lib: 'lib/'
+      lib: 'lib/',
+      tmp: 'tmp/'
     },
 
     preprocess: {
-      build: {
+      lib: {
         src: 'src/build/backbone.syphon.js',
         dest: 'lib/backbone.syphon.js'
-      }
-    },
-
-    concat: {
-      options: {
-        banner: '<%= meta.banner %>'
       },
-      build: {
-        src: '<%= preprocess.build.dest %>',
-        dest: 'lib/backbone.syphon.js'
+
+      tmp: {
+        src: 'src/build/backbone.syphon.js',
+        dest: 'tmp/backbone.syphon.js'
       }
     },
 
@@ -41,8 +37,8 @@ module.exports = function(grunt) {
         banner: '<%= meta.banner %>',
         sourceMap: true
       },
-      build: {
-        src: '<%= concat.build.dest %>',
+      lib: {
+        src: '<%= preprocess.lib.dest %>',
         dest: 'lib/backbone.syphon.min.js'
       }
     },
@@ -50,14 +46,7 @@ module.exports = function(grunt) {
     jasmine: {
       tests: {
         src: [
-          'src/backbone.syphon.js',
-          'src/backbone.syphon.typeregistry.js',
-          'src/backbone.syphon.keyextractors.js',
-          'src/backbone.syphon.inputreaders.js',
-          'src/backbone.syphon.inputwriters.js',
-          'src/backbone.syphon.keyassignmentvalidators.js',
-          'src/backbone.syphon.keysplitter.js',
-          'src/backbone.syphon.keyjoiner.js'
+          'tmp/backbone.syphon.js'
         ],
         options: {
           specs: 'spec/javascripts/*.spec.js',
@@ -75,18 +64,18 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean:lib',
-    'preprocess',
-    'concat',
+    'preprocess:lib',
     'uglify'
   ]);
 
   grunt.registerTask('test', [
-    'jasmine'
+    'preprocess:tmp',
+    'jasmine',
+    'clean:tmp'
   ]);
 
   grunt.registerTask('default', [
     'test',
     'build'
   ]);
-
 };
