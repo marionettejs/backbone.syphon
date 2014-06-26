@@ -29,15 +29,15 @@ describe('deserializing nested key names', function() {
       });
     });
 
-    it('should set root values',function() {
+    it('should set root values', function() {
       expect(view.$('[name="widget"]')).toHaveValue('wombat');
     });
 
-    it('should set first nested value',function() {
+    it('should set first nested value', function() {
       expect(view.$('[name="foo[bar]"]')).toHaveValue('baz');
     });
 
-    it('should set sibling nested value',function() {
+    it('should set sibling nested value', function() {
       expect(view.$('[name="foo[baz][qux]"]')).toHaveValue('qux');
     });
   });
@@ -129,15 +129,15 @@ describe('deserializing nested key names', function() {
       Backbone.Syphon.KeyJoiner = this.keyJoiner;
     });
 
-    it('should set root values',function() {
+    it('should set root values', function() {
       expect(view.$('[name="widget"]')).toHaveValue('wombat');
     });
 
-    it('should set first nested value',function() {
+    it('should set first nested value', function() {
       expect(view.$('[name="foo.bar"]')).toHaveValue('baz');
     });
 
-    it('should set sibling nested value',function() {
+    it('should set sibling nested value', function() {
       expect(view.$('[name="foo.baz.quux"]')).toHaveValue('qux');
     });
   });

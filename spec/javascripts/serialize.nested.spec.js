@@ -74,15 +74,15 @@ describe('serializing nested key names', function() {
       });
     });
 
-    it('has a nested property defined',function() {
+    it('has a nested property defined', function() {
       expect(result.foo.bar).toBeDefined();
     });
 
-    it('should have the first value',function() {
+    it('should have the first value', function() {
       expect(result.foo.bar[0]).toBe('baz');
     });
 
-    it('should have the second value',function() {
+    it('should have the second value', function() {
       expect(result.foo.bar[1]).toBe('qux');
     });
   });
@@ -119,27 +119,27 @@ describe('serializing nested key names', function() {
       Backbone.Syphon.KeySplitter = this.keySplitter;
     });
 
-    it('has a property defined',function() {
+    it('has a property defined', function() {
       expect(result.widget).toBeDefined();
     });
 
-    it('retrieves the value for the property',function() {
+    it('retrieves the value for the property', function() {
       expect(result.widget).toBe('wombat');
     });
 
-    it('has a nested property defined',function() {
+    it('has a nested property defined', function() {
       expect(result.foo.bar).toBeDefined();
     });
 
-    it('retrieves the value for the nested property',function() {
+    it('retrieves the value for the nested property', function() {
       expect(result.foo.bar).toBe('baz');
     });
 
-    it('has a nested, sibling property defined',function() {
+    it('has a nested, sibling property defined', function() {
       expect(result.foo.baz.quux).toBeDefined();
     });
 
-    it('retrieves the value for the nested, sibling property',function() {
+    it('retrieves the value for the nested, sibling property', function() {
       expect(result.foo.baz.quux).toBe('qux');
     });
   });
@@ -170,27 +170,27 @@ describe('serializing nested key names', function() {
       });
     });
 
-    it('has a property defined',function() {
+    it('has a property defined', function() {
       expect(result.widget).toBeDefined();
     });
 
-    it('retrieves the value for the property',function() {
+    it('retrieves the value for the property', function() {
       expect(result.widget).toBe('wombat');
     });
 
-    it('has a nested property defined',function() {
+    it('has a nested property defined', function() {
       expect(result.foo.bar).toBeDefined();
     });
 
-    it('retrieves the value for the nested property',function() {
+    it('retrieves the value for the nested property', function() {
       expect(result.foo.bar).toBe('baz');
     });
 
-    it('has a nested, sibling property defined',function() {
+    it('has a nested, sibling property defined', function() {
       expect(result.foo.baz.quux).toBeDefined();
     });
 
-    it('retrieves the value for the nested, sibling property',function() {
+    it('retrieves the value for the nested, sibling property', function() {
       expect(result.foo.baz.quux).toBe('qux');
     });
   });
