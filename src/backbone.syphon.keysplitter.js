@@ -7,11 +7,11 @@
 //
 // Override this method to use a custom key splitter, such as:
 // `<input name="foo.bar.baz">`, `return key.split(".")`
-var KeySplitter = Syphon.KeySplitter = function(key){
+Syphon.KeySplitter = function(key) {
   var matches = key.match(/[^\[\]]+/g);
   var lastKey;
 
-  if (key.indexOf("[]") === key.length - 2){
+  if (key.indexOf('[]') === key.length - 2) {
     lastKey = matches.pop();
     matches.push([lastKey]);
   }

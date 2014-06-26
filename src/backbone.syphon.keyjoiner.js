@@ -15,6 +15,6 @@
 // `KeyJoiner("foo[bar]", "baz")` //=> "foo[bar][baz]"
 // `KeyJoiner("foo[bar]", "quux")` //=> "foo[bar][quux]"
 
-var KeyJoiner = Syphon.KeyJoiner = function(parentKey, childKey){
-  return parentKey + "[" + childKey + "]";
+Syphon.KeyJoiner = function(parentKey, childKey) {
+  return parentKey + '[' + childKey + ']';
 };

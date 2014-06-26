@@ -14,7 +14,7 @@
   }
 
 }(this, function(_, Backbone, $) {
-  "use strict";
+  'use strict';
 
   var Syphon = Backbone.Syphon = {};
 

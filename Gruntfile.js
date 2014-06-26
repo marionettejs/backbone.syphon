@@ -43,6 +43,22 @@ module.exports = function(grunt) {
       }
     },
 
+    jshint: {
+      src: {
+        options: {
+          jshintrc: '.jshintrc'
+        },
+        src: ['src/**.js']
+      },
+
+      spec: {
+        options: {
+          jshintrc: 'spec/.jshintrc'
+        },
+        src: ['spec/javascripts/**.js']
+      }
+    },
+
     jasmine: {
       tests: {
         src: [
@@ -63,19 +79,21 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build', [
+    'jshint:src',
     'clean:lib',
     'preprocess:lib',
     'uglify'
   ]);
 
   grunt.registerTask('test', [
+    'jshint',
     'preprocess:tmp',
     'jasmine',
     'clean:tmp'
   ]);
 
   grunt.registerTask('default', [
-    'test',
-    'build'
+    'build',
+    'test'
   ]);
 };

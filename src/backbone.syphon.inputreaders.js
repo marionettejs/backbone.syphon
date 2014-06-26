@@ -16,6 +16,6 @@ InputReaders.registerDefault(function($el){
 
 // Checkbox reader, returning a boolean value for
 // whether or not the checkbox is checked.
-InputReaders.register("checkbox", function($el){
-  return $el.prop("checked");
+InputReaders.register('checkbox', function($el) {
+  return $el.prop('checked');
 });

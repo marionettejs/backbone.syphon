@@ -1,9 +1,11 @@
+/* jshint maxstatements: 13, maxlen: 102, maxcomplexity: 8, latedef: false */
+
 // Ignore Element Types
 // --------------------
 
 // Tell Syphon to ignore all elements of these types. You can
 // push new types to ignore directly in to this array.
-Syphon.ignoredTypes = ["button", "submit", "reset", "fieldset"];
+Syphon.ignoredTypes = ['button', 'submit', 'reset', 'fieldset'];
 
 // Syphon
 // ------
@@ -124,12 +126,12 @@ var getElementType = function(el){
   var tagName = $el[0].tagName;
   var type = tagName;
 
-  if (tagName.toLowerCase() === "input"){
-    typeAttr = $el.attr("type");
+  if (tagName.toLowerCase() === 'input'){
+    typeAttr = $el.attr('type');
     if (typeAttr){
       type = typeAttr;
     } else {
-      type = "text";
+      type = 'text';
     }
   }
 
@@ -145,7 +147,7 @@ var getForm = function(viewOrForm){
   if (_.isUndefined(viewOrForm.$el) && viewOrForm.tagName.toLowerCase() === 'form'){
     return viewOrForm;
   } else {
-    return viewOrForm.$el.is("form") ? viewOrForm.el : viewOrForm.$("form")[0];
+    return viewOrForm.$el.is('form') ? viewOrForm.el : viewOrForm.$('form')[0];
   }
 };
 
@@ -178,9 +180,9 @@ var buildConfig = function(options){
 //
 // Examples:
 //
-// `["foo", "bar", "baz"] => {foo: {bar: {baz: "value"}}}`
+// `['foo', 'bar', 'baz'] => {foo: {bar: {baz: 'value'}}}`
 //
-// `["foo", "bar", ["baz"]] => {foo: {bar: {baz: ["value"]}}}`
+// `['foo', 'bar', ['baz']] => {foo: {bar: {baz: ['value']}}}`
 //
 // When the final value is an array with a string, the key
 // becomes an array, and values are pushed in to the array,
@@ -222,13 +224,13 @@ var assignKeyValue = function(obj, keychain, value) {
 //
 // ```js
 // {
-//   widget: "wombat",
+//   widget: 'wombat',
 //   foo: {
-//     bar: "baz",
+//     bar: 'baz',
 //     baz: {
-//       quux: "qux"
+//       quux: 'qux'
 //     },
-//     quux: ["foo", "bar"]
+//     quux: ['foo', 'bar']
 //   }
 // }
 // ```
@@ -238,10 +240,10 @@ var assignKeyValue = function(obj, keychain, value) {
 //
 // ```js
 // {
-//  "widget": "wombat",
-//  "foo[bar]": "baz",
-//  "foo[baz][quux]": "qux",
-//  "foo[quux]": ["foo", "bar"]
+//  'widget': 'wombat',
+//  'foo[bar]': 'baz',
+//  'foo[baz][quux]': 'qux',
+//  'foo[quux]': ['foo', 'bar']
 // }
 // ```
 var flattenData = function(config, data, parentKey){
@@ -257,7 +259,7 @@ var flattenData = function(config, data, parentKey){
     }
 
     if (_.isArray(value)){
-      keyName += "[]";
+      keyName += '[]';
       hash[keyName] = value;
     } else if (_.isObject(value)){
       hash = flattenData(config, value, keyName);
