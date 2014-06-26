@@ -7,7 +7,7 @@
 //
 // Override this method to use a custom key splitter, such as:
 // `<input name="foo.bar.baz">`, `return key.split(".")`
-Backbone.Syphon.KeySplitter = function(key){
+var KeySplitter = Syphon.KeySplitter = function(key){
   var matches = key.match(/[^\[\]]+/g);
   var lastKey;
 

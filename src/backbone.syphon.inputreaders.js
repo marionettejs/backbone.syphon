@@ -3,20 +3,19 @@
 
 // Input Readers are used to extract the value from
 // an input element, for the serialized object result
-Backbone.Syphon.InputReaderSet = Backbone.Syphon.TypeRegistry.extend();
+var InputReaderSet = Syphon.InputReaderSet = TypeRegistry.extend();
 
 // Built-in Input Readers
-Backbone.Syphon.InputReaders = new Backbone.Syphon.InputReaderSet();
+var InputReaders = Syphon.InputReaders = new InputReaderSet();
 
 // The default input reader, which uses an input
 // element's "value"
-Backbone.Syphon.InputReaders.registerDefault(function($el){
+InputReaders.registerDefault(function($el){
   return $el.val();
 });
 
 // Checkbox reader, returning a boolean value for
 // whether or not the checkbox is checked.
-Backbone.Syphon.InputReaders.register("checkbox", function($el){
-  var checked = $el.prop("checked");
-  return checked;
+InputReaders.register("checkbox", function($el){
+  return $el.prop("checked");
 });

@@ -13,8 +13,10 @@
     factory(root._, root.Backbone, root.jQuery);
   }
 
-}(this, function(_, Backbone, jQuery) {
+}(this, function(_, Backbone, $) {
   "use strict";
+
+  var Syphon = Backbone.Syphon = {};
 
   // @include ../backbone.syphon.js
   // @include ../backbone.syphon.typeregistry.js

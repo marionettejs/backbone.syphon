@@ -4,26 +4,20 @@
 // Type Registries allow you to register something to
 // an input type, and retrieve either the item registered
 // for a specific type or the default registration
-Backbone.Syphon.TypeRegistry = function(){
+var TypeRegistry = Syphon.TypeRegistry = function(){
   this.registeredTypes = {};
 };
 
 // Borrow Backbone's `extend` keyword for our TypeRegistry
-Backbone.Syphon.TypeRegistry.extend = Backbone.Model.extend;
+TypeRegistry.extend = Backbone.Model.extend;
 
-_.extend(Backbone.Syphon.TypeRegistry.prototype, {
+_.extend(TypeRegistry.prototype, {
 
   // Get the registered item by type. If nothing is
   // found for the specified type, the default is
   // returned.
   get: function(type){
-    var item = this.registeredTypes[type];
-
-    if (!item){
-      item = this.registeredTypes["default"];
-    }
-
-    return item;
+    return this.registeredTypes[type] || this.registeredTypes["default"];
   },
 
   // Register a new item for a specified type
