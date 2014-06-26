@@ -25,10 +25,21 @@ module.exports = function(grunt) {
         src: 'src/build/backbone.syphon.js',
         dest: 'lib/backbone.syphon.js'
       },
-
       tmp: {
         src: 'src/build/backbone.syphon.js',
         dest: 'tmp/backbone.syphon.js'
+      }
+    },
+
+    template: {
+      options: {
+        data: {
+          version: '<%= pkg.version %>'
+        }
+      },
+      lib: {
+        src: '<%= preprocess.lib.dest %>',
+        dest: '<%= preprocess.lib.dest %>'
       }
     },
 
@@ -82,6 +93,7 @@ module.exports = function(grunt) {
     'jshint:src',
     'clean:lib',
     'preprocess:lib',
+    'template:lib',
     'uglify'
   ]);
 

@@ -16,7 +16,16 @@
 }(this, function(_, Backbone, $) {
   'use strict';
 
+  var previousSyphon = Backbone.Syphon;
+
   var Syphon = Backbone.Syphon = {};
+
+  Syphon.VERSION = '<%= version %>';
+
+  Syphon.noConflict = function() {
+    Backbone.Syphon = previousSyphon;
+    return this;
+  };
 
   // @include ../backbone.syphon.js
   // @include ../backbone.syphon.typeregistry.js
