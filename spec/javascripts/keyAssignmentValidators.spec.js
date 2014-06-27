@@ -1,18 +1,19 @@
 describe('key assignment validators', function() {
   describe('when specifying key assignment validators in the options for serialize', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input data-stuff="bar" name="bar" value="a">' +
-            '<input data-stuff="foo" name="foo" value="b">' +
-          '</form>'
-        );
-      }
-    });
-
     var result;
+
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input data-stuff="bar" name="bar" value="a">' +
+              '<input data-stuff="foo" name="foo" value="b">' +
+            '</form>'
+          );
+        }
+      });
+
       var validators = new Backbone.Syphon.KeyAssignmentValidatorSet();
       validators.registerDefault(function($el) {
         return $el.data('stuff') === 'bar';

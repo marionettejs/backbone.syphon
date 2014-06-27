@@ -1,18 +1,18 @@
 describe('serializing a form', function() {
   describe('when serializing a text input', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="text" name="foo" value="bar">' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="text" name="foo" value="bar">' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -29,19 +29,19 @@ describe('serializing a form', function() {
   });
 
   describe('when serializing a input with no name', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="text" value="bar">' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="text" value="bar">' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -54,19 +54,19 @@ describe('serializing a form', function() {
   });
 
   describe('when serializing a textarea', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<textarea name="foo">bar</textarea>' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<textarea name="foo">bar</textarea>' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -79,21 +79,21 @@ describe('serializing a form', function() {
   });
 
   describe('when serializing a select box', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<select name="foo">' +
-              '<option value="bar">bar</option>' +
-            '</select>' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<select name="foo">' +
+                '<option value="bar">bar</option>' +
+              '</select>' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -106,14 +106,18 @@ describe('serializing a form', function() {
   });
 
   describe('when serializing a checkbox', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="checkbox" id="the-checkbox" name="chk">' +
-          '</form>'
-        );
-      }
+    var View;
+
+    beforeEach(function() {
+      View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="checkbox" id="the-checkbox" name="chk">' +
+            '</form>'
+          );
+        }
+      });
     });
 
     describe('and the checkbox is checked', function() {
@@ -149,19 +153,19 @@ describe('serializing a form', function() {
   });
 
   describe('when serializing a button', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<button name="btn" value="foo">foo</button>' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<button name="btn" value="foo">foo</button>' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -174,19 +178,19 @@ describe('serializing a form', function() {
   });
 
   describe('when serializing an input with type of "submit"', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="submit" name="btn" value="foo" text="Foo">' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="submit" name="btn" value="foo" text="Foo">' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -199,19 +203,19 @@ describe('serializing a form', function() {
   });
 
   describe('when serializing an input with type of "reset"', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="reset" name="btn" value="foo" text="Foo">' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="reset" name="btn" value="foo" text="Foo">' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -224,21 +228,21 @@ describe('serializing a form', function() {
   });
 
   describe('when serializing a radio button group', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="radio" name="foo" value="foo">' +
-            '<input type="radio" name="foo" value="bar" checked>' +
-            '<input type="radio" name="foo" value="baz">' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="radio" name="foo" value="foo">' +
+              '<input type="radio" name="foo" value="bar" checked>' +
+              '<input type="radio" name="foo" value="baz">' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -251,18 +255,18 @@ describe('serializing a form', function() {
   });
 
   describe('when the view is actually a form', function() {
-    var View = Backbone.View.extend({
-      tagName: 'form',
-      render: function() {
-        this.$el.html(
-          '<input type="text" name="foo" value="bar">'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        tagName: 'form',
+        render: function() {
+          this.$el.html(
+            '<input type="text" name="foo" value="bar">'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 

@@ -1,20 +1,24 @@
 describe('key extractors', function() {
-  var defaultExtractor = Backbone.Syphon.KeyExtractors.get();
+  var defaultExtractor;
+
+  beforeEach(function() {
+    defaultExtractor = Backbone.Syphon.KeyExtractors.get();
+  });
 
   describe('when registering a global key extractor', function() {
     var result;
 
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input>' +
-          '</form>'
-        );
-      }
-    });
-
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input>' +
+            '</form>'
+          );
+        }
+      });
+
       Backbone.Syphon.KeyExtractors.registerDefault(function() {
         return 'foo';
       });
@@ -37,18 +41,18 @@ describe('key extractors', function() {
   describe('when registering a key extractor for a specific input type', function() {
     var result;
 
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input>' +
-            '<input type="checkbox" name="chk">' +
-          '</form>'
-        );
-      }
-    });
-
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input>' +
+              '<input type="checkbox" name="chk">' +
+            '</form>'
+          );
+        }
+      });
+
       Backbone.Syphon.KeyExtractors.register('text', function() {
         return 'foo';
       });
@@ -73,18 +77,19 @@ describe('key extractors', function() {
   });
 
   describe('when specifying key extractor in the options for serialize', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input data-stuff="bar">' +
-          '</form>'
-        );
-      }
-    });
-
     var result;
+
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input data-stuff="bar">' +
+            '</form>'
+          );
+        }
+      });
+
       var extractors = new Backbone.Syphon.KeyExtractorSet();
       extractors.registerDefault(function($el) {
         return $el.data('stuff');

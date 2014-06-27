@@ -1,20 +1,20 @@
 describe('serializing nested key names', function() {
   describe('when the view has nested naming with []', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="text" name="widget" value="wombat">' +
-            '<input type="text" name="foo[bar]" value="baz">' +
-            '<input type="text" name="foo[baz][quux]" value="qux">' +
-          '</form>'
-        );
-      }
-    });
-
     var result, view;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="text" name="widget" value="wombat">' +
+              '<input type="text" name="foo[bar]" value="baz">' +
+              '<input type="text" name="foo[baz][quux]" value="qux">' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -47,20 +47,20 @@ describe('serializing nested key names', function() {
   });
 
   describe('when the view has nested naming with [] and ends with [] for an array', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="checkbox" name="foo[bar][]" value="baz" checked="checked">' +
-            '<input type="checkbox" name="foo[bar][]" value="qux" checked="checked">' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="checkbox" name="foo[bar][]" value="baz" checked="checked">' +
+              '<input type="checkbox" name="foo[bar][]" value="qux" checked="checked">' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -88,21 +88,21 @@ describe('serializing nested key names', function() {
   });
 
   describe('when the view has nested naming with a .', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="text" name="widget" value="wombat">' +
-            '<input type="text" name="foo.bar" value="baz">' +
-            '<input type="text" name="foo.baz.quux" value="qux">' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="text" name="widget" value="wombat">' +
+              '<input type="text" name="foo.bar" value="baz">' +
+              '<input type="text" name="foo.baz.quux" value="qux">' +
+            '</form>'
+          );
+        }
+      });
+
       this.keySplitter = Backbone.Syphon.KeySplitter;
 
       Backbone.Syphon.KeySplitter = function(key){
@@ -145,21 +145,21 @@ describe('serializing nested key names', function() {
   });
 
   describe('when the keys are split by a custom splitter in the serialize call', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="text" name="widget" value="wombat">' +
-            '<input type="text" name="foo-bar" value="baz">' +
-            '<input type="text" name="foo-baz-quux" value="qux">' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="text" name="widget" value="wombat">' +
+              '<input type="text" name="foo-bar" value="baz">' +
+              '<input type="text" name="foo-baz-quux" value="qux">' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 

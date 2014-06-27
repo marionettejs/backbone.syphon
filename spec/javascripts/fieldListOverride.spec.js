@@ -1,16 +1,20 @@
 describe('override the list of fields to include or ignore', function() {
-  var View = Backbone.View.extend({
-    render: function() {
-      this.$el.html(
-        '<form>' +
-          '<input name="a">' +
-          '<input name="b">' +
-          '<input name="c">' +
-          '<input name="d">' +
-          '<button name="e">' +
-        '</form>'
-      );
-    }
+  var View;
+
+  beforeEach(function() {
+    View = Backbone.View.extend({
+      render: function() {
+        this.$el.html(
+          '<form>' +
+            '<input name="a">' +
+            '<input name="b">' +
+            '<input name="c">' +
+            '<input name="d">' +
+            '<button name="e">' +
+          '</form>'
+        );
+      }
+    });
   });
 
   describe('when specifying which fields to include', function() {

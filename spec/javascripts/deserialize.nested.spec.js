@@ -1,20 +1,20 @@
 describe('deserializing nested key names', function() {
   describe('when the view has nested naming with []', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="text" name="widget">' +
-            '<input type="text" name="foo[bar]">' +
-            '<input type="text" name="foo[baz][qux]">' +
-          '</form>'
-        );
-      }
-    });
-
     var view;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="text" name="widget">' +
+              '<input type="text" name="foo[bar]">' +
+              '<input type="text" name="foo[baz][qux]">' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -43,20 +43,20 @@ describe('deserializing nested key names', function() {
   });
 
   describe('when the view has nested naming with [] and ends with [] for an array, on checkboxes', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="checkbox" name="foo[bar][]" value="baz">' +
-            '<input type="checkbox" name="foo[bar][]" value="qux">' +
-          '</form>'
-        );
-      }
-    });
-
-    var view, result;
+    var view, result, chk;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="checkbox" name="foo[bar][]" value="baz">' +
+              '<input type="checkbox" name="foo[bar][]" value="qux">' +
+            '</form>'
+          );
+        }
+      });
+
       view = new View();
       view.render();
 
@@ -76,35 +76,35 @@ describe('deserializing nested key names', function() {
       result = Backbone.Syphon.deserialize(view, data, {
         inputWriters: writers
       });
+
+      chk = view.$('[name="foo[bar][]"][value="baz"]');
     });
 
     it('should select the first checkbox', function() {
-      var chk = view.$('[name="foo[bar][]"][value="baz"]');
       expect(chk).to.be.checked;
     });
 
     it('should select the second checkbox', function() {
-      var chk = view.$('[name="foo[bar][]"][value="qux"]');
       expect(chk).to.be.checked;
     });
   });
 
   describe('when the view has nested naming with a . and using a custom keyJoiner', function() {
-    var View = Backbone.View.extend({
-      render: function() {
-        this.$el.html(
-          '<form>' +
-            '<input type="text" name="widget" value="wombat">' +
-            '<input type="text" name="foo.bar" value="baz">' +
-            '<input type="text" name="foo.baz.quux" value="qux">' +
-          '</form>'
-        );
-      }
-    });
-
     var view, result;
 
     beforeEach(function() {
+      var View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+            '<form>' +
+              '<input type="text" name="widget" value="wombat">' +
+              '<input type="text" name="foo.bar" value="baz">' +
+              '<input type="text" name="foo.baz.quux" value="qux">' +
+            '</form>'
+          );
+        }
+      });
+
       this.keyJoiner = Backbone.Syphon.KeyJoiner;
 
       Backbone.Syphon.KeyJoiner = function(parentKey, childKey) {
