@@ -20,11 +20,11 @@ describe('serializing a form', function() {
     });
 
     it('should return an object with a key from the text input name', function() {
-      expect(result.hasOwnProperty('foo')).toBe(true);
+      expect(result).to.have.have.ownProperty('foo');
     });
 
     it('should have the input\'s value', function() {
-      expect(result.foo).toBe('bar');
+      expect(result.foo).to.equal('bar');
     });
   });
 
@@ -49,7 +49,7 @@ describe('serializing a form', function() {
     });
 
     it('should not serialize the value to the target object', function() {
-      expect(result).toBeTruthy({});
+      expect(result).to.be.ok;
     });
   });
 
@@ -74,7 +74,7 @@ describe('serializing a form', function() {
     });
 
     it('should have the textarea\'s value', function() {
-      expect(result.foo).toBe('bar');
+      expect(result.foo).to.equal('bar');
     });
   });
 
@@ -101,7 +101,7 @@ describe('serializing a form', function() {
     });
 
     it('should have the textarea\'s value', function() {
-      expect(result.foo).toBe('bar');
+      expect(result.foo).to.equal('bar');
     });
   });
 
@@ -128,7 +128,7 @@ describe('serializing a form', function() {
       });
 
       it('should return an object with a value of true', function() {
-        expect(result.chk).toBe(true);
+        expect(result.chk).to.be.true;
       });
     });
 
@@ -143,7 +143,7 @@ describe('serializing a form', function() {
       });
 
       it('should return an object with a value of false', function() {
-        expect(result.chk).toBe(false);
+        expect(result.chk).to.be.false;
       });
     });
   });
@@ -169,7 +169,7 @@ describe('serializing a form', function() {
     });
 
     it('should not have the button\'s value', function() {
-      expect(result.hasOwnProperty('btn')).toBe(false);
+      expect(result.hasOwnProperty('btn')).to.be.false;
     });
   });
 
@@ -194,7 +194,7 @@ describe('serializing a form', function() {
     });
 
     it('should not have the button\'s value', function() {
-      expect(result.hasOwnProperty('btn')).toBe(false);
+      expect(result.hasOwnProperty('btn')).to.be.false;
     });
   });
 
@@ -219,7 +219,7 @@ describe('serializing a form', function() {
     });
 
     it('should not have the button\'s value', function() {
-      expect(result.hasOwnProperty('btn')).toBe(false);
+      expect(result.hasOwnProperty('btn')).to.be.false;
     });
   });
 
@@ -246,7 +246,7 @@ describe('serializing a form', function() {
     });
 
     it('should only return the value of the selected radio button', function() {
-      expect(result.foo).toBe('bar');
+      expect(result.foo).to.equal('bar');
     });
   });
 
@@ -270,7 +270,7 @@ describe('serializing a form', function() {
     });
 
     it('retrieves the inputs\' values', function() {
-      expect(result.foo).toBe('bar');
+      expect(result.foo).to.equal('bar');
     });
   });
 
@@ -288,7 +288,7 @@ describe('serializing a form', function() {
     });
 
     it('retrieves the inputs\' values', function() {
-      expect(result.foo).toBe('bar');
+      expect(result.foo).to.equal('bar');
     });
   });
 });

@@ -12,7 +12,7 @@ describe('input writers', function() {
 
     it('should be able to retrieve the input writer for that type', function() {
       var found = Backbone.Syphon.InputWriters.get('foo');
-      expect(found).toBe(writer);
+      expect(found).to.equal(writer);
     });
   });
 
@@ -29,7 +29,7 @@ describe('input writers', function() {
 
     it('should retrieve the registered "text" writer', function() {
       var found = Backbone.Syphon.InputWriters.get('text');
-      expect(found).toBe(writer);
+      expect(found).to.equal(writer);
     });
   });
 
@@ -46,7 +46,7 @@ describe('input writers', function() {
 
     it('should be able to retrieve the input writer for that type', function() {
       var found = Backbone.Syphon.InputWriters.get('textarea');
-      expect(found).toBe(writer);
+      expect(found).to.equal(writer);
     });
   });
 
@@ -61,7 +61,7 @@ describe('input writers', function() {
 
     it('should no longer find the input writer for that type', function() {
       var found = Backbone.Syphon.InputWriters.get('foo');
-      expect(found).not.toBe(writer);
+      expect(found).not.to.equal(writer);
     });
   });
 
@@ -90,7 +90,7 @@ describe('input writers', function() {
 
     it('should use the specified input writer', function() {
       var result = view.$('input[name=foo]').data('stuff');
-      expect(result).toBe('bar');
+      expect(result).to.equal('bar');
     });
   });
 });

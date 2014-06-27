@@ -30,15 +30,15 @@ describe('deserializing nested key names', function() {
     });
 
     it('should set root values', function() {
-      expect(view.$('[name="widget"]')).toHaveValue('wombat');
+      expect(view.$('[name="widget"]')).to.have.value('wombat');
     });
 
     it('should set first nested value', function() {
-      expect(view.$('[name="foo[bar]"]')).toHaveValue('baz');
+      expect(view.$('[name="foo[bar]"]')).to.have.value('baz');
     });
 
     it('should set sibling nested value', function() {
-      expect(view.$('[name="foo[baz][qux]"]')).toHaveValue('qux');
+      expect(view.$('[name="foo[baz][qux]"]')).to.have.value('qux');
     });
   });
 
@@ -80,12 +80,12 @@ describe('deserializing nested key names', function() {
 
     it('should select the first checkbox', function() {
       var chk = view.$('[name="foo[bar][]"][value="baz"]');
-      expect(chk).toBeChecked();
+      expect(chk).to.be.checked;
     });
 
     it('should select the second checkbox', function() {
       var chk = view.$('[name="foo[bar][]"][value="qux"]');
-      expect(chk).toBeChecked();
+      expect(chk).to.be.checked;
     });
   });
 
@@ -130,15 +130,15 @@ describe('deserializing nested key names', function() {
     });
 
     it('should set root values', function() {
-      expect(view.$('[name="widget"]')).toHaveValue('wombat');
+      expect(view.$('[name="widget"]')).to.have.value('wombat');
     });
 
     it('should set first nested value', function() {
-      expect(view.$('[name="foo.bar"]')).toHaveValue('baz');
+      expect(view.$('[name="foo.bar"]')).to.have.value('baz');
     });
 
     it('should set sibling nested value', function() {
-      expect(view.$('[name="foo.baz.quux"]')).toHaveValue('qux');
+      expect(view.$('[name="foo.baz.quux"]')).to.have.value('qux');
     });
   });
 });

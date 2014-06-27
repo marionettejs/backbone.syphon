@@ -9,7 +9,7 @@ var KeyExtractorSet = Syphon.KeyExtractorSet = TypeRegistry.extend();
 var KeyExtractors = Syphon.KeyExtractors = new KeyExtractorSet();
 
 // The default key extractor, which uses the
-// input element's "id" attribute
+// input element's "name" attribute
 KeyExtractors.registerDefault(function($el) {
-  return $el.prop('name');
+  return $el.prop('name') || '';
 });

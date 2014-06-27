@@ -27,11 +27,11 @@ describe('key assignment validators', function() {
     });
 
     it('should use the specified validators to include the right field', function() {
-      expect(result).toHaveOwnProperty('bar');
+      expect(result).to.have.ownProperty('bar');
     });
 
     it('should use the specified validators to exclude the right field', function() {
-      expect(result).not.toHaveOwnProperty('foo');
+      expect(result).not.to.have.ownProperty('foo');
     });
   });
 });

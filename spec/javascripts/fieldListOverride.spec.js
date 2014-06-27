@@ -26,14 +26,14 @@ describe('override the list of fields to include or ignore', function() {
     });
 
     it('should include the specified fields', function() {
-      expect(result).toHaveOwnProperty('a');
-      expect(result).toHaveOwnProperty('b');
+      expect(result).to.have.ownProperty('a');
+      expect(result).to.have.ownProperty('b');
     });
 
     it('should not include other fields', function() {
-      expect(result).not.toHaveOwnProperty('c');
-      expect(result).not.toHaveOwnProperty('d');
-      expect(result).not.toHaveOwnProperty('e');
+      expect(result).not.to.have.ownProperty('c');
+      expect(result).not.to.have.ownProperty('d');
+      expect(result).not.to.have.ownProperty('e');
     });
   });
 
@@ -50,7 +50,7 @@ describe('override the list of fields to include or ignore', function() {
     });
 
     it('should include the specified field', function() {
-      expect(result).toHaveOwnProperty('e');
+      expect(result).to.have.ownProperty('e');
     });
   });
 
@@ -67,13 +67,13 @@ describe('override the list of fields to include or ignore', function() {
     });
 
     it('should ignore the specified fields', function() {
-      expect(result).not.toHaveOwnProperty('a');
-      expect(result).not.toHaveOwnProperty('b');
+      expect(result).not.to.have.ownProperty('a');
+      expect(result).not.to.have.ownProperty('b');
     });
 
     it('should include all other fields', function() {
-      expect(result).toHaveOwnProperty('c');
-      expect(result).toHaveOwnProperty('d');
+      expect(result).to.have.ownProperty('c');
+      expect(result).to.have.ownProperty('d');
     });
   });
 
@@ -91,8 +91,8 @@ describe('override the list of fields to include or ignore', function() {
     });
 
     it('should include the specified fields', function() {
-      expect(result).toHaveOwnProperty('a');
-      expect(result).toHaveOwnProperty('b');
+      expect(result).to.have.ownProperty('a');
+      expect(result).to.have.ownProperty('b');
     });
   });
 });

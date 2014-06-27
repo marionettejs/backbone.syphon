@@ -16,8 +16,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      lib: 'lib/',
-      tmp: 'tmp/'
+      lib: 'lib/'
     },
 
     preprocess: {
@@ -86,6 +85,21 @@ module.exports = function(grunt) {
           ]
         }
       }
+    },
+
+    mochaTest: {
+      spec: {
+        options: {
+          require: 'spec/javascripts/setup/node.js',
+          reporter: 'dot',
+          clearRequireCache: true,
+          mocha: require('mocha')
+        },
+        src: [
+          'spec/javascripts/setup/helpers.js',
+          'spec/javascripts/*.spec.js'
+        ]
+      }
     }
   });
 
@@ -100,8 +114,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', [
     'jshint',
     'preprocess:tmp',
-    'jasmine',
-    'clean:tmp'
+    'mochaTest'
   ]);
 
   grunt.registerTask('default', [

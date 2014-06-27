@@ -21,7 +21,7 @@ describe('deserializing an object into a form', function() {
 
     it('should set the input\'s value to the corresponding value in the given object', function() {
       var result = view.$('input[name=foo]').val();
-      expect(result).toBe('bar');
+      expect(result).to.equal('bar');
     });
   });
 
@@ -47,7 +47,7 @@ describe('deserializing an object into a form', function() {
 
     it('should set the input\'s value to the corresponding value in the given object', function() {
       var result = view.$('textarea[name=foo]').val();
-      expect(result).toBe('bar');
+      expect(result).to.equal('bar');
     });
   });
 
@@ -76,7 +76,7 @@ describe('deserializing an object into a form', function() {
 
     it('should select the option corresponding to the value in the given object', function() {
       var result = view.$('select').val();
-      expect(result).toBe('bar');
+      expect(result).to.equal('bar');
     });
   });
 
@@ -103,7 +103,7 @@ describe('deserializing an object into a form', function() {
 
       it('should check the checkbox', function() {
         var result = view.$('#the-checkbox').prop('checked');
-        expect(result).toBe(true);
+        expect(result).to.be.true;
       });
     });
 
@@ -120,7 +120,7 @@ describe('deserializing an object into a form', function() {
 
       it('should uncheck the checkbox', function() {
         var result = view.$('#the-checkbox').prop('checked');
-        expect(result).toBe(false);
+        expect(result).to.be.false;
       });
     });
   });
@@ -148,7 +148,7 @@ describe('deserializing an object into a form', function() {
 
     it('the button value should remain unchanged', function() {
       var result = view.$('button[name=btn]').val();
-      expect(result).toBe(value);
+      expect(result).to.equal(value);
     });
   });
 
@@ -175,7 +175,7 @@ describe('deserializing an object into a form', function() {
 
     it('the input value should remain unchanged', function() {
       var result = view.$('input[name=btn]').val();
-      expect(result).toBe(value);
+      expect(result).to.equal(value);
     });
   });
 
@@ -202,7 +202,7 @@ describe('deserializing an object into a form', function() {
 
     it('the input should not have a value', function() {
       var result = view.$('input[name=btn]').val();
-      expect(result).toBe(value);
+      expect(result).to.equal(value);
     });
   });
 
@@ -230,7 +230,7 @@ describe('deserializing an object into a form', function() {
 
     it('should select the corresponding radio button', function() {
       var checked = view.$('input[name=foo][value=bar]').prop('checked');
-      expect(checked).toBe(true);
+      expect(checked).to.be.true;
     });
   });
 
@@ -258,7 +258,7 @@ describe('deserializing an object into a form', function() {
 
     it('should select the corresponding radio button', function() {
       var checked = view.$('input[name=foo][value=2]').prop('checked');
-      expect(checked).toBe(true);
+      expect(checked).to.be.true;
     });
   });
 
@@ -277,7 +277,7 @@ describe('deserializing an object into a form', function() {
 
     it('should set the input\'s value to the corresponding value in the given object', function() {
       var result = $(form).find('input[name=foo]').val();
-      expect(result).toBe('bar');
+      expect(result).to.equal('bar');
     });
   });
 });

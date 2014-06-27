@@ -30,7 +30,7 @@ describe('key extractors', function() {
     });
 
     it('should return an object that has a key produced by the key extractor', function() {
-      expect(result).toHaveOwnProperty('foo');
+      expect(result).to.have.ownProperty('foo');
     });
   });
 
@@ -64,11 +64,11 @@ describe('key extractors', function() {
     });
 
     it('should use the specific extractor for inputs of that type', function() {
-      expect(result).toHaveOwnProperty('foo');
+      expect(result).to.have.ownProperty('foo');
     });
 
     it('should use the default extractor for other input types', function() {
-      expect(result).toHaveOwnProperty('chk');
+      expect(result).to.have.ownProperty('chk');
     });
   });
 
@@ -99,7 +99,7 @@ describe('key extractors', function() {
     });
 
     it('should use the specified key extractors', function() {
-      expect(result).toHaveOwnProperty('bar');
+      expect(result).to.have.ownProperty('bar');
     });
   });
 });

@@ -22,27 +22,27 @@ describe('serializing nested key names', function() {
     });
 
     it('has a property defined', function() {
-      expect(result.widget).toBeDefined();
+      expect(result.widget).to.exist;
     });
 
     it('retrieves the value for the property', function() {
-      expect(result.widget).toBe('wombat');
+      expect(result.widget).to.equal('wombat');
     });
 
     it('has a nested property defined', function() {
-      expect(result.foo.bar).toBeDefined();
+      expect(result.foo.bar).to.exist;
     });
 
     it('retrieves the value for the nested property', function() {
-      expect(result.foo.bar).toBe('baz');
+      expect(result.foo.bar).to.equal('baz');
     });
 
     it('has a nested, sibling property defined', function() {
-      expect(result.foo.baz.quux).toBeDefined();
+      expect(result.foo.baz.quux).to.exist;
     });
 
     it('retrieves the value for the nested, sibling property', function() {
-      expect(result.foo.baz.quux).toBe('qux');
+      expect(result.foo.baz.quux).to.equal('qux');
     });
   });
 
@@ -75,15 +75,15 @@ describe('serializing nested key names', function() {
     });
 
     it('has a nested property defined', function() {
-      expect(result.foo.bar).toBeDefined();
+      expect(result.foo.bar).to.exist;
     });
 
     it('should have the first value', function() {
-      expect(result.foo.bar[0]).toBe('baz');
+      expect(result.foo.bar[0]).to.equal('baz');
     });
 
     it('should have the second value', function() {
-      expect(result.foo.bar[1]).toBe('qux');
+      expect(result.foo.bar[1]).to.equal('qux');
     });
   });
 
@@ -120,27 +120,27 @@ describe('serializing nested key names', function() {
     });
 
     it('has a property defined', function() {
-      expect(result.widget).toBeDefined();
+      expect(result.widget).to.exist;
     });
 
     it('retrieves the value for the property', function() {
-      expect(result.widget).toBe('wombat');
+      expect(result.widget).to.equal('wombat');
     });
 
     it('has a nested property defined', function() {
-      expect(result.foo.bar).toBeDefined();
+      expect(result.foo.bar).to.exist;
     });
 
     it('retrieves the value for the nested property', function() {
-      expect(result.foo.bar).toBe('baz');
+      expect(result.foo.bar).to.equal('baz');
     });
 
     it('has a nested, sibling property defined', function() {
-      expect(result.foo.baz.quux).toBeDefined();
+      expect(result.foo.baz.quux).to.exist;
     });
 
     it('retrieves the value for the nested, sibling property', function() {
-      expect(result.foo.baz.quux).toBe('qux');
+      expect(result.foo.baz.quux).to.equal('qux');
     });
   });
 
@@ -171,27 +171,27 @@ describe('serializing nested key names', function() {
     });
 
     it('has a property defined', function() {
-      expect(result.widget).toBeDefined();
+      expect(result.widget).to.exist;
     });
 
     it('retrieves the value for the property', function() {
-      expect(result.widget).toBe('wombat');
+      expect(result.widget).to.equal('wombat');
     });
 
     it('has a nested property defined', function() {
-      expect(result.foo.bar).toBeDefined();
+      expect(result.foo.bar).to.exist;
     });
 
     it('retrieves the value for the nested property', function() {
-      expect(result.foo.bar).toBe('baz');
+      expect(result.foo.bar).to.equal('baz');
     });
 
     it('has a nested, sibling property defined', function() {
-      expect(result.foo.baz.quux).toBeDefined();
+      expect(result.foo.baz.quux).to.exist;
     });
 
     it('retrieves the value for the nested, sibling property', function() {
-      expect(result.foo.baz.quux).toBe('qux');
+      expect(result.foo.baz.quux).to.equal('qux');
     });
   });
 });

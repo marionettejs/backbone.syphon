@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Syphon SpecRunner</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css" />
+    <script src="node_modules/mocha/mocha.js"></script>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/backbone/backbone.js"></script>
+
+    <script src="node_modules/chai/chai.js"></script>
+    <script src="node_modules/sinon/pkg/sinon.js"></script>
+    <script src="node_modules/sinon-chai/lib/sinon-chai.js"></script>
+    <script src="node_modules/chai-jquery/chai-jquery.js"></script>
+
+    <script>
+      mocha.setup('bdd');
+
+      window.expect = chai.expect;
+      window.sinon = sinon;
+
+      onload = function() {
+        mocha.checkLeaks();
+        mocha.run();
+
+        beforeEach(function () {
+          this.sinon = sinon.sandbox.create();
+        });
+
+        afterEach(function () {
+          this.sinon.restore();
+        });
+      };
+    </script>
+
+    <script src="tmp/backbone.syphon.js"></script>
+
+    <script src="spec/javascripts/deserialize.spec.js"></script>
+    <script src="spec/javascripts/deserialize.nested.spec.js"></script>
+    <script src="spec/javascripts/fieldListOverride.spec.js"></script>
+    <script src="spec/javascripts/inputReaders.spec.js"></script>
+    <script src="spec/javascripts/inputWriters.spec.js"></script>
+    <script src="spec/javascripts/keyAssignmentValidators.spec.js"></script>
+    <script src="spec/javascripts/keyExtractors.spec.js"></script>
+    <script src="spec/javascripts/serialize.nested.spec.js"></script>
+    <script src="spec/javascripts/serialize.spec.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <div id="fixtures" hidden></div>
+  </body>
+</html>

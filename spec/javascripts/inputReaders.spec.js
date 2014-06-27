@@ -12,7 +12,7 @@ describe('input readers', function() {
 
     it('should be able to retrieve the input reader for that type', function() {
       var found = Backbone.Syphon.InputReaders.get('foo');
-      expect(found).toBe(reader);
+      expect(found).to.equal(reader);
     });
   });
 
@@ -29,7 +29,7 @@ describe('input readers', function() {
 
     it('should retrieve the registered "text" reader', function() {
       var found = Backbone.Syphon.InputReaders.get('text');
-      expect(found).toBe(reader);
+      expect(found).to.equal(reader);
     });
   });
 
@@ -46,7 +46,7 @@ describe('input readers', function() {
 
     it('should be able to retrieve the input reader for that type', function() {
       var found = Backbone.Syphon.InputReaders.get('textarea');
-      expect(found).toBe(reader);
+      expect(found).to.equal(reader);
     });
   });
 
@@ -61,7 +61,7 @@ describe('input readers', function() {
 
     it('should no longer find the input reader for that type', function() {
       var found = Backbone.Syphon.InputReaders.get('foo');
-      expect(found).not.toBe(reader);
+      expect(found).not.to.equal(reader);
     });
   });
 
@@ -88,7 +88,7 @@ describe('input readers', function() {
     });
 
     it('should use the specified input reader', function() {
-      expect(result.foo).toBe('bar');
+      expect(result.foo).to.equal('bar');
     });
   });
 });
