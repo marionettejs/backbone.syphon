@@ -1,9 +1,7 @@
 describe('serializing nested key names', function() {
   describe('when the view has nested naming with []', function() {
-    var result, view;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -15,42 +13,40 @@ describe('serializing nested key names', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     it('has a property defined', function() {
-      expect(result.widget).to.exist;
+      expect(this.result.widget).to.exist;
     });
 
     it('retrieves the value for the property', function() {
-      expect(result.widget).to.equal('wombat');
+      expect(this.result.widget).to.equal('wombat');
     });
 
     it('has a nested property defined', function() {
-      expect(result.foo.bar).to.exist;
+      expect(this.result.foo.bar).to.exist;
     });
 
     it('retrieves the value for the nested property', function() {
-      expect(result.foo.bar).to.equal('baz');
+      expect(this.result.foo.bar).to.equal('baz');
     });
 
     it('has a nested, sibling property defined', function() {
-      expect(result.foo.baz.quux).to.exist;
+      expect(this.result.foo.baz.quux).to.exist;
     });
 
     it('retrieves the value for the nested, sibling property', function() {
-      expect(result.foo.baz.quux).to.equal('qux');
+      expect(this.result.foo.baz.quux).to.equal('qux');
     });
   });
 
   describe('when the view has nested naming with [] and ends with [] for an array', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -61,37 +57,35 @@ describe('serializing nested key names', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      var inputReaders = new Backbone.Syphon.InputReaderSet();
-      inputReaders.register('checkbox', function($el) {
+      this.inputReaders = new Backbone.Syphon.InputReaderSet();
+      this.inputReaders.register('checkbox', function($el) {
         return $el.val();
       });
 
-      result = Backbone.Syphon.serialize(view, {
-        inputReaders: inputReaders
+      this.result = Backbone.Syphon.serialize(this.view, {
+        inputReaders: this.inputReaders
       });
     });
 
     it('has a nested property defined', function() {
-      expect(result.foo.bar).to.exist;
+      expect(this.result.foo.bar).to.exist;
     });
 
     it('should have the first value', function() {
-      expect(result.foo.bar[0]).to.equal('baz');
+      expect(this.result.foo.bar[0]).to.equal('baz');
     });
 
     it('should have the second value', function() {
-      expect(result.foo.bar[1]).to.equal('qux');
+      expect(this.result.foo.bar[1]).to.equal('qux');
     });
   });
 
   describe('when the view has nested naming with a .', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -109,10 +103,10 @@ describe('serializing nested key names', function() {
         return key.split('.');
       };
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     afterEach(function() {
@@ -120,35 +114,33 @@ describe('serializing nested key names', function() {
     });
 
     it('has a property defined', function() {
-      expect(result.widget).to.exist;
+      expect(this.result.widget).to.exist;
     });
 
     it('retrieves the value for the property', function() {
-      expect(result.widget).to.equal('wombat');
+      expect(this.result.widget).to.equal('wombat');
     });
 
     it('has a nested property defined', function() {
-      expect(result.foo.bar).to.exist;
+      expect(this.result.foo.bar).to.exist;
     });
 
     it('retrieves the value for the nested property', function() {
-      expect(result.foo.bar).to.equal('baz');
+      expect(this.result.foo.bar).to.equal('baz');
     });
 
     it('has a nested, sibling property defined', function() {
-      expect(result.foo.baz.quux).to.exist;
+      expect(this.result.foo.baz.quux).to.exist;
     });
 
     it('retrieves the value for the nested, sibling property', function() {
-      expect(result.foo.baz.quux).to.equal('qux');
+      expect(this.result.foo.baz.quux).to.equal('qux');
     });
   });
 
   describe('when the keys are split by a custom splitter in the serialize call', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -160,38 +152,38 @@ describe('serializing nested key names', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view, {
-        keySplitter: function(key){
+      this.result = Backbone.Syphon.serialize(this.view, {
+        keySplitter: function(key) {
           return key.split('-');
         }
       });
     });
 
     it('has a property defined', function() {
-      expect(result.widget).to.exist;
+      expect(this.result.widget).to.exist;
     });
 
     it('retrieves the value for the property', function() {
-      expect(result.widget).to.equal('wombat');
+      expect(this.result.widget).to.equal('wombat');
     });
 
     it('has a nested property defined', function() {
-      expect(result.foo.bar).to.exist;
+      expect(this.result.foo.bar).to.exist;
     });
 
     it('retrieves the value for the nested property', function() {
-      expect(result.foo.bar).to.equal('baz');
+      expect(this.result.foo.bar).to.equal('baz');
     });
 
     it('has a nested, sibling property defined', function() {
-      expect(result.foo.baz.quux).to.exist;
+      expect(this.result.foo.baz.quux).to.exist;
     });
 
     it('retrieves the value for the nested, sibling property', function() {
-      expect(result.foo.baz.quux).to.equal('qux');
+      expect(this.result.foo.baz.quux).to.equal('qux');
     });
   });
 });

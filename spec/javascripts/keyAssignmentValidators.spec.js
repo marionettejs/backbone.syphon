@@ -1,9 +1,7 @@
 describe('key assignment validators', function() {
   describe('when specifying key assignment validators in the options for serialize', function() {
-    var result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -14,25 +12,25 @@ describe('key assignment validators', function() {
         }
       });
 
-      var validators = new Backbone.Syphon.KeyAssignmentValidatorSet();
-      validators.registerDefault(function($el) {
+      this.validators = new Backbone.Syphon.KeyAssignmentValidatorSet();
+      this.validators.registerDefault(function($el) {
         return $el.data('stuff') === 'bar';
       });
 
-      var view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view, {
-        keyAssignmentValidators: validators
+      this.result = Backbone.Syphon.serialize(this.view, {
+        keyAssignmentValidators: this.validators
       });
     });
 
     it('should use the specified validators to include the right field', function() {
-      expect(result).to.have.ownProperty('bar');
+      expect(this.result).to.have.ownProperty('bar');
     });
 
     it('should use the specified validators to exclude the right field', function() {
-      expect(result).not.to.have.ownProperty('foo');
+      expect(this.result).not.to.have.ownProperty('foo');
     });
   });
 });

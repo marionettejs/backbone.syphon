@@ -1,15 +1,11 @@
 describe('key extractors', function() {
-  var defaultExtractor;
-
   beforeEach(function() {
-    defaultExtractor = Backbone.Syphon.KeyExtractors.get();
+    this.defaultExtractor = Backbone.Syphon.KeyExtractors.get();
   });
 
   describe('when registering a global key extractor', function() {
-    var result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -23,26 +19,24 @@ describe('key extractors', function() {
         return 'foo';
       });
 
-      var view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     afterEach(function() {
-      Backbone.Syphon.KeyExtractors.registerDefault(defaultExtractor);
+      Backbone.Syphon.KeyExtractors.registerDefault(this.defaultExtractor);
     });
 
     it('should return an object that has a key produced by the key extractor', function() {
-      expect(result).to.have.ownProperty('foo');
+      expect(this.result).to.have.ownProperty('foo');
     });
   });
 
   describe('when registering a key extractor for a specific input type', function() {
-    var result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -57,10 +51,10 @@ describe('key extractors', function() {
         return 'foo';
       });
 
-      var view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     afterEach(function() {
@@ -68,19 +62,17 @@ describe('key extractors', function() {
     });
 
     it('should use the specific extractor for inputs of that type', function() {
-      expect(result).to.have.ownProperty('foo');
+      expect(this.result).to.have.ownProperty('foo');
     });
 
     it('should use the default extractor for other input types', function() {
-      expect(result).to.have.ownProperty('chk');
+      expect(this.result).to.have.ownProperty('chk');
     });
   });
 
   describe('when specifying key extractor in the options for serialize', function() {
-    var result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -90,21 +82,21 @@ describe('key extractors', function() {
         }
       });
 
-      var extractors = new Backbone.Syphon.KeyExtractorSet();
-      extractors.registerDefault(function($el) {
+      this.extractors = new Backbone.Syphon.KeyExtractorSet();
+      this.extractors.registerDefault(function($el) {
         return $el.data('stuff');
       });
 
-      var view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view, {
-        keyExtractors: extractors
+      this.result = Backbone.Syphon.serialize(this.view, {
+        keyExtractors: this.extractors
       });
     });
 
     it('should use the specified key extractors', function() {
-      expect(result).to.have.ownProperty('bar');
+      expect(this.result).to.have.ownProperty('bar');
     });
   });
 });

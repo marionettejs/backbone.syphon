@@ -1,11 +1,9 @@
 describe('input writers', function() {
   describe('when registering an input writer for an input with a type attribute', function() {
-    var writer, found;
-
     beforeEach(function() {
-      writer = function() {};
-      Backbone.Syphon.InputWriters.register('foo', writer);
-      found = Backbone.Syphon.InputWriters.get('foo');
+      this.writer = function() {};
+      Backbone.Syphon.InputWriters.register('foo', this.writer);
+      this.found = Backbone.Syphon.InputWriters.get('foo');
     });
 
     afterEach(function() {
@@ -13,17 +11,15 @@ describe('input writers', function() {
     });
 
     it('should be able to retrieve the input writer for that type', function() {
-      expect(found).to.equal(writer);
+      expect(this.found).to.equal(this.writer);
     });
   });
 
   describe('when retrieving a writer for an input with no type attribute', function() {
-    var writer, found;
-
     beforeEach(function() {
-      writer = function() {};
-      Backbone.Syphon.InputWriters.register('text', writer);
-      found = Backbone.Syphon.InputWriters.get('text');
+      this.writer = function() {};
+      Backbone.Syphon.InputWriters.register('text', this.writer);
+      this.found = Backbone.Syphon.InputWriters.get('text');
     });
 
     afterEach(function() {
@@ -31,17 +27,15 @@ describe('input writers', function() {
     });
 
     it('should retrieve the registered "text" writer', function() {
-      expect(found).to.equal(writer);
+      expect(this.found).to.equal(this.writer);
     });
   });
 
   describe('when registering an input writer for an input element that does not have a "type" attribute', function() {
-    var writer, found;
-
     beforeEach(function() {
-      writer = function() {};
-      Backbone.Syphon.InputWriters.register('textarea', writer);
-      found = Backbone.Syphon.InputWriters.get('textarea');
+      this.writer = function() {};
+      Backbone.Syphon.InputWriters.register('textarea', this.writer);
+      this.found = Backbone.Syphon.InputWriters.get('textarea');
     });
 
     afterEach(function() {
@@ -49,52 +43,48 @@ describe('input writers', function() {
     });
 
     it('should be able to retrieve the input writer for that type', function() {
-      expect(found).to.equal(writer);
+      expect(this.found).to.equal(this.writer);
     });
   });
 
   describe('when unregistering an input writer', function() {
-    var writer, found;
-
     beforeEach(function() {
-      writer = function() {};
-      Backbone.Syphon.InputWriters.register('foo', writer);
+      this.writer = function() {};
+      Backbone.Syphon.InputWriters.register('foo', this.writer);
 
       Backbone.Syphon.InputWriters.unregister('foo');
-      found = Backbone.Syphon.InputWriters.get('foo');
+      this.found = Backbone.Syphon.InputWriters.get('foo');
     });
 
     it('should no longer find the input writer for that type', function() {
-      expect(found).not.to.equal(writer);
+      expect(this.found).not.to.equal(this.writer);
     });
   });
 
   describe('when specifying input writers in the options for unserialize', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html('<form><input name="foo"></form>');
         }
       });
 
-      var writers = new Backbone.Syphon.InputWriterSet();
-      writers.registerDefault(function($el, value){
+      this.writers = new Backbone.Syphon.InputWriterSet();
+      this.writers.registerDefault(function($el, value){
         $el.data('stuff', value);
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      Backbone.Syphon.deserialize(view, { foo: 'bar' }, {
-        inputWriters: writers
+      Backbone.Syphon.deserialize(this.view, { foo: 'bar' }, {
+        inputWriters: this.writers
       });
-      result = view.$('input[name=foo]').data('stuff');
+      this.result = this.view.$('input[name=foo]').data('stuff');
     });
 
     it('should use the specified input writer', function() {
-      expect(result).to.equal('bar');
+      expect(this.result).to.equal('bar');
     });
   });
 });

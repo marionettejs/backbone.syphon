@@ -1,9 +1,7 @@
 describe('serializing a form', function() {
   describe('when serializing a text input', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -13,26 +11,24 @@ describe('serializing a form', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     it('should return an object with a key from the text input name', function() {
-      expect(result).to.have.have.ownProperty('foo');
+      expect(this.result).to.have.have.ownProperty('foo');
     });
 
     it('should have the input\'s value', function() {
-      expect(result.foo).to.equal('bar');
+      expect(this.result.foo).to.equal('bar');
     });
   });
 
   describe('when serializing a input with no name', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -42,22 +38,20 @@ describe('serializing a form', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     it('should not serialize the value to the target object', function() {
-      expect(result).to.be.ok;
+      expect(this.result).to.be.ok;
     });
   });
 
   describe('when serializing a textarea', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -67,22 +61,20 @@ describe('serializing a form', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     it('should have the textarea\'s value', function() {
-      expect(result.foo).to.equal('bar');
+      expect(this.result.foo).to.equal('bar');
     });
   });
 
   describe('when serializing a select box', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -94,22 +86,20 @@ describe('serializing a form', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     it('should have the textarea\'s value', function() {
-      expect(result.foo).to.equal('bar');
+      expect(this.result.foo).to.equal('bar');
     });
   });
 
   describe('when serializing a checkbox', function() {
-    var View;
-
     beforeEach(function() {
-      View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -121,42 +111,36 @@ describe('serializing a form', function() {
     });
 
     describe('and the checkbox is checked', function() {
-      var view, result;
-
       beforeEach(function() {
-        view = new View();
-        view.render();
-        view.$('#the-checkbox').prop('checked', true);
+        this.view = new this.View();
+        this.view.render();
+        this.view.$('#the-checkbox').prop('checked', true);
 
-        result = Backbone.Syphon.serialize(view);
+        this.result = Backbone.Syphon.serialize(this.view);
       });
 
       it('should return an object with a value of true', function() {
-        expect(result.chk).to.be.true;
+        expect(this.result.chk).to.be.true;
       });
     });
 
     describe('and the checkbox is not checked', function() {
-      var view, result;
-
       beforeEach(function() {
-        view = new View();
-        view.render();
+        this.view = new this.View();
+        this.view.render();
 
-        result = Backbone.Syphon.serialize(view);
+        this.result = Backbone.Syphon.serialize(this.view);
       });
 
       it('should return an object with a value of false', function() {
-        expect(result.chk).to.be.false;
+        expect(this.result.chk).to.be.false;
       });
     });
   });
 
   describe('when serializing a button', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -166,22 +150,20 @@ describe('serializing a form', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     it('should not have the button\'s value', function() {
-      expect(result.hasOwnProperty('btn')).to.be.false;
+      expect(this.result.hasOwnProperty('btn')).to.be.false;
     });
   });
 
   describe('when serializing an input with type of "submit"', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -191,22 +173,20 @@ describe('serializing a form', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     it('should not have the button\'s value', function() {
-      expect(result.hasOwnProperty('btn')).to.be.false;
+      expect(this.result.hasOwnProperty('btn')).to.be.false;
     });
   });
 
   describe('when serializing an input with type of "reset"', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -216,22 +196,20 @@ describe('serializing a form', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     it('should not have the button\'s value', function() {
-      expect(result.hasOwnProperty('btn')).to.be.false;
+      expect(this.result.hasOwnProperty('btn')).to.be.false;
     });
   });
 
   describe('when serializing a radio button group', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -243,22 +221,20 @@ describe('serializing a form', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     it('should only return the value of the selected radio button', function() {
-      expect(result.foo).to.equal('bar');
+      expect(this.result.foo).to.equal('bar');
     });
   });
 
   describe('when the view is actually a form', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         tagName: 'form',
         render: function() {
           this.$el.html(
@@ -267,32 +243,30 @@ describe('serializing a form', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view);
+      this.result = Backbone.Syphon.serialize(this.view);
     });
 
     it('retrieves the inputs\' values', function() {
-      expect(result.foo).to.equal('bar');
+      expect(this.result.foo).to.equal('bar');
     });
   });
 
   describe('when given a form element instead of a view', function() {
-    var result;
-
     beforeEach(function() {
-      var form = $(
+      this.form = $(
         '<form>' +
           '<input type="text" name="foo" value="bar">' +
         '</form>'
       )[0];
 
-      result = Backbone.Syphon.serialize(form);
+      this.result = Backbone.Syphon.serialize(this.form);
     });
 
     it('retrieves the inputs\' values', function() {
-      expect(result.foo).to.equal('bar');
+      expect(this.result.foo).to.equal('bar');
     });
   });
 });

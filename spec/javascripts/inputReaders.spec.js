@@ -1,10 +1,9 @@
 describe('input readers', function() {
   describe('when registering an input reader for an input with a type attribute', function() {
-    var reader;
-
     beforeEach(function() {
-      reader = function() {};
-      Backbone.Syphon.InputReaders.register('foo', reader);
+      this.reader = function() {};
+      Backbone.Syphon.InputReaders.register('foo', this.reader);
+      this.found = Backbone.Syphon.InputReaders.get('foo');
     });
 
     afterEach(function() {
@@ -12,18 +11,15 @@ describe('input readers', function() {
     });
 
     it('should be able to retrieve the input reader for that type', function() {
-      var found = Backbone.Syphon.InputReaders.get('foo');
-      expect(found).to.equal(reader);
+      expect(this.found).to.equal(this.reader);
     });
   });
 
   describe('when retrieving a reader for an input with no type attribute', function() {
-    var reader, found;
-
     beforeEach(function() {
-      reader = function() {};
-      Backbone.Syphon.InputReaders.register('text', reader);
-      found = Backbone.Syphon.InputReaders.get('text');
+      this.reader = function() {};
+      Backbone.Syphon.InputReaders.register('text', this.reader);
+      this.found = Backbone.Syphon.InputReaders.get('text');
     });
 
     afterEach(function() {
@@ -31,17 +27,15 @@ describe('input readers', function() {
     });
 
     it('should retrieve the registered "text" reader', function() {
-      expect(found).to.equal(reader);
+      expect(this.found).to.equal(this.reader);
     });
   });
 
   describe('when registering an input reader for an input element that does not have a "type" attribute', function() {
-    var reader, found;
-
     beforeEach(function() {
-      reader = function() {};
-      Backbone.Syphon.InputReaders.register('textarea', reader);
-      found = Backbone.Syphon.InputReaders.get('textarea');
+      this.reader = function() {};
+      Backbone.Syphon.InputReaders.register('textarea', this.reader);
+      this.found = Backbone.Syphon.InputReaders.get('textarea');
     });
 
     afterEach(function() {
@@ -49,51 +43,47 @@ describe('input readers', function() {
     });
 
     it('should be able to retrieve the input reader for that type', function() {
-      expect(found).to.equal(reader);
+      expect(this.found).to.equal(this.reader);
     });
   });
 
   describe('when unregistering an input reader', function() {
-    var reader, found;
-
     beforeEach(function() {
-      reader = function() {};
-      Backbone.Syphon.InputReaders.register('foo', reader);
+      this.reader = function() {};
+      Backbone.Syphon.InputReaders.register('foo', this.reader);
 
       Backbone.Syphon.InputReaders.unregister('foo');
-      found = Backbone.Syphon.InputReaders.get('foo');
+      this.found = Backbone.Syphon.InputReaders.get('foo');
     });
 
     it('should no longer find the input reader for that type', function() {
-      expect(found).not.to.equal(reader);
+      expect(this.found).not.to.equal(this.reader);
     });
   });
 
   describe('when specifying input readers in the options for serialize', function() {
-    var result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html('<form><input name="foo" data-stuff="bar"></form>');
         }
       });
 
-      var readers = new Backbone.Syphon.InputReaderSet();
-      readers.registerDefault(function($el) {
+      this.readers = new Backbone.Syphon.InputReaderSet();
+      this.readers.registerDefault(function($el) {
         return $el.data('stuff');
       });
 
-      var view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.serialize(view, {
-        inputReaders: readers
+      this.result = Backbone.Syphon.serialize(this.view, {
+        inputReaders: this.readers
       });
     });
 
     it('should use the specified input reader', function() {
-      expect(result.foo).to.equal('bar');
+      expect(this.result.foo).to.equal('bar');
     });
   });
 });

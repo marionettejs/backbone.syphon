@@ -1,9 +1,7 @@
 describe('deserializing nested key names', function() {
   describe('when the view has nested naming with []', function() {
-    var view;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -15,10 +13,10 @@ describe('deserializing nested key names', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      Backbone.Syphon.deserialize(view, {
+      Backbone.Syphon.deserialize(this.view, {
         widget: 'wombat',
         foo: {
           bar: 'baz',
@@ -30,23 +28,21 @@ describe('deserializing nested key names', function() {
     });
 
     it('should set root values', function() {
-      expect(view.$('[name="widget"]')).to.have.value('wombat');
+      expect(this.view.$('[name="widget"]')).to.have.value('wombat');
     });
 
     it('should set first nested value', function() {
-      expect(view.$('[name="foo[bar]"]')).to.have.value('baz');
+      expect(this.view.$('[name="foo[bar]"]')).to.have.value('baz');
     });
 
     it('should set sibling nested value', function() {
-      expect(view.$('[name="foo[baz][qux]"]')).to.have.value('qux');
+      expect(this.view.$('[name="foo[baz][qux]"]')).to.have.value('qux');
     });
   });
 
   describe('when the view has nested naming with [] and ends with [] for an array, on checkboxes', function() {
-    var view, result, chk;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -57,43 +53,41 @@ describe('deserializing nested key names', function() {
         }
       });
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      var writers = new Backbone.Syphon.InputWriterSet();
-      writers.register('checkbox', function($el, value) {
+      this.writers = new Backbone.Syphon.InputWriterSet();
+      this.writers.register('checkbox', function($el, value) {
         if (_.include(value, $el.val())){
           $el.prop('checked', true);
         }
       });
 
-      var data = {
+      this.data = {
         foo: {
           bar: ['baz', 'qux']
         }
       };
 
-      result = Backbone.Syphon.deserialize(view, data, {
-        inputWriters: writers
+      this.result = Backbone.Syphon.deserialize(this.view, this.data, {
+        inputWriters: this.writers
       });
 
-      chk = view.$('[name="foo[bar][]"][value="baz"]');
+      this.chk = this.view.$('[name="foo[bar][]"][value="baz"]');
     });
 
     it('should select the first checkbox', function() {
-      expect(chk).to.be.checked;
+      expect(this.chk).to.be.checked;
     });
 
     it('should select the second checkbox', function() {
-      expect(chk).to.be.checked;
+      expect(this.chk).to.be.checked;
     });
   });
 
   describe('when the view has nested naming with a . and using a custom keyJoiner', function() {
-    var view, result;
-
     beforeEach(function() {
-      var View = Backbone.View.extend({
+      this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
             '<form>' +
@@ -111,10 +105,10 @@ describe('deserializing nested key names', function() {
         return [parentKey, childKey].join('.');
       };
 
-      view = new View();
-      view.render();
+      this.view = new this.View();
+      this.view.render();
 
-      result = Backbone.Syphon.deserialize(view,{
+      this.result = Backbone.Syphon.deserialize(this.view, {
         widget: 'wombat',
         foo: {
           bar: 'baz',
@@ -130,15 +124,15 @@ describe('deserializing nested key names', function() {
     });
 
     it('should set root values', function() {
-      expect(view.$('[name="widget"]')).to.have.value('wombat');
+      expect(this.view.$('[name="widget"]')).to.have.value('wombat');
     });
 
     it('should set first nested value', function() {
-      expect(view.$('[name="foo.bar"]')).to.have.value('baz');
+      expect(this.view.$('[name="foo.bar"]')).to.have.value('baz');
     });
 
     it('should set sibling nested value', function() {
-      expect(view.$('[name="foo.baz.quux"]')).to.have.value('qux');
+      expect(this.view.$('[name="foo.baz.quux"]')).to.have.value('qux');
     });
   });
 });
