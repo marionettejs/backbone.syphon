@@ -231,7 +231,7 @@ to change how the data is written to the form. To do this register
 a callback function to an input type.
 
 ```js
-Backbone.Syphon.InputReaders.register('radio', function(el, value){
+Backbone.Syphon.InputWriters.register('radio', function(el, value){
   el.val(value);
 });
 ```
