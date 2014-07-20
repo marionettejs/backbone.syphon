@@ -1,17 +1,17 @@
 {
   "name": "backbone.syphon",
-  "description": "Serialize a Backbone.View in to a JavaScript object !",
-  "repo": "marionettejs/backbone.syphon",
+  "version": "0.5.0",
+  "description": "Serialize a Backbone.View in to a JavaScript object.",
   "main": "lib/backbone.syphon.js",
   "scripts": ["lib/backbone.syphon.js"],
-  "version": "0.5.0",
-
   "keywords": [
     "backbone",
     "serialize",
     "client",
     "browser"
   ],
+  "license": "https://github.com/marionettejs/backbone.syphon/blob/master/LICENSE.md",
+  "repository": "marionettejs/backbone.syphon",
   "dependencies": {
     "components/jquery": "^1.8.0 || ^2.1.0",
     "jashkenas/backbone" : "^1.1.0",
