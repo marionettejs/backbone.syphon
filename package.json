@@ -5,6 +5,7 @@
     "type": "git",
     "url": "https://github.com/marionettejs/backbone.syphon.git"
   },
+  "main": "lib/backbone.syphon.js",
   "dependencies": {},
   "devDependencies": {
     "backbone": "1.1.2",
