@@ -10,7 +10,12 @@
     "client",
     "browser"
   ],
-  "license": "https://github.com/marionettejs/backbone.syphon/blob/master/LICENSE.md",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/marionettejs/backbone.syphon/blob/master/LICENSE.md"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/marionettejs/backbone.syphon.git"
