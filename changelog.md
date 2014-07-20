@@ -1,3 +1,13 @@
+## v0.5.0
+
+* [FEATURE] Add `Syphon.VERSION`
+* [FEATURE] Add `Syphon.noConflict`
+* [FEATURE] Add UMD for Common.js/AMD modules and browser globals
+* Publish to NPM, Bower, and Component.io
+* Update jQuery dependency
+* Update Underscore dependency
+* Update Backbone dependency
+
 ## v0.4.1
 
 * Fixed issue w/ field that has no name (or other specified identifier)
