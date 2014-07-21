@@ -1,10 +1,8 @@
-Backbone.Syphon - serialize the forms in your
-Backbone.Views into a JSON object for use with
-Backbone's models.
+# Backbone.Syphon
+Easily serialize forms in your Backbone.Views into a JSON representation.
 
 [![Build Status](https://travis-ci.org/marionettejs/backbone.syphon.svg)](https://travis-ci.org/marionettejs/backbone.syphon)
 
-## Backbone.Syphon
 
 Working with form elements in a Backbone view can become
 very tedious very quickly. You will either end up writing
