@@ -518,7 +518,7 @@ I've recorded several screencasts on how I built Syphon.
 
 ## Release Notes
 
-See the [changelog.md]((https://github.com/derickbailey/backbone.syphon/blob/master/changelog.md) file.
+See the [changelog.md](https://github.com/marionettejs/backbone.syphon/blob/master/changelog.md) file.
 
 ## Legal Mumbo Jumbo (MIT License)
 
