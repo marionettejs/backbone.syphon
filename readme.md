@@ -490,16 +490,25 @@ If you wish to build Backbone.Syphon on your system, you will
 need Ruby to run the Jasmine specs, and NodeJS to run the
 grunt build. 
 
-### To Run The Jasmine Specs
+### Testing Backbone.Syphon
 
-1. Be sure you have Bundler installed in your Ruby Gems. Then
-run `bundle install` from the project folder
+There are two methods to running the unit test suite, suited for your desired workflow and overall developer happiness:
+you can open SpecRunner.html in the browser or run `npm test`
+To begin ensure that you have installed the project dev dependencies via:
 
-2. Once this is done, you can run `rake jasmine` to run the 
-Jasmine server
+    $ npm install
 
-3. Point your browser at `http://localhost:8888` and you will
-see all of the specs for Backbone.Syphon
+#### In a browser
+
+  Open [SpecRunner.html](SpecRunner.html) in your browser.
+
+#### Via Grunt
+
+  Running `grunt` alone will default to running the tests once.
+
+#### Via npm
+    
+    $ npm test
 
 ### To Build The Packages
 
