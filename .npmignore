@@ -1,5 +1,13 @@
+api
+bower_components
+src
+spec
+.editorconfig
+.gitignore
+.jshintrc
+.travis.yml
+bower.json
 component.json
+CONTRIBUTING.md
 Gruntfile.js
 SpecRunner.html
-.jshintrc
-spec/
