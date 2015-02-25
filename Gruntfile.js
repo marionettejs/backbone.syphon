@@ -18,7 +18,8 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      lib: 'lib/'
+      lib: 'lib/',
+      tmp: 'tmp/'
     },
 
     preprocess: {
@@ -81,6 +82,17 @@ module.exports = function(grunt) {
       }
     },
 
+    lintspaces: {
+      all: {
+        src: [
+          'src/*.js'
+        ],
+        options: {
+          editorconfig: '.editorconfig'
+        }
+      }
+    },
+
     watch: {
       syphon: {
         options: {
@@ -107,25 +119,16 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('build', [
-    'jshint:src',
-    'clean:lib',
-    'preprocess:lib',
-    'template:lib',
-    'concat:lib',
-    'uglify'
-  ]);
 
-  grunt.registerTask('test', [
-    'jshint',
-    'preprocess:tmp',
-    'mochaTest'
-  ]);
+  grunt.registerTask('default', 'An alias task for running tests.', ['test']);
+
+  grunt.registerTask('lint', 'Lints our sources', ['lintspaces', 'jshint']);
+
+  grunt.registerTask('test', 'Run the unit tests.', ['lint', 'preprocess:tmp', 'mochaTest']);
 
   grunt.registerTask('dev', 'Auto-lints while writing code.', ['test', 'watch:syphon']);
 
-  grunt.registerTask('default', [
-    'build',
-    'test'
+  grunt.registerTask('build', 'Builds the library', [
+    'clean', 'lint', 'preprocess', 'template', 'concat', 'uglify'
   ]);
 };
