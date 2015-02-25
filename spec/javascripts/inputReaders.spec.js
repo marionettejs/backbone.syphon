@@ -23,7 +23,7 @@ describe('input readers', function() {
     });
 
     afterEach(function() {
-      Backbone.Syphon.InputReaders.register('text');
+      Backbone.Syphon.InputReaders.unregister('text');
     });
 
     it('should retrieve the registered "text" reader', function() {
@@ -39,7 +39,7 @@ describe('input readers', function() {
     });
 
     afterEach(function() {
-      Backbone.Syphon.InputReaders.register('textarea');
+      Backbone.Syphon.InputReaders.unregister('textarea');
     });
 
     it('should be able to retrieve the input reader for that type', function() {
