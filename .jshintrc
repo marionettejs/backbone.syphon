@@ -1,15 +1,15 @@
 {
   "globals": {
-    "define"             : true,
-    "require"            : true,
-    "module"             : true,
-    "exports"            : true,
-    "$"                  : true,
-    "jQuery"             : true,
-    "_"                  : true,
-    "Backbone"           : true,
-    "Syphon"             : true,
-    "TypeRegistry"       : true
+    "define"     : true,
+    "require"    : true,
+    "module"     : true,
+    "exports"    : true,
+    "$"          : true,
+    "jQuery"     : true,
+    "_"          : true,
+    "Backbone"   : true,
+    "Syphon"     : true,
+    "TypeRegistry": true
   },
 
   "bitwise"       : true,
@@ -24,6 +24,7 @@
   "newcap"        : true,
   "noarg"         : true,
   "noempty"       : true,
+  "nonbsp"        : true,
   "nonew"         : true,
   "plusplus"      : false,
   "quotmark"      : "single",
@@ -53,6 +54,7 @@
   "loopfunc"      : false,
   "maxerr"        : 50,
   "multistr"      : false,
+  "notypeof"      : false,
   "proto"         : false,
   "scripturl"     : false,
   "smarttabs"     : false,
@@ -60,6 +62,7 @@
   "sub"           : false,
   "supernew"      : false,
   "validthis"     : false,
+  "noyield"       : false,
 
   "browser"       : true,
   "couch"         : false,

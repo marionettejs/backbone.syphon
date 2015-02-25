@@ -2,7 +2,13 @@
 *.swp
 *.swo
 *.orig
+.idea
+*.iml
 tmp/
 ext/
-node_modules
-bower_components
+node_modules/
+coverage/
+.grunt/
+npm-debug.log
+bower_components/
+.grunt
