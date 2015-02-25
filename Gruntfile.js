@@ -69,24 +69,6 @@ module.exports = function(grunt) {
       }
     },
 
-    jasmine: {
-      tests: {
-        src: [
-          'tmp/backbone.syphon.js'
-        ],
-        options: {
-          specs: 'spec/javascripts/*.spec.js',
-          vendor: [
-            'bower_components/jquery/dist/jquery.js',
-            'bower_components/underscore/underscore.js',
-            'bower_components/backbone/backbone.js',
-            'spec/javascripts/helpers/jasmine-jquery.js',
-            'spec/javascripts/helpers/SpecHelper.js'
-          ]
-        }
-      }
-    },
-
     mochaTest: {
       spec: {
         options: {
