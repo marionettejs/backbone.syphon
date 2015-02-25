@@ -16,6 +16,7 @@ To begin ensure that you have installed the project dev dependencies via:
 ### Via Grunt
 
   Running `grunt` alone will default to running the tests once.
+  Running `grunt watch` will rerun the tests after any file change.
 
 ## Documentation Fixes
 

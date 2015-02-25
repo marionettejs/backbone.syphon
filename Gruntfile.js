@@ -69,6 +69,16 @@ module.exports = function(grunt) {
       }
     },
 
+    watch: {
+      syphon: {
+        options: {
+          spawn: false
+        },
+        files: ['src/**/*.js', 'spec/**/*.js'],
+        tasks: ['test']
+      }
+    },
+
     mochaTest: {
       spec: {
         options: {
@@ -98,6 +108,8 @@ module.exports = function(grunt) {
     'preprocess:tmp',
     'mochaTest'
   ]);
+
+  grunt.registerTask('dev', 'Auto-lints while writing code.', ['test', 'watch:syphon']);
 
   grunt.registerTask('default', [
     'build',
