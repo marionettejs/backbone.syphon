@@ -7,12 +7,14 @@ module.exports = function(grunt) {
 
     meta: {
       version: '<%= pkg.version %>',
-      banner: (
+      banner:
         '// Backbone.Syphon, v<%= meta.version %>\n' +
+        '// ----------------------------------\n' +
+        '//\n' +
         '// Copyright (c) <%= grunt.template.today("yyyy") %> Derick Bailey, Muted Solutions, LLC.\n' +
         '// Distributed under MIT license\n' +
+        '//\n' +
         '// http://github.com/marionettejs/backbone.syphon\n'
-      )
     },
 
     clean: {
@@ -35,6 +37,16 @@ module.exports = function(grunt) {
         data: {
           version: '<%= pkg.version %>'
         }
+      },
+      lib: {
+        src: '<%= preprocess.lib.dest %>',
+        dest: '<%= preprocess.lib.dest %>'
+      }
+    },
+
+    concat: {
+      options: {
+        banner: '<%= meta.banner %>'
       },
       lib: {
         src: '<%= preprocess.lib.dest %>',
@@ -100,6 +112,7 @@ module.exports = function(grunt) {
     'clean:lib',
     'preprocess:lib',
     'template:lib',
+    'concat:lib',
     'uglify'
   ]);
 
