@@ -7,16 +7,19 @@ module.exports = function(grunt) {
 
     meta: {
       version: '<%= pkg.version %>',
-      banner: (
+      banner:
         '// Backbone.Syphon, v<%= meta.version %>\n' +
+        '// ----------------------------------\n' +
+        '//\n' +
         '// Copyright (c) <%= grunt.template.today("yyyy") %> Derick Bailey, Muted Solutions, LLC.\n' +
         '// Distributed under MIT license\n' +
+        '//\n' +
         '// http://github.com/marionettejs/backbone.syphon\n'
-      )
     },
 
     clean: {
-      lib: 'lib/'
+      lib: 'lib/',
+      tmp: 'tmp/'
     },
 
     preprocess: {
@@ -35,6 +38,16 @@ module.exports = function(grunt) {
         data: {
           version: '<%= pkg.version %>'
         }
+      },
+      lib: {
+        src: '<%= preprocess.lib.dest %>',
+        dest: '<%= preprocess.lib.dest %>'
+      }
+    },
+
+    concat: {
+      options: {
+        banner: '<%= meta.banner %>'
       },
       lib: {
         src: '<%= preprocess.lib.dest %>',
@@ -69,21 +82,24 @@ module.exports = function(grunt) {
       }
     },
 
-    jasmine: {
-      tests: {
+    lintspaces: {
+      all: {
         src: [
-          'tmp/backbone.syphon.js'
+          'src/*.js'
         ],
         options: {
-          specs: 'spec/javascripts/*.spec.js',
-          vendor: [
-            'bower_components/jquery/dist/jquery.js',
-            'bower_components/underscore/underscore.js',
-            'bower_components/backbone/backbone.js',
-            'spec/javascripts/helpers/jasmine-jquery.js',
-            'spec/javascripts/helpers/SpecHelper.js'
-          ]
+          editorconfig: '.editorconfig'
         }
+      }
+    },
+
+    watch: {
+      syphon: {
+        options: {
+          spawn: false
+        },
+        files: ['src/**/*.js', 'spec/**/*.js'],
+        tasks: ['test']
       }
     },
 
@@ -103,22 +119,16 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('build', [
-    'jshint:src',
-    'clean:lib',
-    'preprocess:lib',
-    'template:lib',
-    'uglify'
-  ]);
 
-  grunt.registerTask('test', [
-    'jshint',
-    'preprocess:tmp',
-    'mochaTest'
-  ]);
+  grunt.registerTask('default', 'An alias task for running tests.', ['test']);
 
-  grunt.registerTask('default', [
-    'build',
-    'test'
+  grunt.registerTask('lint', 'Lints our sources', ['lintspaces', 'jshint']);
+
+  grunt.registerTask('test', 'Run the unit tests.', ['lint', 'preprocess:tmp', 'mochaTest']);
+
+  grunt.registerTask('dev', 'Auto-lints while writing code.', ['test', 'watch:syphon']);
+
+  grunt.registerTask('build', 'Builds the library', [
+    'clean', 'lint', 'preprocess', 'template', 'concat', 'uglify'
   ]);
 };

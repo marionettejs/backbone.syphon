@@ -43,17 +43,18 @@
     "chai-jquery": "^1.2.3",
     "grunt": "^0.4.4",
     "grunt-contrib-clean": "^0.5.0",
-    "grunt-contrib-concat": "^0.4.0",
-    "grunt-contrib-jasmine": "^0.6.3",
+    "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.4.0",
+    "grunt-contrib-watch": "0.6.1",
     "grunt-mocha-test": "^0.11.0",
     "grunt-preprocess": "^4.0.0",
     "grunt-template": "^0.2.3",
+    "grunt-lintspaces": "0.4.1",
     "jsdom": "^0.11.0",
     "load-grunt-tasks": "^0.4.0",
     "mocha": "^1.20.1",
     "sinon": "^1.10.2",
-    "sinon-chai": "^2.5.0"    
+    "sinon-chai": "^2.5.0"
   }
 }
