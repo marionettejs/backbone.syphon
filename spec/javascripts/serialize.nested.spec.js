@@ -4,11 +4,11 @@ describe('serializing nested key names', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="text" name="widget" value="wombat">' +
               '<input type="text" name="foo[bar]" value="baz">' +
               '<input type="text" name="foo[baz][quux]" value="qux">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -49,10 +49,10 @@ describe('serializing nested key names', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="checkbox" name="foo[bar][]" value="baz" checked="checked">' +
               '<input type="checkbox" name="foo[bar][]" value="qux" checked="checked">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -88,18 +88,18 @@ describe('serializing nested key names', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="text" name="widget" value="wombat">' +
               '<input type="text" name="foo.bar" value="baz">' +
               '<input type="text" name="foo.baz.quux" value="qux">' +
-            '</form>'
+              '</form>'
           );
         }
       });
 
       this.keySplitter = Backbone.Syphon.KeySplitter;
 
-      Backbone.Syphon.KeySplitter = function(key){
+      Backbone.Syphon.KeySplitter = function(key) {
         return key.split('.');
       };
 
@@ -143,11 +143,11 @@ describe('serializing nested key names', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="text" name="widget" value="wombat">' +
               '<input type="text" name="foo-bar" value="baz">' +
               '<input type="text" name="foo-baz-quux" value="qux">' +
-            '</form>'
+              '</form>'
           );
         }
       });

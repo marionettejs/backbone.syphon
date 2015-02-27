@@ -4,11 +4,11 @@ describe('deserializing nested key names', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="text" name="widget">' +
               '<input type="text" name="foo[bar]">' +
               '<input type="text" name="foo[baz][qux]">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -45,10 +45,10 @@ describe('deserializing nested key names', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="checkbox" name="foo[bar][]" value="baz">' +
               '<input type="checkbox" name="foo[bar][]" value="qux">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -58,7 +58,7 @@ describe('deserializing nested key names', function() {
 
       this.writers = new Backbone.Syphon.InputWriterSet();
       this.writers.register('checkbox', function($el, value) {
-        if (_.include(value, $el.val())){
+        if (_.include(value, $el.val())) {
           $el.prop('checked', true);
         }
       });
@@ -90,11 +90,11 @@ describe('deserializing nested key names', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="text" name="widget" value="wombat">' +
               '<input type="text" name="foo.bar" value="baz">' +
               '<input type="text" name="foo.baz.quux" value="qux">' +
-            '</form>'
+              '</form>'
           );
         }
       });

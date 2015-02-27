@@ -3,13 +3,13 @@ describe('override the list of fields to include or ignore', function() {
     this.View = Backbone.View.extend({
       render: function() {
         this.$el.html(
-          '<form>' +
+            '<form>' +
             '<input name="a">' +
             '<input name="b">' +
             '<input name="c">' +
             '<input name="d">' +
             '<button name="e">' +
-          '</form>'
+            '</form>'
         );
       }
     });

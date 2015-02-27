@@ -2,16 +2,16 @@ if (!global.document || !global.window) {
   var jsdom = require('jsdom').jsdom;
 
   global.document = jsdom('<html><head><script></script></head><body></body></html>', null, {
-    FetchExternalResources   : ['script'],
-    ProcessExternalResources : ['script'],
-    MutationEvents           : '2.0',
-    QuerySelector            : false
+    FetchExternalResources: ['script'],
+    ProcessExternalResources: ['script'],
+    MutationEvents: '2.0',
+    QuerySelector: false
   });
 
   global.window = document.createWindow();
   global.navigator = global.window.navigator;
 
-  global.window.Node.prototype.contains = function (node) {
+  global.window.Node.prototype.contains = function(node) {
     return this.compareDocumentPosition(node) & 16;
   };
 }

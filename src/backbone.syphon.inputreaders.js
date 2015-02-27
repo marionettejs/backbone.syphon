@@ -10,7 +10,7 @@ var InputReaders = Syphon.InputReaders = new InputReaderSet();
 
 // The default input reader, which uses an input
 // element's "value"
-InputReaders.registerDefault(function($el){
+InputReaders.registerDefault(function($el) {
   return $el.val();
 });
 
