@@ -4,9 +4,9 @@ describe('deserializing an object into a form', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="text" name="foo">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -14,7 +14,7 @@ describe('deserializing an object into a form', function() {
       this.view = new this.View();
       this.view.render();
 
-      Backbone.Syphon.deserialize(this.view, { foo: 'bar' });
+      Backbone.Syphon.deserialize(this.view, {foo: 'bar'});
       this.result = this.view.$('input[name=foo]').val();
     });
 
@@ -28,9 +28,9 @@ describe('deserializing an object into a form', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<textarea name="foo"></textarea>' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -38,7 +38,7 @@ describe('deserializing an object into a form', function() {
       this.view = new this.View();
       this.view.render();
 
-      Backbone.Syphon.deserialize(this.view, { foo: 'bar' });
+      Backbone.Syphon.deserialize(this.view, {foo: 'bar'});
       this.result = this.view.$('textarea[name=foo]').val();
     });
 
@@ -52,12 +52,12 @@ describe('deserializing an object into a form', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<select name="foo">' +
-                '<option value="baz">baz</option>' +
-                '<option value="bar">bar</option>' +
+              '<option value="baz">baz</option>' +
+              '<option value="bar">bar</option>' +
               '</select>' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -65,7 +65,7 @@ describe('deserializing an object into a form', function() {
       this.view = new this.View();
       this.view.render();
 
-      Backbone.Syphon.deserialize(this.view, { foo: 'bar' });
+      Backbone.Syphon.deserialize(this.view, {foo: 'bar'});
       this.result = this.view.$('select').val();
     });
 
@@ -79,9 +79,9 @@ describe('deserializing an object into a form', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="checkbox" id="the-checkbox" name="chk">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -92,7 +92,7 @@ describe('deserializing an object into a form', function() {
         this.view = new this.View();
         this.view.render();
 
-        Backbone.Syphon.deserialize(this.view, { chk: true });
+        Backbone.Syphon.deserialize(this.view, {chk: true});
         this.result = this.view.$('#the-checkbox').prop('checked');
       });
 
@@ -107,7 +107,7 @@ describe('deserializing an object into a form', function() {
         this.view.render();
         this.view.$('#the-checkbox').prop('checked', true);
 
-        Backbone.Syphon.deserialize(this.view, { chk: false });
+        Backbone.Syphon.deserialize(this.view, {chk: false});
         this.result = this.view.$('#the-checkbox').prop('checked');
       });
 
@@ -122,9 +122,9 @@ describe('deserializing an object into a form', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<button name="btn">foo</button>' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -133,7 +133,7 @@ describe('deserializing an object into a form', function() {
       this.view.render();
       this.value = this.view.$('button[name=btn]').val();
 
-      Backbone.Syphon.deserialize(this.view, { btn: 'foo' });
+      Backbone.Syphon.deserialize(this.view, {btn: 'foo'});
       this.result = this.view.$('button[name=btn]').val();
     });
 
@@ -147,9 +147,9 @@ describe('deserializing an object into a form', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="submit" name="btn" text="Foo">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -158,7 +158,7 @@ describe('deserializing an object into a form', function() {
       this.view.render();
       this.value = this.view.$('input[name=btn]').val();
 
-      Backbone.Syphon.deserialize(this.view, { btn: 'foo' });
+      Backbone.Syphon.deserialize(this.view, {btn: 'foo'});
       this.result = this.view.$('input[name=btn]').val();
     });
 
@@ -172,9 +172,9 @@ describe('deserializing an object into a form', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="reset" name="btn" text="Foo">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -183,7 +183,7 @@ describe('deserializing an object into a form', function() {
       this.view.render();
       this.value = this.view.$('input[name=btn]').val();
 
-      Backbone.Syphon.deserialize(this.view, { btn: 'foo' });
+      Backbone.Syphon.deserialize(this.view, {btn: 'foo'});
       this.result = this.view.$('input[name=btn]').val();
     });
 
@@ -197,11 +197,11 @@ describe('deserializing an object into a form', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="radio" name="foo" value="foo">' +
               '<input type="radio" name="foo" value="bar">' +
               '<input type="radio" name="foo" value="baz">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -209,7 +209,7 @@ describe('deserializing an object into a form', function() {
       this.view = new this.View();
       this.view.render();
 
-      Backbone.Syphon.deserialize(this.view, { foo: 'bar' });
+      Backbone.Syphon.deserialize(this.view, {foo: 'bar'});
       this.checked = this.view.$('input[name=foo][value=bar]').prop('checked');
     });
 
@@ -223,11 +223,11 @@ describe('deserializing an object into a form', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input type="radio" name="foo" value="1">' +
               '<input type="radio" name="foo" value="2">' +
               '<input type="radio" name="foo" value="3">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -235,7 +235,7 @@ describe('deserializing an object into a form', function() {
       this.view = new this.View();
       this.view.render();
 
-      Backbone.Syphon.deserialize(this.view, { foo: 2 });
+      Backbone.Syphon.deserialize(this.view, {foo: 2});
       this.checked = this.view.$('input[name=foo][value=2]').prop('checked');
     });
 
@@ -247,12 +247,12 @@ describe('deserializing an object into a form', function() {
   describe('when given a form element instead of a view', function() {
     beforeEach(function() {
       this.form = $(
-        '<form>' +
+          '<form>' +
           '<input type="text" name="foo" value="bar">' +
-        '</form>'
+          '</form>'
       )[0];
 
-      Backbone.Syphon.deserialize(this.form, { foo: 'bar' });
+      Backbone.Syphon.deserialize(this.form, {foo: 'bar'});
       this.result = $(this.form).find('input[name=foo]').val();
     });
 

@@ -1,7 +1,8 @@
 describe('input readers', function() {
   describe('when registering an input reader for an input with a type attribute', function() {
     beforeEach(function() {
-      this.reader = function() {};
+      this.reader = function() {
+      };
       Backbone.Syphon.InputReaders.register('foo', this.reader);
       this.found = Backbone.Syphon.InputReaders.get('foo');
     });
@@ -17,7 +18,8 @@ describe('input readers', function() {
 
   describe('when retrieving a reader for an input with no type attribute', function() {
     beforeEach(function() {
-      this.reader = function() {};
+      this.reader = function() {
+      };
       Backbone.Syphon.InputReaders.register('text', this.reader);
       this.found = Backbone.Syphon.InputReaders.get('text');
     });
@@ -33,7 +35,8 @@ describe('input readers', function() {
 
   describe('when registering an input reader for an input element that does not have a "type" attribute', function() {
     beforeEach(function() {
-      this.reader = function() {};
+      this.reader = function() {
+      };
       Backbone.Syphon.InputReaders.register('textarea', this.reader);
       this.found = Backbone.Syphon.InputReaders.get('textarea');
     });
@@ -49,7 +52,8 @@ describe('input readers', function() {
 
   describe('when unregistering an input reader', function() {
     beforeEach(function() {
-      this.reader = function() {};
+      this.reader = function() {
+      };
       Backbone.Syphon.InputReaders.register('foo', this.reader);
 
       Backbone.Syphon.InputReaders.unregister('foo');

@@ -4,10 +4,10 @@ describe('key assignment validators', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input data-stuff="bar" name="bar" value="a">' +
               '<input data-stuff="foo" name="foo" value="b">' +
-            '</form>'
+              '</form>'
           );
         }
       });

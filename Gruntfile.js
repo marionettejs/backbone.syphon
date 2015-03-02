@@ -93,6 +93,28 @@ module.exports = function(grunt) {
       }
     },
 
+    jscs: {
+      options: {
+        config: ".jscsrc",
+        force: true
+      },
+
+      syphon: {
+        files: {
+          src: [ 'src/*.js' ]
+        }
+      },
+
+      specs: {
+        files: {
+          src: ['spec/javascripts/**.js']
+        },
+        options: {
+          maximumLineLength: 200
+        }
+      }
+    },
+
     watch: {
       syphon: {
         options: {
@@ -122,7 +144,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', 'An alias task for running tests.', ['test']);
 
-  grunt.registerTask('lint', 'Lints our sources', ['lintspaces', 'jshint']);
+  grunt.registerTask('lint', 'Lints our sources', ['lintspaces', 'jshint', 'jscs']);
 
   grunt.registerTask('test', 'Run the unit tests.', ['lint', 'preprocess:tmp', 'mochaTest']);
 

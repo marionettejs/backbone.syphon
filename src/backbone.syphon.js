@@ -14,7 +14,7 @@ Syphon.ignoredTypes = ['button', 'submit', 'reset', 'fieldset'];
 // all of the form inputs, in this view.
 // Alternately, pass a form element directly
 // in place of the view.
-Syphon.serialize = function(view, options){
+Syphon.serialize = function(view, options) {
   var data = {};
 
   // Build the configuration
@@ -24,7 +24,7 @@ Syphon.serialize = function(view, options){
   var elements = getInputElements(view, config);
 
   // Process all of the elements
-  _.each(elements, function(el){
+  _.each(elements, function(el) {
     var $el = $(el);
     var type = getElementType($el);
 
@@ -39,7 +39,7 @@ Syphon.serialize = function(view, options){
     // Get the key assignment validator and make sure
     // it's valid before assigning the value to the key
     var validKeyAssignment = config.keyAssignmentValidators.get(type);
-    if (validKeyAssignment($el, key, value)){
+    if (validKeyAssignment($el, key, value)) {
       var keychain = config.keySplitter(key);
       data = assignKeyValue(data, keychain, value);
     }
@@ -53,7 +53,7 @@ Syphon.serialize = function(view, options){
 // all of the form inputs, in this view.
 // Alternately, pass a form element directly
 // in place of the view.
-Syphon.deserialize = function(view, data, options){
+Syphon.deserialize = function(view, data, options) {
   // Build the configuration
   var config = buildConfig(options);
 
@@ -64,7 +64,7 @@ Syphon.deserialize = function(view, data, options){
   var flattenedData = flattenData(config, data);
 
   // Process all of the elements
-  _.each(elements, function(el){
+  _.each(elements, function(el) {
     var $el = $(el);
     var type = getElementType($el);
 
@@ -86,11 +86,11 @@ Syphon.deserialize = function(view, data, options){
 
 // Retrieve all of the form inputs
 // from the form
-var getInputElements = function(view, config){
+var getInputElements = function(view, config) {
   var form = getForm(view);
   var elements = form.elements;
 
-  elements = _.reject(elements, function(el){
+  elements = _.reject(elements, function(el) {
     var reject;
     var type = getElementType(el);
     var extractor = config.keyExtractors.get(type);
@@ -100,10 +100,10 @@ var getInputElements = function(view, config){
     var foundInInclude = _.include(config.include, identifier);
     var foundInExclude = _.include(config.exclude, identifier);
 
-    if (foundInInclude){
+    if (foundInInclude) {
       reject = false;
     } else {
-      if (config.include){
+      if (config.include) {
         reject = true;
       } else {
         reject = (foundInExclude || foundInIgnored);
@@ -120,15 +120,15 @@ var getInputElements = function(view, config){
 // will either return the `type` attribute of
 // an `<input>` element, or the `tagName` of
 // the element when the element is not an `<input>`.
-var getElementType = function(el){
+var getElementType = function(el) {
   var typeAttr;
   var $el = $(el);
   var tagName = $el[0].tagName;
   var type = tagName;
 
-  if (tagName.toLowerCase() === 'input'){
+  if (tagName.toLowerCase() === 'input') {
     typeAttr = $el.attr('type');
-    if (typeAttr){
+    if (typeAttr) {
       type = typeAttr;
     } else {
       type = 'text';
@@ -143,8 +143,8 @@ var getElementType = function(el){
 
 // If a form element is given, just return it.
 // Otherwise, get the form element from the view.
-var getForm = function(viewOrForm){
-  if (_.isUndefined(viewOrForm.$el) && viewOrForm.tagName.toLowerCase() === 'form'){
+var getForm = function(viewOrForm) {
+  if (_.isUndefined(viewOrForm.$el) && viewOrForm.tagName.toLowerCase() === 'form') {
     return viewOrForm;
   } else {
     return viewOrForm.$el.is('form') ? viewOrForm.el : viewOrForm.$('form')[0];
@@ -153,7 +153,7 @@ var getForm = function(viewOrForm){
 
 // Build a configuration object and initialize
 // default values.
-var buildConfig = function(options){
+var buildConfig = function(options) {
   var config = _.clone(options) || {};
 
   config.ignoredTypes = _.clone(Syphon.ignoredTypes);
@@ -189,18 +189,18 @@ var buildConfig = function(options){
 // allowing multiple fields with the same name to be
 // assigned to the array.
 var assignKeyValue = function(obj, keychain, value) {
-  if (!keychain){ return obj; }
+  if (!keychain) { return obj; }
 
   var key = keychain.shift();
 
   // build the current object we need to store data
-  if (!obj[key]){
+  if (!obj[key]) {
     obj[key] = _.isArray(key) ? [] : {};
   }
 
   // if it's the last key in the chain, assign the value directly
-  if (keychain.length === 0){
-    if (_.isArray(obj[key])){
+  if (keychain.length === 0) {
+    if (_.isArray(obj[key])) {
       obj[key].push(value);
     } else {
       obj[key] = value;
@@ -208,7 +208,7 @@ var assignKeyValue = function(obj, keychain, value) {
   }
 
   // recursive parsing of the array, depth-first
-  if (keychain.length > 0){
+  if (keychain.length > 0) {
     assignKeyValue(obj[key], keychain, value);
   }
 
@@ -246,22 +246,22 @@ var assignKeyValue = function(obj, keychain, value) {
 //  'foo[quux]': ['foo', 'bar']
 // }
 // ```
-var flattenData = function(config, data, parentKey){
+var flattenData = function(config, data, parentKey) {
   var flatData = {};
 
-  _.each(data, function(value, keyName){
+  _.each(data, function(value, keyName) {
     var hash = {};
 
     // If there is a parent key, join it with
     // the current, child key.
-    if (parentKey){
+    if (parentKey) {
       keyName = config.keyJoiner(parentKey, keyName);
     }
 
-    if (_.isArray(value)){
+    if (_.isArray(value)) {
       keyName += '[]';
       hash[keyName] = value;
-    } else if (_.isObject(value)){
+    } else if (_.isObject(value)) {
       hash = flattenData(config, value, keyName);
     } else {
       hash[keyName] = value;

@@ -8,9 +8,9 @@ describe('key extractors', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input>' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -39,10 +39,10 @@ describe('key extractors', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input>' +
               '<input type="checkbox" name="chk">' +
-            '</form>'
+              '</form>'
           );
         }
       });
@@ -75,9 +75,9 @@ describe('key extractors', function() {
       this.View = Backbone.View.extend({
         render: function() {
           this.$el.html(
-            '<form>' +
+              '<form>' +
               '<input data-stuff="bar">' +
-            '</form>'
+              '</form>'
           );
         }
       });
