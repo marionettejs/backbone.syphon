@@ -3,67 +3,44 @@ Easily serialize forms in your Backbone.Views into a JSON representation.
 
 [![Build Status](https://travis-ci.org/marionettejs/backbone.syphon.svg)](https://travis-ci.org/marionettejs/backbone.syphon)
 
+## About Backbone.Syphon
 
-Working with form elements in a Backbone view can become
-very tedious very quickly. You will either end up writing
-a lot of repetitive code to read values from the form,
-or end up using a key-value-observer or data-binding
-solution that automatically populates your model for you.
-While these are valid options and I highly recommend
-understanding how they work, there are times when these 
-options are not the best choice for your application.
-
-Backbone.Syphon aims to make it easy to serialize the
-form inputs of a Backbone.View in to a simple JSON object
+Backbone.Syphon aims to make it easy to serialize the form inputs of a Backbone.View in to a simple JSON object
 that contains all of the values from the form.
 
-## Source Code And Downloads
-
-You can download the raw source code from the "src" 
-folder above, or grab one of the builds from the 
-"lib" folder. 
-
-To get the latest stable release, use these links 
-which point to the 'master' branch's builds:
-
-### Standard Builds
-
-Development: [backbone.syphon.js](https://raw.github.com/derickbailey/backbone.syphon/master/lib/backbone.syphon.js)
-
-Production: [backbone.syphon.min.js](https://raw.github.com/derickbailey/backbone.syphon/master/lib/backbone.syphon.min.js)
-
-### AMD/RequireJS Builds
-
-Development: [backbone.syphon.js](https://raw.github.com/derickbailey/backbone.syphon/master/lib/amd/backbone.syphon.js)
-
-Production: [backbone.syphon.min.js](https://raw.github.com/derickbailey/backbone.syphon/master/lib/amd/backbone.syphon.min.js)
+Working with form elements in a Backbone view can become very tedious very quickly. You will either end up writing
+a lot of repetitive code to read values from the form, or end up using a key-value-observer or data-binding
+solution that automatically populates your model for you. While these are valid options and it is highly recommended to
+understand how they work, there are times when these options are not the best choice for your application.
 
 ## Documentation
 
-This readme file contains basic usage examples.
+This readme file contains [basic usage examples](#basic-usage).
 
-### Extensibility / API Documentation
+If you need to modify the behaviors of Syphon, see the [API document](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
+It contains the documentation for the core APIs that Syphon exposes, with examples on how to change the behaviors of Syphon.
 
-If you need to modify the behaviors of Syphon, see the API document. It
-contains the documentation for the core APIs that Syphon exposes, with
-examples on how to change the behaviors of Syphon.
+### [View The API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md)
 
-##### [View The API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md)
+## Source Code And Downloads
 
-### Annotated Source Code
+You can download the raw source code from the "src" folder above, or grab one of the builds from the "lib" folder.
 
-Syphon has annotated source code using the Docco tool to turn
-comments in to documentation. This provides an in-depth look
-at what each section of is doing.
+To get the latest stable release, use these links which point to the 'master' branch's builds:
 
-##### [View The Annotated Source Code](http://derickbailey.github.com/backbone.syphon/docs/backbone.syphon.html)
+### Standard Builds
 
-## Basic Usage : Serialize
+Development: [backbone.syphon.js](https://raw.github.com/marionettejs/backbone.syphon/master/lib/backbone.syphon.js)
 
-When the data from a form is needed, you can call the
-`serialize` method of `Backbone.Syphon` to retrieve an
-object literal that contains the data from your view's
-form.
+Production: [backbone.syphon.min.js](https://raw.github.com/marionettejs/backbone.syphon/master/lib/backbone.syphon.min.js)
+
+
+## Basic Usage
+
+### Serialize
+
+When the data from a form is needed, you can call the `serialize` method of `Backbone.Syphon` to retrieve an object
+literal that contains the data from your view's form.
 
 ```js
 Backbone.View.extend({
@@ -88,8 +65,7 @@ Backbone.View.extend({
 
 ### Keys Retrieved By "name" Attribute
 
-The default behavior for serializing fields is to use the field's "name"
-attribute as the key in the serialized object.
+The default behavior for serializing fields is to use the field's "name" attribute as the key in the serialized object.
 
 ```html
 <form>
@@ -102,7 +78,7 @@ attribute as the key in the serialized object.
 ```js
 Backbone.Syphon.serialize(view);
 
-// will produce => 
+// will produce =>
 
 {
   a: "",
@@ -111,14 +87,12 @@ Backbone.Syphon.serialize(view);
 }
 ```
 
-For information on how to change this behavior, see the Key Extractors 
-section of the 
-[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+For information on how to change this behavior, see the Key Extractors section of the
+[API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 
 ### Values Retrieved By jQuery `.val()` Call
 
-The default behavior for serializing fields is to use jQuery's `.val()`
-to get the value of the input element.
+The default behavior for serializing fields is to use jQuery's `.val()` to get the value of the input element.
 
 ```html
 <form>
@@ -130,7 +104,7 @@ to get the value of the input element.
 ```js
 Backbone.Syphon.serialize(view);
 
-// will produce => 
+// will produce =>
 
 {
   a: "a-value",
@@ -138,14 +112,12 @@ Backbone.Syphon.serialize(view);
 }
 ```
 
-For information on how to change this behavior, see the Input Readers
-section of the 
-[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+For information on how to change this behavior, see the Input Readers section of the
+[API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 
 ### Checkboxes
 
-By default, a checkbox will return a boolean value signifying whether or 
-not it is checked.
+By default, a checkbox will return a boolean value signifying whether or not it is checked.
 
 ```html
 <form>
@@ -157,7 +129,7 @@ not it is checked.
 ```js
 Backbone.Syphon.serialize(view);
 
-// will produce => 
+// will produce =>
 
 {
   a: false,
@@ -165,14 +137,13 @@ Backbone.Syphon.serialize(view);
 }
 ```
 
-For information on how to change this behavior, see the Input Readers
-section of the 
-[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+For information on how to change this behavior, see the Input Readers section of the
+[API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 
 ### Radio Button Groups
 
-Radio button groups (grouped by the input element "name" attribute) will
-produce a single value, from the selected radio button.
+Radio button groups (grouped by the input element "name" attribute) will produce a single value, from the selected
+radio button.
 
 ```html
 <form>
@@ -186,25 +157,24 @@ produce a single value, from the selected radio button.
 ```js
 Backbone.Syphon.serialize(view);
 
-// will produce => 
+// will produce =>
 
 {
   a: "2"
 }
 ```
 
-This behavior can be changed by registering a different set of Key
-Extractors, Input Readers, and Key Assignment Validators. See the full
-[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+This behavior can be changed by registering a different set of Key Extractors, Input Readers, and Key Assignment
+Validators. See the full
+[API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 for more information on these.
 
 ## Basic Usage : Deserialize
 
-Syphon also allows you to deserialize an object's values back on to a
-form. It uses the same conventions and configuration as the serialization
-process, with the introduction of Input Writers to handle populating the
-form fields with the values. See the full 
-[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+Syphon also allows you to deserialize an object's values back on to a form. It uses the same conventions and
+configuration as the serialization process, with the introduction of Input Writers to handle populating the
+form fields with the values. See the full
+[API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 for more information on Input Writers.
 
 ```html
@@ -223,32 +193,27 @@ var data = {
 Backbone.Syphon.deserialize(this, data);
 ```
 
-This will populate the form input elements with the correct values from
-the `data` parameter.
+This will populate the form input elements with the correct values from the `data` parameter.
 
 ## Ignored Input Types
 
-The following types of input are ignored, and not included in
-the resulting JavaScript object:
+The following types of input are ignored, and not included in the resulting JavaScript object:
 
 * `<input type="submit">` buttons
 * `<input type="reset"`> buttons
 * standard `<button>` tags
 * `<fieldset>` tags
 
-If you need to get a value from the specific button that was
-clicked, you can either include it specifically (see below) or use
-a DOM event to listen for that element being manipulated (clicked, for
-example) and manually grab the data you need.
+If you need to get a value from the specific button that was clicked, you can either include it specifically
+(see below) or use a DOM event to listen for that element being manipulated (clicked, for example) and manually grab
+the data you need.
 
 ### Ignoring Other Input Types
 
-Syphon exposes the list of ignored input types as a raw array. You can
-push, pop, and manipulate this array as any other array, to specify which
-types of input fields you want to ignore.
+Syphon exposes the list of ignored input types as a raw array. You can push, pop, and manipulate this array as any
+other array, to specify which types of input fields you want to ignore.
 
-This list is global to Syphon and there is no way to customize it for
-a specific call to `serialize`.
+This list is global to Syphon and there is no way to customize it for a specific call to `serialize`.
 
 ```js
 // ignore all <textarea> input elements
@@ -257,8 +222,8 @@ Backbone.Syphon.ignoredTypes.push("textarea");
 
 ## Serializing Nested Attributes And Field Names
 
-Syphon will parse nested attribute names and create a nested result object,
-using the Rails standard of `name="foo[bar][baz]"` by default.
+Syphon will parse nested attribute names and create a nested result object, using the Rails standard of
+`name="foo[bar][baz]"` by default.
 
 ```html
 <form>
@@ -282,9 +247,8 @@ will produce
 
 ## Include / Exclude Specific Fields
 
-You can include or exclude specific fields as needed. Inclusion is given
-priority and specifying fields to include will force Syphon to exclude all
-other fields. Including a field that is ignore by it's type will also force
+You can include or exclude specific fields as needed. Inclusion is given priority and specifying fields to include
+will force Syphon to exclude all other fields. Including a field that is ignore by it's type will also force
 the field to be included.
 
 ### Examples
@@ -361,15 +325,12 @@ Backbone.Syphon.serialize(view, {
 
 ### Include / Exclude Based On Key Extractors
 
-The include / exclude process uses the registered Key Extractors to determine
-which fields to include / exclude. 
+The include / exclude process uses the registered Key Extractors to determine which fields to include / exclude.
 
-This means if you are only using the default Key Extractor which uses 
-the "name" attribute, all fields will be included or excluded based on 
-the name of the field.
+This means if you are only using the default Key Extractor which uses the "name" attribute, all fields will be
+included or excluded based on the name of the field.
 
-If you have registered other Key Extractors, they will be used when
-determining which fields to include / exclude.
+If you have registered other Key Extractors, they will be used when determining which fields to include / exclude.
 
 ```html
 <form>
@@ -404,19 +365,18 @@ Backbone.Syphon.serialize(view, {
 }
 ```
 
-For more information on Key Extractors, see the full 
-[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+For more information on Key Extractors, see the full
+[API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 
 ## Other Options
 
-There are a few other options that can be specified when calling the
-`Syphon.serialize` method, which allow the behavior of Syphon to be
-altered for a single call instead of for all calls.
+There are a few other options that can be specified when calling the `Syphon.serialize` method, which allow the
+behavior of Syphon to be altered for a single call instead of for all calls.
 
 ### Key Extractors
 
-Key extractors are used to generate the "key" in the `{key: "value"}`
-result. You can specify a `KeyExtractorSet` as part of the options:
+Key extractors are used to generate the "key" in the `{key: "value"}` result. You can specify a `KeyExtractorSet`
+as part of the options:
 
 ```js
 extractors = new Backbone.Syphon.KeyExtractorSet();
@@ -427,13 +387,13 @@ Backbone.Syphon.serialize({
 });
 ```
 
-For more information on Key Extractors, see the full 
-[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+For more information on Key Extractors, see the full
+[API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 
 ### Input Readers
 
-Input Readers are used to generate the "value" in the `{key: "value"}`
-result. You can specify a `InputReadetSet` as part of the options:
+Input Readers are used to generate the "value" in the `{key: "value"}` result. You can specify a `InputReadetSet`
+as part of the options:
 
 ```js
 readers = new Backbone.Syphon.InputReaderSet();
@@ -444,24 +404,21 @@ Backbone.Syphon.serialize({
 });
 ```
 
-For more information on Input Readers, see the full 
-[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+For more information on Input Readers, see the full
+[API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 
 ### Input Writers
 
-Input Writers are used to set the value of form elements to the 
-"value" in the `{key: "value"}` data / object.  At this time, you cannot
-specify input writers in the `deserialize` method. That will come
-soon, hopefully.
+Input Writers are used to set the value of form elements to the "value" in the `{key: "value"}` data / object.
+At this time, you cannot specify input writers in the `deserialize` method. That will come soon, hopefully.
 
-For more information on Input Writers, see the full 
-[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+For more information on Input Writers, see the full
+[API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 
 ### Key Assignment Validators
 
-Input Readers are used to validate the assignment of a key to a value,
-in the context of an element. You can specify a `InputReadetSet` as part 
-of the options:
+Input Readers are used to validate the assignment of a key to a value, in the context of an element. You can specify
+a `InputReadetSet` as part of the options:
 
 ```js
 validators = new Backbone.Syphon.KeyAssignmentValidators();
@@ -472,23 +429,19 @@ Backbone.Syphon.serialize({
 });
 ```
 
-For more information on Key Assignment Validators, see the full 
-[API Documentation](https://github.com/derickbailey/backbone.syphon/blob/master/apidoc.md).
+For more information on Key Assignment Validators, see the full
+[API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 
 ## Current Limitations
 
-There some known limitations in Backbone.Syphon, partially by design and
-partially implemented as default behaivors. 
+There some known limitations in Backbone.Syphon, partially by design and partially implemented as default behaviors.
 
 * You must have a `<form>` within your view's `$el`
-* An input of type `checkbox` will return a boolean value. This can be
-overriden by replacing the Input Reader for checkboxes.
+* An input of type `checkbox` will return a boolean value. This can be overriden by replacing the Input Reader for checkboxes.
 
 ## Building Backbone.Syphon
 
-If you wish to build Backbone.Syphon on your system, you will
-need Ruby to run the Jasmine specs, and NodeJS to run the
-grunt build. 
+If you wish to build Backbone.Syphon on your system, you will need NodeJS and grunt to run the build.
 
 ### Testing Backbone.Syphon
 
@@ -507,7 +460,7 @@ To begin ensure that you have installed the project dev dependencies via:
   Running `grunt` alone will default to running the tests once.
 
 #### Via npm
-    
+
     $ npm test
 
 ### To Build The Packages
@@ -516,7 +469,7 @@ To begin ensure that you have installed the project dev dependencies via:
 
 2. Run `npm install -g grunt` to install the grunt build system
 
-3. From the project folder, run `grunt` to produce a build
+3. From the project folder, run `grunt build` to produce a build
 
 ## Screencasts
 
