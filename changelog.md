@@ -1,3 +1,19 @@
+## v0.5.1 [view commit logs](https://github.com/marionettejs/backbone.syphon/compare/v0.5.0...v5.0.1)
+
+### Fixes
+
+* Using falsy items in the `TypeRegistry`
+
+### Docs
+
+* Slight restructure of readme
+
+### Improvements
+* Add JSCS support for style linting and consistency
+* Synchronized workflow tooling to match Marionette Core style
+* Removal of stale Jasmine fragments
+* Update of dependencies to match Marionette Core
+
 ## v0.5.0
 
 * [FEATURE] Add `Syphon.VERSION`
