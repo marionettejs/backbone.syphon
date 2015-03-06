@@ -261,6 +261,53 @@ describe('deserializing an object into a form', function() {
     });
   });
 
+  describe('when deserializing without a form', function() {
+    beforeEach(function() {
+      this.View = Backbone.View.extend({
+        render: function() {
+          this.$el.html('<input type="text" name="foo">');
+        }
+      });
+      this.view = new this.View();
+      this.view.render();
+
+      Backbone.Syphon.deserialize(this.view, {foo: 'bar'});
+    });
+
+    it('should set the input\'s value', function() {
+      var result = this.view.$('input[name=foo]').val();
+      expect(result).to.equal('bar');
+    });
+  });
+
+  describe('when deserializing multiple forms', function() {
+    beforeEach(function() {
+      this.View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+              '<form>' +
+              '<input type="text" name="foo">' +
+              '</form>' +
+              '<form>' +
+              '<input type="text" name="bar">' +
+              '</form>'
+          );
+        }
+      });
+      this.view = new this.View();
+      this.view.render();
+
+      Backbone.Syphon.deserialize(this.view, {foo: 'bar', bar: 'foo'});
+    });
+
+    it('should set the input\'s value', function() {
+      var foo = this.view.$('input[name=foo]').val();
+      var bar = this.view.$('input[name=bar]').val();
+      expect(foo).to.equal('bar');
+      expect(bar).to.equal('foo');
+    });
+  });
+
   describe('when ignoring a field by selector', function() {
     beforeEach(function() {
       this.form = $(

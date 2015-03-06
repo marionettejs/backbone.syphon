@@ -1,15 +1,15 @@
 # Backbone.Syphon
-Easily serialize forms in your Backbone.Views into a JSON representation.
+Easily serialize forms fields in your Backbone.Views into a JSON representation.
 
 [![Build Status](https://travis-ci.org/marionettejs/backbone.syphon.svg)](https://travis-ci.org/marionettejs/backbone.syphon)
 
 ## About Backbone.Syphon
 
-Backbone.Syphon aims to make it easy to serialize the form inputs of a Backbone.View in to a simple JSON object
-that contains all of the values from the form.
+Backbone.Syphon aims to make it easy to serialize the fields of a Backbone.View into a simple JSON object
+that contains all of the values.
 
-Working with form elements in a Backbone view can become very tedious very quickly. You will either end up writing
-a lot of repetitive code to read values from the form, or end up using a key-value-observer or data-binding
+Working with form fields in a Backbone view can become very tedious very quickly. You will either end up writing
+a lot of repetitive code to read values from the fields, or end up using a key-value-observer or data-binding
 solution that automatically populates your model for you. While these are valid options and it is highly recommended to
 understand how they work, there are times when these options are not the best choice for your application.
 
@@ -171,9 +171,9 @@ for more information on these.
 
 ## Basic Usage : Deserialize
 
-Syphon also allows you to deserialize an object's values back on to a form. It uses the same conventions and
+Syphon also allows you to deserialize an object's values back into their field equivalent. It uses the same conventions and
 configuration as the serialization process, with the introduction of Input Writers to handle populating the
-form fields with the values. See the full
+fields with the values. See the full
 [API Documentation](https://github.com/marionettejs/backbone.syphon/blob/master/apidoc.md).
 for more information on Input Writers.
 
@@ -193,7 +193,7 @@ var data = {
 Backbone.Syphon.deserialize(this, data);
 ```
 
-This will populate the form input elements with the correct values from the `data` parameter.
+This will populate the form field elements with the correct values from the `data` parameter.
 
 ## Ignored Input Types
 
@@ -409,7 +409,7 @@ For more information on Input Readers, see the full
 
 ### Input Writers
 
-Input Writers are used to set the value of form elements to the "value" in the `{key: "value"}` data / object.
+Input Writers are used to set the value of form fields to the "value" in the `{key: "value"}` data / object.
 At this time, you cannot specify input writers in the `deserialize` method. That will come soon, hopefully.
 
 For more information on Input Writers, see the full
@@ -436,7 +436,6 @@ For more information on Key Assignment Validators, see the full
 
 There some known limitations in Backbone.Syphon, partially by design and partially implemented as default behaviors.
 
-* You must have a `<form>` within your view's `$el`
 * An input of type `checkbox` will return a boolean value. This can be overriden by replacing the Input Reader for checkboxes.
 
 ## Building Backbone.Syphon

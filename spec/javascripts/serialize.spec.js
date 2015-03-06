@@ -270,6 +270,60 @@ describe('serializing a form', function() {
     });
   });
 
+  describe('when given more than 1 form', function() {
+    beforeEach(function() {
+      this.View = Backbone.View.extend({
+        tagName: 'form',
+        render: function() {
+          this.$el.html(
+              '<form>' +
+              '<input type="text" name="foo" value="bar">' +
+              '</form>' +
+              '<form>' +
+              '<input type="text" name="bar" value="foo">' +
+              '</form>'
+          );
+        }
+      });
+
+      this.view = new this.View();
+      this.view.render();
+
+      this.result = Backbone.Syphon.serialize(this.view);
+    });
+
+    it('retrieves all values', function() {
+      expect(_.keys(this.result).length).to.equal(2);
+      expect(this.result.foo).to.equal('bar');
+      expect(this.result.bar).to.equal('foo');
+    });
+  });
+
+  describe('when a form tag does not exist', function() {
+    beforeEach(function() {
+      this.View = Backbone.View.extend({
+        tagName: 'form',
+        render: function() {
+          this.$el.html(
+              '<input type="text" name="foo" value="bar">' +
+              '<input type="text" name="bar" value="foo">'
+          );
+        }
+      });
+
+      this.view = new this.View();
+      this.view.render();
+
+      this.result = Backbone.Syphon.serialize(this.view);
+    });
+
+    it('retrieves all values', function() {
+      expect(_.keys(this.result).length).to.equal(2);
+      expect(this.result.foo).to.equal('bar');
+      expect(this.result.bar).to.equal('foo');
+    });
+  });
+
   describe('when ignoring a field by selector', function() {
     beforeEach(function() {
       this.View = Backbone.View.extend({
