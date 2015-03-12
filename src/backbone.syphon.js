@@ -92,11 +92,14 @@ var getInputElements = function(view, config) {
 
   elements = _.reject(elements, function(el) {
     var reject;
-    var type = getElementType(el);
-    var extractor = config.keyExtractors.get(type);
+    var myType = getElementType(el);
+    var extractor = config.keyExtractors.get(myType);
     var identifier = extractor($(el));
 
-    var foundInIgnored = _.include(config.ignoredTypes, type);
+    var foundInIgnored = _.find(config.ignoredTypes, function(ignoredTypeOrSelector) {
+      return (ignoredTypeOrSelector === myType) || $(el).is(ignoredTypeOrSelector);
+    });
+
     var foundInInclude = _.include(config.include, identifier);
     var foundInExclude = _.include(config.exclude, identifier);
 

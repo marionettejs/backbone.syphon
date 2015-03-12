@@ -260,4 +260,25 @@ describe('deserializing an object into a form', function() {
       expect(this.result).to.equal('bar');
     });
   });
+
+  describe('when ignoring a field by selector', function() {
+    beforeEach(function() {
+      this.form = $(
+        '<form>' +
+          '<input type="text" name="foo" value="bar">' +
+          '<input type="text" name="dontDeserialize" class="doNotSerializeMe" value="myOriginalValue">' +
+          '</form>'
+      )[0];
+
+      // ignore all .doNotSerializeMe elements
+      Backbone.Syphon.ignoredTypes.push('.doNotSerializeMe');
+      Backbone.Syphon.deserialize(this.form, {foo: 'foo', dontDeserialize: 'iShouldNotBeSet'});
+      this.result = $(this.form).find('input[name=dontDeserialize]').val();
+    });
+
+    it('should not modify fields excluded by selector', function() {
+      expect(this.result).to.eql('myOriginalValue');
+    });
+
+  });
 });
