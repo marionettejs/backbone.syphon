@@ -1,4 +1,26 @@
 describe('deserializing an object into a form', function() {
+
+  describe('when no elements are found', function() {
+    var View = Backbone.View.extend({
+      render: function() {
+        this.$el.html('<span>When I am alone I pretend to be a carrot<span/>');
+      }
+    });
+
+    var view;
+
+    beforeEach(function() {
+      view = new View();
+      view.render();
+    });
+
+    it('should not throw an exception', function() {
+      expect(function() {
+        Backbone.Syphon.deserialize(view, {foo: 'bar'});
+      }).to.not.throw(Error);
+    });
+  });
+
   describe('when deserializing into a text input', function() {
     beforeEach(function() {
       this.View = Backbone.View.extend({
