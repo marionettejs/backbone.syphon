@@ -269,4 +269,35 @@ describe('serializing a form', function() {
       expect(this.result.foo).to.equal('bar');
     });
   });
+
+  describe('when ignoring a field by selector', function() {
+    beforeEach(function() {
+      this.View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+              '<form>' +
+              '<input name="a">' +
+              '<input name="b" class="doNotSerializeMe">' +
+              '<input name="c">' +
+              '<input name="d" class="doNotSerializeMe">' +
+              '<button name="e">' +
+              '</form>'
+          );
+        }
+      });
+
+      this.view = new this.View();
+      this.view.render();
+
+      // ignore all .doNotSerializeMe elements
+      Backbone.Syphon.ignoredTypes.push('.doNotSerializeMe');
+      this.result = Backbone.Syphon.serialize(this.view);
+    });
+
+    it('should not include fields excluded by selector', function() {
+      // note Syphon will create empty strings, not nulls.
+      expect(this.result).to.eql({a: '', c: ''});
+    });
+
+  });
 });
