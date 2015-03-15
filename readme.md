@@ -123,6 +123,7 @@ By default, a checkbox will return a boolean value signifying whether or not it 
 <form>
   <input type="checkbox" name="a">
   <input type="checkbox" name="b" checked>
+  <input type="checkbox" name="c" indeterminate>
 </form>
 ```
 
@@ -133,7 +134,8 @@ Backbone.Syphon.serialize(view);
 
 {
   a: false,
-  b: true
+  b: true,
+  c: null
 }
 ```
 

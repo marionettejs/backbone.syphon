@@ -158,6 +158,20 @@ describe('serializing a form', function() {
         expect(this.result.chk).to.be.false;
       });
     });
+
+    describe('and the checkbox is indeterminate', function() {
+      beforeEach(function() {
+        this.view = new this.View();
+        this.view.render();
+        this.view.$('#the-checkbox').prop('indeterminate', true);
+
+        this.result = Backbone.Syphon.serialize(this.view);
+      });
+
+      it('should return an object with a value of null', function() {
+        expect(this.result.chk).to.be.null;
+      });
+    });
   });
 
   describe('when serializing a button', function() {

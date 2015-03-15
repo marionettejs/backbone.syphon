@@ -137,6 +137,21 @@ describe('deserializing an object into a form', function() {
         expect(this.result).to.be.false;
       });
     });
+
+    describe('and the corresponding value in the given object is null', function() {
+      beforeEach(function() {
+        this.view = new this.View();
+        this.view.render();
+        this.view.$('#the-checkbox').prop('checked', false);
+
+        Backbone.Syphon.deserialize(this.view, {chk: null});
+        this.result = this.view.$('#the-checkbox').prop('indeterminate');
+      });
+
+      it('should add an indeterminate attribute', function() {
+        expect(this.result).to.be.true;
+      });
+    });
   });
 
   describe('when deserializing into a button', function() {
