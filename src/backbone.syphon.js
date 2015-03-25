@@ -87,16 +87,18 @@ Syphon.deserialize = function(view, data, options) {
 // Retrieve all of the form inputs
 // from the form
 var getInputElements = function(view, config) {
-  var form = getForm(view);
-  var elements = form.elements;
+  var formInputs = getForm(view);
 
-  elements = _.reject(elements, function(el) {
+  formInputs = _.reject(formInputs, function(el) {
     var reject;
-    var type = getElementType(el);
-    var extractor = config.keyExtractors.get(type);
+    var myType = getElementType(el);
+    var extractor = config.keyExtractors.get(myType);
     var identifier = extractor($(el));
 
-    var foundInIgnored = _.include(config.ignoredTypes, type);
+    var foundInIgnored = _.find(config.ignoredTypes, function(ignoredTypeOrSelector) {
+      return (ignoredTypeOrSelector === myType) || $(el).is(ignoredTypeOrSelector);
+    });
+
     var foundInInclude = _.include(config.include, identifier);
     var foundInExclude = _.include(config.exclude, identifier);
 
@@ -113,7 +115,7 @@ var getInputElements = function(view, config) {
     return reject;
   });
 
-  return elements;
+  return formInputs;
 };
 
 // Determine what type of element this is. It
@@ -141,13 +143,13 @@ var getElementType = function(el) {
   return type.toLowerCase();
 };
 
-// If a form element is given, just return it.
-// Otherwise, get the form element from the view.
+// If a dom element is given, just return the form fields.
+// Otherwise, get the form fields from the view.
 var getForm = function(viewOrForm) {
-  if (_.isUndefined(viewOrForm.$el) && viewOrForm.tagName.toLowerCase() === 'form') {
-    return viewOrForm;
+  if (_.isUndefined(viewOrForm.$el)) {
+    return $(viewOrForm).children(':input');
   } else {
-    return viewOrForm.$el.is('form') ? viewOrForm.el : viewOrForm.$('form')[0];
+    return viewOrForm.$(':input');
   }
 };
 

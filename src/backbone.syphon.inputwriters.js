@@ -17,7 +17,11 @@ InputWriters.registerDefault(function($el, value) {
 // Checkbox writer, set whether or not the checkbox is checked
 // depending on the boolean value.
 InputWriters.register('checkbox', function($el, value) {
-  $el.prop('checked', value);
+  if (value === null) {
+    $el.prop('indeterminate', true);
+  } else {
+    $el.prop('checked', value);
+  }
 });
 
 // Radio button writer, set whether or not the radio button is

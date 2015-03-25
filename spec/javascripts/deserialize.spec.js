@@ -1,4 +1,26 @@
 describe('deserializing an object into a form', function() {
+
+  describe('when no elements are found', function() {
+    var View = Backbone.View.extend({
+      render: function() {
+        this.$el.html('<span>When I am alone I pretend to be a carrot<span/>');
+      }
+    });
+
+    var view;
+
+    beforeEach(function() {
+      view = new View();
+      view.render();
+    });
+
+    it('should not throw an exception', function() {
+      expect(function() {
+        Backbone.Syphon.deserialize(view, {foo: 'bar'});
+      }).to.not.throw(Error);
+    });
+  });
+
   describe('when deserializing into a text input', function() {
     beforeEach(function() {
       this.View = Backbone.View.extend({
@@ -113,6 +135,21 @@ describe('deserializing an object into a form', function() {
 
       it('should uncheck the checkbox', function() {
         expect(this.result).to.be.false;
+      });
+    });
+
+    describe('and the corresponding value in the given object is null', function() {
+      beforeEach(function() {
+        this.view = new this.View();
+        this.view.render();
+        this.view.$('#the-checkbox').prop('checked', false);
+
+        Backbone.Syphon.deserialize(this.view, {chk: null});
+        this.result = this.view.$('#the-checkbox').prop('indeterminate');
+      });
+
+      it('should add an indeterminate attribute', function() {
+        expect(this.result).to.be.true;
       });
     });
   });
@@ -259,5 +296,73 @@ describe('deserializing an object into a form', function() {
     it('should set the input\'s value to the corresponding value in the given object', function() {
       expect(this.result).to.equal('bar');
     });
+  });
+
+  describe('when deserializing without a form', function() {
+    beforeEach(function() {
+      this.View = Backbone.View.extend({
+        render: function() {
+          this.$el.html('<input type="text" name="foo">');
+        }
+      });
+      this.view = new this.View();
+      this.view.render();
+
+      Backbone.Syphon.deserialize(this.view, {foo: 'bar'});
+    });
+
+    it('should set the input\'s value', function() {
+      var result = this.view.$('input[name=foo]').val();
+      expect(result).to.equal('bar');
+    });
+  });
+
+  describe('when deserializing multiple forms', function() {
+    beforeEach(function() {
+      this.View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+              '<form>' +
+              '<input type="text" name="foo">' +
+              '</form>' +
+              '<form>' +
+              '<input type="text" name="bar">' +
+              '</form>'
+          );
+        }
+      });
+      this.view = new this.View();
+      this.view.render();
+
+      Backbone.Syphon.deserialize(this.view, {foo: 'bar', bar: 'foo'});
+    });
+
+    it('should set the input\'s value', function() {
+      var foo = this.view.$('input[name=foo]').val();
+      var bar = this.view.$('input[name=bar]').val();
+      expect(foo).to.equal('bar');
+      expect(bar).to.equal('foo');
+    });
+  });
+
+  describe('when ignoring a field by selector', function() {
+    beforeEach(function() {
+      this.form = $(
+        '<form>' +
+          '<input type="text" name="foo" value="bar">' +
+          '<input type="text" name="dontDeserialize" class="doNotSerializeMe" value="myOriginalValue">' +
+          '</form>'
+      )[0];
+
+      // ignore all .doNotSerializeMe elements
+      Backbone.Syphon.ignoredTypes.push('.doNotSerializeMe');
+      Backbone.Syphon.deserialize(this.form, {foo: 'foo', dontDeserialize: 'iShouldNotBeSet'});
+      this.result = $(this.form).find('input[name=dontDeserialize]').val();
+    });
+
+    it('should not modify fields excluded by selector', function() {
+      expect(this.result).to.eql('myOriginalValue');
+    });
+
   });
 });
