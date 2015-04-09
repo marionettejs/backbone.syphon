@@ -306,6 +306,24 @@ describe('serializing a form', function() {
     });
   });
 
+  describe('when given a form element with nested inputs', function() {
+    beforeEach(function() {
+      this.form = $(
+          '<form>' +
+          '<div>' +
+          '<input type="text" name="foo" value="bar">' +
+          '</div>' +
+          '</form>'
+      )[0];
+
+      this.result = Backbone.Syphon.serialize(this.form);
+    });
+
+    it('retrieves the inputs\' values', function() {
+      expect(this.result.foo).to.equal('bar');
+    });
+  });
+
   describe('when given more than 1 form', function() {
     beforeEach(function() {
       this.View = Backbone.View.extend({
