@@ -91,7 +91,7 @@ var getInputElements = function(view, config) {
 
   formInputs = _.reject(formInputs, function(el) {
     // Reject disabled fields always
-    if (el.hasAttribute('disabled')) { return true; }
+    if ($(el).is(':disabled')) { return true; }
 
     var myType = getElementType(el);
     var extractor = config.keyExtractors.get(myType);
