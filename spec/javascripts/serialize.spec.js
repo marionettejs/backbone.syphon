@@ -390,55 +390,60 @@ describe('serializing a form', function() {
     });
   });
 
-  describe("when serializing forms with disabled text fields", function(){
+  describe('when serializing forms with disabled text fields', function() {
     var View = Backbone.View.extend({
-      render: function(){
-        this.$el.html("<form><input type='text' name='foo' value='bar'><input type='text' name='ignore' value='bar' disabled></form>");
+      render: function() {
+        this.$el.html('<form><input type="text" name="foo" value="bar"><input type="text" name="ignore" value="bar" disabled></form>');
       }
     });
 
-    var view, result;
+    var view;
+    var result;
 
-    beforeEach(function(){
+    beforeEach(function() {
       view = new View();
       view.render();
 
       result = Backbone.Syphon.serialize(view);
     });
 
-    it("should return an object with a key from the text input name, and ignore disabled", function(){
-      expect(result.hasOwnProperty("foo")).toBe(true)
-      expect(result.hasOwnProperty("ignore")).toBe(false)
+    it('should return an object with a key from the text input name, and ignore disabled', function() {
+      expect(result.hasOwnProperty('foo')).toBe(true);
+      expect(result.hasOwnProperty('ignore')).toBe(false);
     });
 
-    it("should have the input's value", function(){
-      expect(result.foo).toBe("bar");
+    it('should have the input\'s value', function() {
+      expect(result.foo).toBe('bar');
     });
   });
 
-  describe("when serializing forms with disabled select field", function(){
+  describe('when serializing forms with disabled select field', function() {
     var View = Backbone.View.extend({
-      render: function(){
-        this.$el.html("<form><input type='text' name='foo' value='bar'><select name='ignore' disabled='disabled'><option selected='selected' value='bar'>bar</option><option value='bar2'>bar2</option></select></form>");
+      render: function() {
+        this.$el.html('<form><input type="text" name="foo" value="bar"><select ' +
+          'name="ignore" disabled="disabled"><option selected="selected" ' +
+          'value="bar">bar</option><option value="bar2">bar2</option>' +
+          '</select></form>');
       }
     });
 
-    var view, result;
+    var view;
+    var result;
 
-    beforeEach(function(){
+    beforeEach(function() {
       view = new View();
       view.render();
 
       result = Backbone.Syphon.serialize(view);
     });
 
-    it("should return an object with a key from the text input name, and ignore disabled", function(){
-      expect(result.hasOwnProperty("foo")).toBe(true)
-      expect(result.hasOwnProperty("ignore")).toBe(false)
+    it('should return an object with a key from the text input name, and ignore disabled', function() {
+      expect(result.hasOwnProperty('foo')).toBe(true);
+      expect(result.hasOwnProperty('ignore')).toBe(false);
     });
 
-    it("should have the input's value", function(){
-      expect(result.foo).toBe("bar");
+    it('should have the input\'s value', function() {
+      expect(result.foo).toBe('bar');
     });
   });
 });

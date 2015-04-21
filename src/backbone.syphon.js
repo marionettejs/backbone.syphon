@@ -93,7 +93,6 @@ var getInputElements = function(view, config) {
     // Reject disabled fields always
     if (el.hasAttribute('disabled')) { return true; }
 
-    var reject;
     var myType = getElementType(el);
     var extractor = config.keyExtractors.get(myType);
     var identifier = extractor($(el));
@@ -105,17 +104,9 @@ var getInputElements = function(view, config) {
     var foundInInclude = _.include(config.include, identifier);
     var foundInExclude = _.include(config.exclude, identifier);
 
-    if (foundInInclude) {
-      reject = false;
-    } else {
-      if (config.include) {
-        reject = true;
-      } else {
-        reject = (foundInExclude || foundInIgnored);
-      }
-    }
-
-    return reject;
+    if (foundInInclude) { return false; }
+    if (config.include) { return true; }
+    return foundInExclude || foundInIgnored;
   });
 
   return formInputs;
