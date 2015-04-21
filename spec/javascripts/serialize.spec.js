@@ -408,12 +408,12 @@ describe('serializing a form', function() {
     });
 
     it('should return an object with a key from the text input name, and ignore disabled', function() {
-      expect(result.hasOwnProperty('foo')).toBe(true);
-      expect(result.hasOwnProperty('ignore')).toBe(false);
+      expect(result.hasOwnProperty('foo')).to.be.true;
+      expect(result.hasOwnProperty('ignore')).to.be.false;
     });
 
     it('should have the input\'s value', function() {
-      expect(result.foo).toBe('bar');
+      expect(result.foo).to.equal('bar');
     });
   });
 
@@ -438,12 +438,12 @@ describe('serializing a form', function() {
     });
 
     it('should return an object with a key from the text input name, and ignore disabled', function() {
-      expect(result.hasOwnProperty('foo')).toBe(true);
-      expect(result.hasOwnProperty('ignore')).toBe(false);
+      expect(result.hasOwnProperty('foo')).to.be.true;
+      expect(result.hasOwnProperty('ignore')).to.be.false;
     });
 
     it('should have the input\'s value', function() {
-      expect(result.foo).toBe('bar');
+      expect(result.foo).to.equal('bar');
     });
   });
 });
