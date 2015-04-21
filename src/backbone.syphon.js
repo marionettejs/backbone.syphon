@@ -5,7 +5,7 @@
 
 // Tell Syphon to ignore all elements of these types. You can
 // push new types to ignore directly in to this array.
-Syphon.ignoredTypes = ['button', 'submit', 'reset', 'fieldset'];
+Syphon.ignoredTypes = ['button', 'submit', 'reset', 'fieldset', ':disabled'];
 
 // Syphon
 // ------
@@ -90,9 +90,6 @@ var getInputElements = function(view, config) {
   var formInputs = getForm(view);
 
   formInputs = _.reject(formInputs, function(el) {
-    // Reject disabled fields always
-    if ($(el).is(':disabled')) { return true; }
-
     var myType = getElementType(el);
     var extractor = config.keyExtractors.get(myType);
     var identifier = extractor($(el));
