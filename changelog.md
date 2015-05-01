@@ -1,4 +1,26 @@
-## v0.5.1 [view commit logs](https://github.com/marionettejs/backbone.syphon/compare/v0.5.0...v5.0.1)
+## v0.6.0 [view commit logs](https://github.com/marionettejs/backbone.syphon/compare/v0.5.1...v0.6.1)
+
+### Fixes
+
+* When no elements are found, Backbone.Syphon will not throw an exception
+
+### Docs
+
+* Added note about using Backbone.Relational and circular references
+* Typo fixes
+
+### Improvements
+
+* Travis now uses Docker images to speed up testing
+* Uses `:input` instead of `form` to discover fields
+
+### Features
+
+* You can now ignore fields by selector
+* When using indeterminate checkboxes, they will be a null value
+
+
+## v0.5.1 [view commit logs](https://github.com/marionettejs/backbone.syphon/compare/v0.5.0...v0.5.1)
 
 ### Fixes
 

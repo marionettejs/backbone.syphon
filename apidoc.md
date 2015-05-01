@@ -15,7 +15,7 @@ to `.serialize`.
 ### Default Key Extractor Set
 
 Syphon comes with a default key extractor set in the
-`Backbone.Syhpon.KeyExtractors` object. This extractor set
+`Backbone.Syphon.KeyExtractors` object. This extractor set
 has one default extractor built in to it (see below).
 
 You can replace the entire extractor set by creating a new
@@ -141,7 +141,7 @@ boolean value.
 ### Default Input Reader Set
 
 Syphon comes with a default input reader set in the
-`Backbone.Syhpon.InputReaders` object. This input reader set
+`Backbone.Syphon.InputReaders` object. This input reader set
 has a few default input readers built in (see below).
 
 You can replace the entire input reader set by creating a new
@@ -204,7 +204,7 @@ select the correct radio button in a radio button group.
 ### Default Input Writer Set
 
 Syphon comes with a default input writer set in the
-`Backbone.Syhpon.InputWriters` object. This input writer set
+`Backbone.Syphon.InputWriters` object. This input writer set
 has a few default input writers built in (see above).
 
 You can replace the entire input writer set by creating a new
