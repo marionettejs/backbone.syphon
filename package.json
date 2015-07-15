@@ -34,9 +34,9 @@
     "coverage": "grunt coverage --mocha-reporter=dot"
   },
   "dependencies": {
+    "backbone": "1.0.0 - 1.2.1",
     "jquery": "^1.8.0 || ^2.1.0",
-    "backbone": "1.0.0 - 1.1.2",
-    "underscore": "1.4.4 - 1.6.0"
+    "underscore": "1.4.4 - 1.8.3"
   },
   "devDependencies": {
     "chai": "^1.9.1",
