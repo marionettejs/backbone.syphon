@@ -29,6 +29,7 @@
     "url": "http://derickbailey.lostechies.com"
   },
   "scripts": {
+    "build": "grunt build",
     "bower": "bower install",
     "test": "grunt test --mocha-reporter=dot",
     "coverage": "grunt coverage --mocha-reporter=dot"
