@@ -1,3 +1,9 @@
+## v0.6.3 [view commit logs](https://github.com/marionettejs/backbone.syphon/compare/v0.6.2...v0.6.3)
+
+### Fixes
+
+* Update Backbone version range
+
 ## v0.6.2 [view commit logs](https://github.com/marionettejs/backbone.syphon/compare/v0.6.1...v0.6.2)
 
 ### Fixes
