@@ -98,7 +98,7 @@ we'll ask, then, is that you add that information.
 
 Please refrain from giving code examples in altJS languages like
 CoffeeScript, etc. Marionette is written in plain-old JavaScript
-and is generally easier all members in the community to read.
+and is generally easier for all members in the community to read.
 
 ### Create A Topic Branch For Your Work
 
