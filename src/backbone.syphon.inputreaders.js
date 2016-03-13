@@ -10,12 +10,12 @@ var InputReaders = Syphon.InputReaders = new InputReaderSet();
 
 // The default input reader, which uses an input
 // element's "value"
-InputReaders.registerDefault(function($el) {
-  return $el.val();
+InputReaders.registerDefault(function(el) {
+  return el.value;
 });
 
 // Checkbox reader, returning a boolean value for
 // whether or not the checkbox is checked.
-InputReaders.register('checkbox', function($el) {
-  return ($el.prop('indeterminate')) ? null : $el.prop('checked');
+InputReaders.register('checkbox', function(el) {
+  return el.indeterminate ? null : el.checked;
 });

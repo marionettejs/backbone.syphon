@@ -75,6 +75,8 @@ describe('input readers', function() {
 
       this.readers = new Backbone.Syphon.InputReaderSet();
       this.readers.registerDefault(function($el) {
+        $el = $($el);
+
         return $el.data('stuff');
       });
 

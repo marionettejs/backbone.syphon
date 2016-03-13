@@ -18,6 +18,6 @@ KeyAssignmentValidators.registerDefault(function() {
 
 // But only the "checked" radio button for a given
 // radio button group is valid
-KeyAssignmentValidators.register('radio', function($el, key, value) {
-  return $el.prop('checked');
+KeyAssignmentValidators.register('radio', function(el, key, value) {
+  return el.checked;
 });

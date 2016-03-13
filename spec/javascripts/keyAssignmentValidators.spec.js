@@ -14,6 +14,8 @@ describe('key assignment validators', function() {
 
       this.validators = new Backbone.Syphon.KeyAssignmentValidatorSet();
       this.validators.registerDefault(function($el) {
+        $el = $($el);
+
         return $el.data('stuff') === 'bar';
       });
 

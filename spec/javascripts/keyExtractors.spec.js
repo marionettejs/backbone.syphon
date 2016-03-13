@@ -84,6 +84,8 @@ describe('key extractors', function() {
 
       this.extractors = new Backbone.Syphon.KeyExtractorSet();
       this.extractors.registerDefault(function($el) {
+        $el = $($el);
+
         return $el.data('stuff');
       });
 

@@ -75,6 +75,8 @@ describe('input writers', function() {
 
       this.writers = new Backbone.Syphon.InputWriterSet();
       this.writers.registerDefault(function($el, value) {
+        $el = $($el);
+
         $el.data('stuff', value);
       });
 

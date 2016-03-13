@@ -62,6 +62,7 @@ describe('serializing nested key names', function() {
 
       this.inputReaders = new Backbone.Syphon.InputReaderSet();
       this.inputReaders.register('checkbox', function($el) {
+        $el = $($el);
         return $el.val();
       });
 

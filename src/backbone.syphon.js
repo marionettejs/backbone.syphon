@@ -25,21 +25,20 @@ Syphon.serialize = function(view, options) {
 
   // Process all of the elements
   _.each(elements, function(el) {
-    var $el = $(el);
-    var type = getElementType($el);
+    var type = getElementType(el);
 
     // Get the key for the input
     var keyExtractor = config.keyExtractors.get(type);
-    var key = keyExtractor($el);
+    var key = keyExtractor(el);
 
     // Get the value for the input
     var inputReader = config.inputReaders.get(type);
-    var value = inputReader($el);
+    var value = inputReader(el);
 
     // Get the key assignment validator and make sure
     // it's valid before assigning the value to the key
     var validKeyAssignment = config.keyAssignmentValidators.get(type);
-    if (validKeyAssignment($el, key, value)) {
+    if (validKeyAssignment(el, key, value)) {
       var keychain = config.keySplitter(key);
       data = assignKeyValue(data, keychain, value);
     }
@@ -65,19 +64,18 @@ Syphon.deserialize = function(view, data, options) {
 
   // Process all of the elements
   _.each(elements, function(el) {
-    var $el = $(el);
-    var type = getElementType($el);
+    var type = getElementType(el);
 
     // Get the key for the input
     var keyExtractor = config.keyExtractors.get(type);
-    var key = keyExtractor($el);
+    var key = keyExtractor(el);
 
     // Get the input writer and the value to write
     var inputWriter = config.inputWriters.get(type);
     var value = flattenedData[key];
 
     // Write the value to the input
-    inputWriter($el, value);
+    inputWriter(el, value);
   });
 };
 
@@ -93,10 +91,11 @@ var getInputElements = function(view, config) {
     var reject;
     var myType = getElementType(el);
     var extractor = config.keyExtractors.get(myType);
-    var identifier = extractor($(el));
+    var identifier = extractor(el);
 
     var foundInIgnored = _.find(config.ignoredTypes, function(ignoredTypeOrSelector) {
-      return (ignoredTypeOrSelector === myType) || $(el).is(ignoredTypeOrSelector);
+      // IE8 will need to polyfill matches
+      return (ignoredTypeOrSelector === myType) || el.matches(ignoredTypeOrSelector);
     });
 
     var foundInInclude = _.include(config.include, identifier);
@@ -124,12 +123,11 @@ var getInputElements = function(view, config) {
 // the element when the element is not an `<input>`.
 var getElementType = function(el) {
   var typeAttr;
-  var $el = $(el);
-  var tagName = $el[0].tagName;
+  var tagName = el.tagName;
   var type = tagName;
 
   if (tagName.toLowerCase() === 'input') {
-    typeAttr = $el.attr('type');
+    typeAttr = el.getAttribute('type');
     if (typeAttr) {
       type = typeAttr;
     } else {
@@ -146,10 +144,14 @@ var getElementType = function(el) {
 // If a dom element is given, just return the form fields.
 // Otherwise, get the form fields from the view.
 var getForm = function(viewOrForm) {
+  // Do not need to worry about this case because there are no space + selectors
+  //http://ejohn.org/blog/thoughts-on-queryselectorall/
+  var inputMatcher = 'input,select,textarea,button';
+
   if (_.isUndefined(viewOrForm.$el)) {
-    return $(viewOrForm).find(':input');
+    return viewOrForm.querySelectorAll(inputMatcher);
   } else {
-    return viewOrForm.$(':input');
+    return viewOrForm.el.querySelectorAll(inputMatcher);
   }
 };
 
