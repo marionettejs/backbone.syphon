@@ -69,7 +69,8 @@ module.exports = function(grunt) {
     jshint: {
       src: {
         options: {
-          jshintrc: '.jshintrc'
+          jshintrc: '.jshintrc',
+          reporterOutput: ''
         },
         src: ['src/**.js']
       },
@@ -138,21 +139,6 @@ module.exports = function(grunt) {
           'spec/javascripts/*.spec.js'
         ]
       }
-    },
-
-    mochaTestLodash: {
-      spec: {
-        options: {
-          require: 'spec/javascripts/setup/node_lodash.js',
-          reporter: 'dot',
-          clearRequireCache: true,
-          mocha: require('mocha')
-        },
-        src: [
-          'spec/javascripts/setup/helpers.js',
-          'spec/javascripts/*.spec.js'
-        ]
-      }
     }
   });
 
@@ -161,7 +147,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('lint', 'Lints our sources', ['lintspaces', 'jshint', 'jscs']);
 
-  grunt.registerTask('test', 'Run the unit tests.', ['lint', 'preprocess:tmp', 'mochaTest', 'mochaTestLodash']);
+  grunt.registerTask('test', 'Run the unit tests.', ['lint', 'preprocess:tmp', 'mochaTest']);
 
   grunt.registerTask('dev', 'Auto-lints while writing code.', ['test', 'watch:syphon']);
 
