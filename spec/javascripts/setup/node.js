@@ -16,8 +16,14 @@ if (!global.document || !global.window) {
   };
 }
 
+if (process.env.USE_LODASH) {
+  global._ = require('lodash');
+}
+else {
+  global._ = require('underscore');
+
+}
 global.$ = global.jQuery = require('jquery');
-global._ = require('underscore');
 global.Backbone = require('backbone');
 global.Backbone.$ = global.$;
 global.Syphon = require('../../../tmp/backbone.syphon');

@@ -99,8 +99,8 @@ var getInputElements = function(view, config) {
       return (ignoredTypeOrSelector === myType) || $(el).is(ignoredTypeOrSelector);
     });
 
-    var foundInInclude = _.include(config.include, identifier);
-    var foundInExclude = _.include(config.exclude, identifier);
+    var foundInInclude = _.includes(config.include, identifier);
+    var foundInExclude = _.includes(config.exclude, identifier);
 
     if (foundInInclude) {
       reject = false;
