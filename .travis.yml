@@ -1,5 +1,15 @@
 sudo: false
 language: node_js
-before_install: npm install -g grunt-cli
+before_install:
+  - npm install -g grunt-cli
 node_js:
-  - "0.10"
+  - "4"
+  - "6"
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8

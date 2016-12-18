@@ -58,7 +58,7 @@ describe('deserializing nested key names', function() {
 
       this.writers = new Backbone.Syphon.InputWriterSet();
       this.writers.register('checkbox', function($el, value) {
-        if (_.include(value, $el.val())) {
+        if (_.includes(value, $el.val())) {
           $el.prop('checked', true);
         }
       });
