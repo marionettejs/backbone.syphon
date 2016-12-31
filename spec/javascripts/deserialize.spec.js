@@ -245,13 +245,28 @@ describe('deserializing an object into a form', function() {
 
       this.view = new this.View();
       this.view.render();
-
-      Backbone.Syphon.deserialize(this.view, {foo: 'bar'});
-      this.checked = this.view.$('input[name=foo][value=bar]').prop('checked');
     });
 
     it('should select the corresponding radio button', function() {
-      expect(this.checked).to.be.true;
+      Backbone.Syphon.deserialize(this.view, {foo: 'bar'});
+      var checked = this.view.$('input[name=foo][value=bar]').prop('checked');
+      var foo = this.view.$('input[name=foo][value=foo]').prop('checked');
+      var baz = this.view.$('input[name=foo][value=baz]').prop('checked');
+
+      expect(checked).to.be.true;
+      expect(foo).to.be.false;
+      expect(baz).to.be.false;
+    });
+
+    it('should deselect everything when value is unset', function() {
+      Backbone.Syphon.deserialize(this.view, {});
+      var foo = this.view.$('input[name=foo][value=foo]').prop('checked');
+      var bar = this.view.$('input[name=foo][value=bar]').prop('checked');
+      var baz = this.view.$('input[name=foo][value=baz]').prop('checked');
+
+      expect(foo).to.be.false;
+      expect(bar).to.be.false;
+      expect(baz).to.be.false;
     });
   });
 

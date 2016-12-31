@@ -28,5 +28,6 @@ InputWriters.register('checkbox', function($el, value) {
 // checked.  The button should only be checked if it's value
 // equals the given value.
 InputWriters.register('radio', function($el, value) {
-  $el.prop('checked', $el.val() === value.toString());
+  var checked = _.isUndefined(value) ? false : $el.val() === value.toString();
+  $el.prop('checked', checked);
 });
