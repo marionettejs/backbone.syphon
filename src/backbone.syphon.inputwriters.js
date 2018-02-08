@@ -14,6 +14,12 @@ InputWriters.registerDefault(function($el, value) {
   $el.val(value);
 });
 
+// contenteditable writer, which changes the HTML contained by
+// the element
+InputWriters.register('contenteditable', function($el, value) {
+  $el.html(value);
+});
+
 // Checkbox writer, set whether or not the checkbox is checked
 // depending on the boolean value.
 InputWriters.register('checkbox', function($el, value) {

@@ -439,7 +439,8 @@ For more information on Key Assignment Validators, see the full
 There some known limitations in Backbone.Syphon, partially by design and partially implemented as default behaviors.
 
 * An input of type `checkbox` will return a boolean value. This can be overriden by replacing the Input Reader for checkboxes.
-* Yo avoid circular references, care should be taken when using Backbone.Relational. See (#33)[https://github.com/marionettejs/backbone.syphon/issues/33].
+* To avoid circular references, care should be taken when using Backbone.Relational. See (#33)[https://github.com/marionettejs/backbone.syphon/issues/33].
+* `contenteditable` fields will only be processed if they are explicitly assigned the `true` value: `contenteditable="true"`.
 
 ## Building Backbone.Syphon
 

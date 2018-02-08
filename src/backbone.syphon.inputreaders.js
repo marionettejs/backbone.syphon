@@ -14,6 +14,12 @@ InputReaders.registerDefault(function($el) {
   return $el.val();
 });
 
+// contenteditable reader, which returns the HTML
+// contained by the element
+InputReaders.register('contenteditable', function($el) {
+  return $el.html();
+});
+
 // Checkbox reader, returning a boolean value for
 // whether or not the checkbox is checked.
 InputReaders.register('checkbox', function($el) {

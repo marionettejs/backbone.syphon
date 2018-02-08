@@ -137,6 +137,10 @@ var getElementType = function(el) {
     }
   }
 
+  if (('' + $el.attr('contenteditable')).toLowerCase() === 'true') {
+    type = 'contenteditable';
+  }
+
   // Always return the type as lowercase
   // so it can be matched to lowercase
   // type registrations.
@@ -147,9 +151,9 @@ var getElementType = function(el) {
 // Otherwise, get the form fields from the view.
 var getForm = function(viewOrForm) {
   if (_.isUndefined(viewOrForm.$el)) {
-    return $(viewOrForm).find(':input');
+    return $(viewOrForm).find(':input, [contenteditable]');
   } else {
-    return viewOrForm.$(':input');
+    return viewOrForm.$(':input, [contenteditable]');
   }
 };
 

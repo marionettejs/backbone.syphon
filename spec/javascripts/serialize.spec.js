@@ -268,6 +268,41 @@ describe('serializing a form', function() {
     });
   });
 
+  describe('when serializing contenteditable elements', function() {
+    beforeEach(function() {
+      this.View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+              '<form>' +
+              '<div  data-name="foo"       contenteditable="true">bar</div>' +
+              '<span data-name="fu"        contenteditable="true">baz</span>' +
+              '<div  data-name="trap"                            >bar</div>' +
+              '<span data-name="trapAgain"                       >baz</span>' +
+              '</form>'
+          );
+        }
+      });
+
+      this.view = new this.View();
+      this.view.render();
+
+      this.result = Backbone.Syphon.serialize(this.view);
+    });
+
+    it('should return the value of a contenteditable "div" element', function() {
+      expect(this.result.foo).to.equal('bar');
+    });
+
+    it('should return the value of a contenteditable "span" element', function() {
+      expect(this.result.fu).to.equal('baz');
+    });
+
+    it('should ignore elements that are not "contenteditable"', function() {
+      expect(this.result.trap).to.be.undefined;
+      expect(this.result.trapAgain).to.be.undefined;
+    });
+  });
+
   describe('when the view is actually a form', function() {
     beforeEach(function() {
       this.View = Backbone.View.extend({

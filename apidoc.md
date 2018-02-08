@@ -37,7 +37,10 @@ register new extractors as needed (see below).
 ### Default Key Extractor: element "name"
 
 The default key extractor uses the `name` attribute of the form's
-input element as the key.
+input element as the key. If the `name` property is undefined, it
+will fall back to using the `data-name` property (which should
+therefore be defined in order to use Syphon with non-input elements,
+e.g. a `div` with `contenteditable="true"`).
 
 For example, an HTML form that looks like this:
 
@@ -45,6 +48,7 @@ For example, an HTML form that looks like this:
 <form>
   <input name="foo" value="bar">
   <input type="checkbox" name="chk" checked>
+  <div data-name="editor" contenteditable="true">my text</div>
 </form>
 ```
 
@@ -53,7 +57,8 @@ will produce this result, when serialized:
 ```js
 {
   foo: "bar",
-  chk: true
+  chk: true,
+  editor: "my text"
 }
 ```
 

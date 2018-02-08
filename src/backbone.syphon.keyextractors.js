@@ -11,5 +11,5 @@ var KeyExtractors = Syphon.KeyExtractors = new KeyExtractorSet();
 // The default key extractor, which uses the
 // input element's "name" attribute
 KeyExtractors.registerDefault(function($el) {
-  return $el.prop('name') || '';
+  return $el.prop('name') || $el.data('name') || '';
 });

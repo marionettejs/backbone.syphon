@@ -69,6 +69,30 @@ describe('deserializing an object into a form', function() {
     });
   });
 
+  describe('when deserializing into a "contenteditable" element', function() {
+    beforeEach(function() {
+      this.View = Backbone.View.extend({
+        render: function() {
+          this.$el.html(
+              '<form>' +
+              '<div data-name="foo" contenteditable="true"></div>' +
+              '</form>'
+          );
+        }
+      });
+
+      this.view = new this.View();
+      this.view.render();
+
+      Backbone.Syphon.deserialize(this.view, {foo: '<em>bar</em>'});
+      this.result = this.view.$('div[data-name=foo]').html();
+    });
+
+    it('should set the element\'s value to the corresponding value in the given object', function() {
+      expect(this.result).to.equal('<em>bar</em>');
+    });
+  });
+
   describe('when deserializing into a select box', function() {
     beforeEach(function() {
       this.View = Backbone.View.extend({

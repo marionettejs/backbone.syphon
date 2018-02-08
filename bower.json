@@ -1,6 +1,6 @@
 {
   "name": "backbone.syphon",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Serialize a Backbone.View in to a JavaScript object.",
   "main": "./lib/backbone.syphon.js",
   "homepage": "https://github.com/marionettejs/backbone.syphon",
